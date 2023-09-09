@@ -6,7 +6,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-dynamic = ["dependencies"]
+name = 'auto_control_tools'
+dynamic = ["version", "dependencies"]
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
