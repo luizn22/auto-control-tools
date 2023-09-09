@@ -13,7 +13,7 @@ dynamic = ["version", "dependencies"]
 dependencies = {file = ["requirements.txt"]}
 
 [tool.pytest.ini_options]
-addopts = "--cov=slapping"
+addopts = "--cov=auto_control_tools"
 testpaths = [
     "tests",
 ]
