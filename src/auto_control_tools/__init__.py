@@ -1,2 +1,2 @@
-from .model import *
-from .controller import *
+from .model import *  # noqa
+from .controller import *  # noqa

@@ -11,5 +11,3 @@ class BaseModelIdentification:
     @abstractmethod
     def get_data_input_layout(self, path: str, *args, **kwargs):
         raise NotImplementedError('get_data_input_layout must be implemented in a subclass')
-
-
