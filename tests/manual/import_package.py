@@ -1,4 +1,4 @@
-from src import auto_control_tools
+import auto_control_tools
 
 
 if __name__ == '__main__':
