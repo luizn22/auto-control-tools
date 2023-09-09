@@ -24,7 +24,7 @@ class Model:
         self.source_data = self.meta.get('source_data', pd.DataFrame(columns=DataInputUtils.standard_fields))
 
     def identify_model_order(self) -> int:
-        return int(self.tf.den[0][0].size)
+        return int(self.tf.den[0][0].size) - 1
 
 
 class ModelView:
