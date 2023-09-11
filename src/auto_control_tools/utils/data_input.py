@@ -32,7 +32,7 @@ class DataInputUtils:
         return file_path
 
     @classmethod
-    def read_table_with_fields(cls, path: str, fields: Union[List[str]] = None) -> pd.DataFrame:
+    def read_table_with_fields(cls, path: str, fields: Union[List[str], None] = None) -> pd.DataFrame:
         if fields is None:
             fields = cls.standard_fields
 
