@@ -3,7 +3,7 @@ from typing import Dict, Any
 import pandas as pd
 import pprint
 
-from auto_control_tools.utils.envoirment import is_jupyter_environment
+from .envoirment import is_jupyter_environment
 from IPython import display
 
 
