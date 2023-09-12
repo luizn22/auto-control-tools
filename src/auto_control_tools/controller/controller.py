@@ -2,8 +2,10 @@ from typing import Union, Dict, Any
 
 import control
 import sympy as sp
+import matplotlib.pyplot as plt
 
 from ..model.model import Model
+from ..utils.data import DataUtils
 
 
 class Controller:
@@ -36,10 +38,16 @@ class ControllerView:
         self.controller = controller
 
     def plot_controller_graph(self, *args, **kwargs):
-        pass
+        time, response = control.step_response(self.controller.tf)
+        plt.plot(time, response)
+        plt.xlabel('Time')
+        plt.ylabel('Response')
+        plt.title('Step Response of PID Controlled System')
+        plt.show()
 
     def get_controller_data(self) -> Dict[str, Any]:
-        pass
+        return control.step_info(self.controller.tf)
 
     def print_controller_data(self, *args, **kwargs):
-        pass
+        DataUtils.pprint_dict(self.get_controller_data())
+
