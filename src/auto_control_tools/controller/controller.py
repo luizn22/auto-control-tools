@@ -46,7 +46,7 @@ class ControllerView:
         plt.show()
 
     def get_controller_data(self) -> Dict[str, Any]:
-        return control.step_info(self.controller.tf)
+        return dict(control.step_info(self.controller.tf))
 
     def print_controller_data(self, *args, **kwargs):
         DataUtils.pprint_dict(self.get_controller_data())

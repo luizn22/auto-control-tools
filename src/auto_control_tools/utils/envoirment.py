@@ -3,7 +3,7 @@ def is_jupyter_environment():
         # Attempt to import the IPython module
         import IPython
         # Check if IPython is running in interactive mode
-        if IPython.get_ipython():
+        if IPython.get_ipython():  # type: ignore
             return True
         else:
             return False

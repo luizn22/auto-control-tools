@@ -61,7 +61,7 @@ class ModelView:
         plt.show()
 
     def get_model_data(self) -> Dict[str, Any]:
-        return control.step_info(self.model.tf)
+        return dict(control.step_info(self.model.tf))
 
     def print_model_data(self, *args, **kwargs):
         DataUtils.pprint_dict(self.get_model_data())
