@@ -10,21 +10,25 @@ class Model:
     def __init__(
             self,
             tf: Union[control.TransferFunction, List[List[float]]],
-            meta: Union[Dict[str, Any], None] = None
+            order: Union[int, None] = None,
+            source_data: Union[pd.DataFrame, None] = None
     ):
+        self.system = self.get_control_system(tf)
+        self.order = order if order is not None else self.identify_model_order()
+        self.source_data = source_data if source_data is not None else pd.DataFrame(
+            columns=DataInputUtils.standard_fields)
+
         self.view = ModelView(self)
+
+    @staticmethod
+    def get_control_system(tf: Union[control.TransferFunction, List[List[float]]]):
         if isinstance(tf, control.TransferFunction):
-            self.system = tf
+            return tf
         else:
-            self.tf = control.TransferFunction(*tf)
-
-        self.meta = meta if meta else {}
-
-        self.order = self.meta.get('order', self.identify_model_order())
-        self.source_data = self.meta.get('source_data', pd.DataFrame(columns=DataInputUtils.standard_fields))
+            return control.TransferFunction(*tf)
 
     def identify_model_order(self) -> int:
-        return int(self.tf.den[0][0].size) - 1
+        return int(self.system.den[0][0].size) - 1
 
 
 class ModelView:
