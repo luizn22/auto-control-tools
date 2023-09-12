@@ -1,5 +1,8 @@
 from typing import Union, Dict, Any
 
+import control
+import sympy as sp
+
 from ..model.model import Model
 
 
@@ -9,15 +12,23 @@ class Controller:
             model: Model,
             ki: float = 0,
             kp: float = 0,
-            kd: float = 0,
-            meta: Union[Dict[str, Any], None] = None
+            kd: float = 0
     ):
         self.model = model
-        self.view = ControllerView(self)
-        self.meta = meta if meta else {}
         self.ki = ki
         self.kp = kp
         self.kd = kd
+
+        s = sp.symbols('s')
+        Kp, Ki, Kd = sp.symbols('Kp Ki Kd')
+        pid_symbolic = Kp + (Ki / s) + (Kd * s)
+
+        self.tf_symbolic = model.tf_symbolic * pid_symbolic / (1 + model.tf_symbolic * pid_symbolic)
+
+        pid = control.TransferFunction([kd, kp, ki], [1])
+        self.tf = model.tf.feedback(pid)
+
+        self.view = ControllerView(self)
 
 
 class ControllerView:
