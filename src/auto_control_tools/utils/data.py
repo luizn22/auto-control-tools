@@ -17,4 +17,3 @@ class DataUtils:
             display.display(df)
         else:
             pprint.pprint(di)
-

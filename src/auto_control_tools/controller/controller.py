@@ -50,4 +50,3 @@ class ControllerView:
 
     def print_controller_data(self, *args, **kwargs):
         DataUtils.pprint_dict(self.get_controller_data())
-
