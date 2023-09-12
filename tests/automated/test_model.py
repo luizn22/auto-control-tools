@@ -3,18 +3,11 @@ import control
 from numpy.testing import assert_array_equal
 
 from auto_control_tools import Model
+from tests.conftest import MODEL_TEST_CASES
 
 
-@pytest.mark.parametrize('tf, tf_type', [
-    item for sublist in [
-        [
-            ([[1], [1, 2]], tf_type),
-            ([[1], [1, 2, 3]], tf_type),
-            ([[1, 2], [1, 2, 3]], tf_type),
-        ] for tf_type in ['list', 'control']
-    ] for item in sublist
-])
-def test_model_tf_list(tf, tf_type):
+@pytest.mark.parametrize('tf, tf_type', MODEL_TEST_CASES)
+def test_model(tf, tf_type):
     num = tf[0]
     den = tf[1]
     order = len(den) - 1
@@ -29,6 +22,6 @@ def test_model_tf_list(tf, tf_type):
 
     m = Model(inp)
     tf = control.TransferFunction(num, den)
-    assert_array_equal(m.system.num, tf.num)
-    assert_array_equal(m.system.den, tf.den)
+    assert_array_equal(m.tf.num, tf.num)
+    assert_array_equal(m.tf.den, tf.den)
     assert m.order == order
