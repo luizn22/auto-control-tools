@@ -3,10 +3,10 @@ from typing import Union, List, Dict, Any
 import control
 import pandas as pd
 import sympy as sp
-import matplotlib.pyplot as plt
 
 from ..utils.data import DataUtils
 from ..utils.data_input import DataInputUtils
+from ..utils.plot import PlotUtils
 
 
 class Model:
@@ -52,13 +52,8 @@ class ModelView:
     def __init__(self, model: Model):
         self.model = model
 
-    def plot_model_graph(self, *args, **kwargs):
-        time, response = control.step_response(self.model.tf)
-        plt.plot(time, response)
-        plt.xlabel('Time')
-        plt.ylabel('Response')
-        plt.title('Step Response of Model')
-        plt.show()
+    def plot_model_graph(self):
+        PlotUtils.plot_tf(self.model.tf, self.get_model_data())
 
     def get_model_data(self) -> Dict[str, Any]:
         return dict(control.step_info(self.model.tf))

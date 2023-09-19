@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 
 from ..model.model import Model
 from ..utils.data import DataUtils
+from ..utils.plot import PlotUtils
 
 
 class Controller:
@@ -37,13 +38,8 @@ class ControllerView:
     def __init__(self, controller):
         self.controller = controller
 
-    def plot_controller_graph(self, *args, **kwargs):
-        time, response = control.step_response(self.controller.tf)
-        plt.plot(time, response)
-        plt.xlabel('Time')
-        plt.ylabel('Response')
-        plt.title('Step Response of PID Controlled System')
-        plt.show()
+    def plot_controller_graph(self):
+        PlotUtils.plot_tf(self.controller.tf, self.get_controller_data())
 
     def get_controller_data(self) -> Dict[str, Any]:
         return dict(control.step_info(self.controller.tf))
