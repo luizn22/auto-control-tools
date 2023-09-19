@@ -2,7 +2,6 @@ from typing import Dict, Any
 
 import control
 import sympy as sp
-import matplotlib.pyplot as plt
 
 from ..model.model import Model
 from ..utils.data import DataUtils

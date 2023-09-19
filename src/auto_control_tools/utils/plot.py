@@ -1,10 +1,10 @@
-from typing import Union, Dict, Any, Tuple
+from typing import Union, Tuple
 
 import control
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from auto_control_tools.utils.envoirment import is_jupyter_environment
+from .envoirment import is_jupyter_environment
 
 
 class PlotUtils:
@@ -15,7 +15,7 @@ class PlotUtils:
             cls,
             tf: control.TransferFunction,
             discrete_data: Union[pd.DataFrame, None] = None,
-            settling_time: Union[float, None] = 0.02,
+            settling_time: Union[float] = 0.02,
     ):
 
         if cls.jupyter_env:
