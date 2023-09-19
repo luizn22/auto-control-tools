@@ -1,4 +1,4 @@
-from typing import Union, Dict, Any
+from typing import Union, Dict, Any, Tuple
 
 import control
 import pandas as pd
@@ -11,13 +11,58 @@ class PlotUtils:
     jupyter_env = is_jupyter_environment()
 
     @classmethod
-    def plot_tf(cls, tf: control.TransferFunction, data_dict: Dict[str, Any],
-                discrete_data: Union[pd.DataFrame, None] = None):
-        if cls.jupyter_env:
-            time, response = control.step_response(tf)
-            plt.plot(time, response)
-            plt.xlabel('Time')
-            plt.ylabel('Response')
-            plt.title('Step Response of Model')
+    def plot_tf(
+            cls,
+            tf: control.TransferFunction,
+            discrete_data: Union[pd.DataFrame, None] = None,
+            settling_time: Union[float, None] = 0.02,
+    ):
 
-            plt.show()
+        if cls.jupyter_env:
+            legend_kwargs = {
+                'loc': 'upper center',
+                'bbox_to_anchor': (1.25, 0.45)
+            }
+
+        else:
+            legend_kwargs = {
+                'loc': 'lower right'
+            }
+            plt.switch_backend('TkAgg')
+
+        time, response = control.step_response(tf)
+        data = pd.Series(response, time)
+        info = control.step_info(tf, SettlingTimeThreshold=settling_time)
+
+        plt.plot(time, response)
+        plt.xlabel('Time')
+        plt.ylabel('Response')
+        plt.title('Step Response of Model')
+
+        plt.axhline(y=info['SteadyStateValue'], color='orange', label="vreg")
+        plt.axhline(y=info['SteadyStateValue'] * (1 + settling_time), color='orange', linestyle='--',
+                    label=f"vreg+/-{settling_time*100}%")
+        plt.axhline(y=info['SteadyStateValue'] * (1 - settling_time), color='orange', linestyle='--')
+
+        cls.plot_vertical(
+            (info['SettlingTime'], data.loc[min(data.index, key=lambda x: abs(x - info['SettlingTime']))]),
+            color='green',
+            label='ta',
+        )
+
+        if info['Overshoot'] != 0:
+            os = (1 + info['Overshoot']/100)*info['SteadyStateValue']
+            cls.plot_vertical(
+                ((data - os).abs().idxmin(), os),
+                color='purple',
+                label='So',
+            )
+
+        plt.legend(**legend_kwargs)
+        plt.show()
+
+    @classmethod
+    def plot_vertical(cls, coordinate: Tuple[float, float], color: str, label: str,
+                      linestyle: str = '--', marker: str = 'o'):
+        pd.Series((coordinate[1],), (coordinate[0],)).plot(color=color, label=label, linestyle=linestyle, marker=marker)
+        plt.axvline(x=coordinate[0], color=color, linestyle=linestyle)

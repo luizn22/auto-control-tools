@@ -39,7 +39,7 @@ class ControllerView:
         self.controller = controller
 
     def plot_controller_graph(self):
-        PlotUtils.plot_tf(self.controller.tf, self.get_controller_data())
+        PlotUtils.plot_tf(self.controller.tf)
 
     def get_controller_data(self) -> Dict[str, Any]:
         return dict(control.step_info(self.controller.tf))
