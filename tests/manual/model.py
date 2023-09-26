@@ -1,7 +1,7 @@
 
 
 def run():
-    from auto_control_tools import Model, Controller
+    from auto_control_tools import Model
 
     tf = [[1, 1], [1, 2, 3]]
     model = Model(tf)
