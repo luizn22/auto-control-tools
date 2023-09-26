@@ -9,4 +9,3 @@ def test_controller(tf, pid):
     model = Model(tf)
     ki, kp, kd = pid
     Controller(model, ki=ki, kp=kp, kd=kd)
-
