@@ -53,7 +53,7 @@ class ModelView:
         self.model = model
 
     def plot_model_graph(self):
-        PlotUtils.plot_tf(self.model.tf, self.get_model_data())
+        PlotUtils.plot_tf(self.model.tf)
 
     def get_model_data(self) -> Dict[str, Any]:
         return dict(control.step_info(self.model.tf))
