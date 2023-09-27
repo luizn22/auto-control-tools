@@ -1,17 +1,13 @@
 # Configuration file for the Sphinx documentation builder.
-from configparser import ConfigParser
-
-confparser = ConfigParser()
-confparser.read('setup.cfg')
 
 # -- Project information
 
-project = confparser['metadata']['name']
+project = 'auto-control-tools'
 copyright = 'Copyright (c) 2023 luizn22'
 author = 'Graziella'
 
-release = confparser['metadata']['version']
-version = confparser['metadata']['version']
+release = '0.0.1'
+version = '0.0.1'
 
 # -- General configuration
 
