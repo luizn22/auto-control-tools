@@ -1,5 +1,10 @@
-Useful Scripts
-==============
+Dev Scripts
+===========
+
+Clone:
+
+.. code-block::
+    git clone https://github.com/luizn22/auto-control-tools.git
 
 Install requirements:
 
@@ -31,3 +36,9 @@ Run tests:
 .. code-block:: console
 
     pytest
+
+Build docs locally:
+
+.. code-block:: console
+
+    sphinx-build -b html .\docs\source\ .\rtd_build\

@@ -8,3 +8,4 @@
 - run typing check: `mypy src`
 - run format check: `flake8 src`
 - run tests: `pytest`
+- build docs locally: `sphinx-build -b html .\docs\source\ .\rtd_build\`
