@@ -1,3 +1,5 @@
+from typing import Union
+
 from ..first_order_model import FirstOrderModel
 from .base import BaseModelIdentification
 
@@ -7,8 +9,8 @@ class ZieglerNicholsModelIdentification(BaseModelIdentification):
     def get_model(
             cls,
             path: str,
-            sample_time: float = None,
-            step_signal: float = None,
+            sample_time: Union[None, float] = None,
+            step_signal: Union[None, float] = None,
             ignore_delay_threshold: float = 0.5,
 
     ) -> FirstOrderModel:

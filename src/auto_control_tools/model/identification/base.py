@@ -1,6 +1,6 @@
 from abc import abstractmethod
 from copy import copy
-from typing import List, Tuple
+from typing import List, Tuple, Union
 
 import pandas as pd
 
@@ -16,7 +16,8 @@ class BaseModelIdentification:
         raise NotImplementedError('get_model must be implemented in a subclass')
 
     @classmethod
-    def get_model_data_default(cls, path: str, sample_time: float = None, step_signal: float = None) -> pd.DataFrame:
+    def get_model_data_default(cls, path: str, sample_time: Union[None, float] = None,
+                               step_signal: Union[float, None] = None) -> pd.DataFrame:
         expected_fields = cls._expected_fields(sample_time, step_signal)
         df = DataInputUtils.read_table_with_fields(path, expected_fields)
 
@@ -27,7 +28,8 @@ class BaseModelIdentification:
         return df
 
     @classmethod
-    def setup_data_default(cls, df: pd.DataFrame, sample_time: float = None, step_signal: float = None,
+    def setup_data_default(cls, df: pd.DataFrame, sample_time: Union[float, None] = None,
+                           step_signal: Union[float, None] = None,
                            use_lin_filter: bool = False, linfilter_sothness: int = 5
                            ) -> Tuple[pd.Series, float]:
         if sample_time is not None:
@@ -58,11 +60,13 @@ class BaseModelIdentification:
         return df.loc[df['input'] != 0][[col for col in df if col != 'input']]
 
     @classmethod
-    def get_data_input_layout(cls, path: str, sample_time: float = None, step_signal: float = None):
+    def get_data_input_layout(cls, path: str, sample_time: Union[float, None] = None,
+                              step_signal: Union[float, None] = None):
         DataInputUtils.create_table_with_fields(path, cls._expected_fields(sample_time, step_signal))
 
     @classmethod
-    def _expected_fields(cls, sample_time: float = None, step_signal: float = None) -> List[str]:
+    def _expected_fields(cls, sample_time: Union[float, None] = None,
+                         step_signal: Union[float, None] = None) -> List[str]:
         fields = copy(DataInputUtils.standard_fields)
 
         if sample_time is not None:
