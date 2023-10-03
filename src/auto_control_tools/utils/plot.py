@@ -1,4 +1,4 @@
-from typing import Union, Tuple
+from typing import Union, Tuple, Any
 
 import control
 import pandas as pd
@@ -66,3 +66,11 @@ class PlotUtils:
                       linestyle: str = '--', marker: str = 'o'):
         pd.Series((coordinate[1],), (coordinate[0],)).plot(color=color, label=label, linestyle=linestyle, marker=marker)
         plt.axvline(x=coordinate[0], color=color, linestyle=linestyle)
+
+    @classmethod
+    def print_tf(cls, tf: Any):
+        if cls.jupyter_env:
+            from IPython import display
+            display.display(tf)
+        else:
+            print(tf)
