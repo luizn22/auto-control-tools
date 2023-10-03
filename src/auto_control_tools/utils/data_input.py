@@ -43,6 +43,6 @@ class DataInputUtils:
         else:
             raise ValueError(f'{os.path.splitext(path)[-1]} is not an allowed file type')
 
-        df = df[fields]
+        df = df[[f for f in fields if f in df.columns]]
 
         return df

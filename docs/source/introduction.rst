@@ -23,3 +23,5 @@ Para instalar com pip::
 Primeiros passos
 ================
 Adicionar exemplo de uso com identificação e aproximação de controlador
+
+Documentação das classes em :ref:`class-ref`.

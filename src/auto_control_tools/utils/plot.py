@@ -14,7 +14,7 @@ class PlotUtils:
     def plot_tf(
             cls,
             tf: control.TransferFunction,
-            discrete_data: Union[pd.DataFrame, None] = None,
+            discrete_data: Union[pd.Series, None] = None,
             settling_time: Union[float] = 0.02,
     ):
 
@@ -34,7 +34,9 @@ class PlotUtils:
         data = pd.Series(response, time)
         info = control.step_info(tf, SettlingTimeThreshold=settling_time)
 
-        plt.plot(time, response)
+        plt.plot(time, response, label='Tf', color='red')
+        if discrete_data is not None:
+            discrete_data.plot(label='Discrete Data', color='blue')
         plt.xlabel('Time')
         plt.ylabel('Response')
         plt.title('Step Response of Model')

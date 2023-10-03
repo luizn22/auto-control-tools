@@ -18,9 +18,9 @@ class FirstOrderModel(Model):
             tau: float,
             teta: float = 0,
             pade_degree: int = 1,
-            source_data: Union[pd.DataFrame, None] = None,
+            source_data: Union[pd.Series, None] = None,
     ):
-        super().__init__([[K], [tau, 1]])
+        super().__init__([[K], [tau, 1]], source_data=source_data)
         self.K = K
         self.tau = tau
         self.teta = teta

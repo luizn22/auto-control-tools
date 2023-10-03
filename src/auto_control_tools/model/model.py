@@ -10,11 +10,15 @@ from ..utils.plot import PlotUtils
 
 
 class Model:
+    """
+    Classe armazenando a função de transferência que representa um modelo, métodos de visualização
+    bem como diversos outros dados úteis.
+    """
     def __init__(
             self,
             tf: Union[control.TransferFunction, List[List[float]]],
             order: Union[int, None] = None,
-            source_data: Union[pd.DataFrame, None] = None,
+            source_data: Union[pd.Series, None] = None,
             num: Union[List[float], None] = None,
             den: Union[List[float], None] = None,
     ):
@@ -39,8 +43,7 @@ class Model:
         self.tf_symbolic = num_symbolic / den_symbolic
 
         self.order = order if order is not None else self.identify_model_order()
-        self.source_data = source_data if source_data is not None else pd.DataFrame(
-            columns=DataInputUtils.standard_fields)
+        self.source_data = source_data if source_data is not None else pd.Series().astype(float)
 
         self.view = ModelView(self)
 
@@ -53,7 +56,10 @@ class ModelView:
         self.model = model
 
     def plot_model_graph(self):
-        PlotUtils.plot_tf(self.model.tf)
+        if self.model.source_data.empty:
+            PlotUtils.plot_tf(self.model.tf)
+        else:
+            PlotUtils.plot_tf(self.model.tf, self.model.source_data)
 
     def get_model_data(self) -> Dict[str, Any]:
         return dict(control.step_info(self.model.tf))

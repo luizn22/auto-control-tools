@@ -1,4 +1,9 @@
-# Configuration file for the Sphinx documentation builder.
+# Configuration file for the Sphinx documentation builder
+
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.getcwd())), 'src\\auto_control_tools'))
+print(sys.path)
 
 # -- Project information
 
