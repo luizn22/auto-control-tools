@@ -1,6 +1,6 @@
 from abc import abstractmethod
 from copy import copy
-from typing import List, Tuple, Union
+from typing import List, Tuple
 
 import pandas as pd
 
@@ -22,7 +22,7 @@ class BaseModelIdentification:
 
         if any(f not in df.columns for f in expected_fields):
             missing_fields = [f for f in expected_fields if f not in df.columns]
-            raise ValueError(f'The fields {expected_fields} are required and were informed in the input data')
+            raise ValueError(f'The fields {missing_fields} are required and were informed in the input data')
 
         return df
 

@@ -5,7 +5,6 @@ import pandas as pd
 import sympy as sp
 
 from ..utils.data import DataUtils
-from ..utils.data_input import DataInputUtils
 from ..utils.plot import PlotUtils
 
 
