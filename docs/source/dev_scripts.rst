@@ -1,9 +1,11 @@
+===========
 Dev Scripts
 ===========
 
 Clone:
 
-.. code-block::
+.. code-block:: console
+
     git clone https://github.com/luizn22/auto-control-tools.git
 
 Install requirements:
