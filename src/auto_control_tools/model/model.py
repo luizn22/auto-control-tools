@@ -60,3 +60,6 @@ class ModelView:
 
     def print_model_data(self, *args, **kwargs):
         DataUtils.pprint_dict(self.get_model_data())
+
+    def print_tf(self):
+        PlotUtils.print_tf(self.model.tf_symbolic)
