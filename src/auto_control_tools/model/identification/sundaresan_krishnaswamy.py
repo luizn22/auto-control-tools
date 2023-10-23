@@ -4,7 +4,7 @@ from ..first_order_model import FirstOrderModel
 from .base import BaseModelIdentification
 
 
-class SmithModelIdentification(BaseModelIdentification):
+class SundaresanKrishnaswamyModelIdentification(BaseModelIdentification):
     @classmethod
     def get_model(
             cls,
