@@ -50,6 +50,7 @@ class BaseModelIdentification:
 
     @classmethod
     def offset_data_output(cls, df: pd.DataFrame) -> pd.DataFrame:
+        df['output'] = df['output'].apply(lambda x: x if x > 0 else 0)
         df['output'] = df['output'] - min(df['output'])
         return df
 
