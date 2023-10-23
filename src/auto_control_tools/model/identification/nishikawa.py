@@ -1,5 +1,7 @@
 from typing import Union
 
+import numpy as np
+
 from ..first_order_model import FirstOrderModel
 from .base import BaseModelIdentification
 
@@ -19,11 +21,11 @@ class NishikawaModelIdentification(BaseModelIdentification):
 
         idx_vreg, vreg = cls.get_vreg(tf_data)
 
-        A0 = vreg*idx_vreg - tf_data[:idx_vreg].cumsum()
+        A0 = vreg*idx_vreg - np.trapz(tf_data[:idx_vreg], tf_data[:idx_vreg].index)
 
         t0 = A0/vreg
 
-        A1 = tf_data.loc[tf_data.index <= t0].cumsum()
+        A1 = np.trapz(tf_data.loc[tf_data.index <= t0], tf_data.loc[tf_data.index <= t0].index)
 
         K = vreg / step_signal
 
