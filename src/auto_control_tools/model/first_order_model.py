@@ -31,6 +31,3 @@ class FirstOrderModel(Model):
 
             s = sp.symbols('s')
             self.tf_symbolic = self.tf_symbolic * sp.exp(-teta*s)
-
-        else:
-            self.pade = None

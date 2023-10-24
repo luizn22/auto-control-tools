@@ -43,6 +43,8 @@ class Model:
         self.order = order if order is not None else self.identify_model_order()
         self.source_data = source_data if source_data is not None else pd.Series().astype(float)
 
+        self.pade = None
+
         self.view = ModelView(self)
 
     def identify_model_order(self) -> int:
