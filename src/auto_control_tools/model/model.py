@@ -23,12 +23,11 @@ class Model:
     ):
         if isinstance(tf, control.TransferFunction):
             self.tf = tf
-            self.num = self.tf.num[0][0].tolist()
-            self.den = self.tf.den[0][0].tolist()
         else:
             self.tf = control.TransferFunction(*tf)
-            self.num = tf[0]
-            self.den = tf[1]
+
+        self.num = self.tf.num[0][0].tolist()
+        self.den = self.tf.den[0][0].tolist()
 
         if num is not None:
             self.num = num
