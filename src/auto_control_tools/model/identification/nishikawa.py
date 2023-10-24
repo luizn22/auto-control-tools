@@ -21,7 +21,7 @@ class NishikawaModelIdentification(BaseModelIdentification):
 
         idx_vreg, vreg = cls.get_vreg(tf_data)
 
-        A0 = vreg*idx_vreg - np.trapz(tf_data[:idx_vreg], tf_data[:idx_vreg].index)
+        A0 = vreg*idx_vreg - np.trapz(tf_data[:idx_vreg], tf_data[:idx_vreg].index)  # type: ignore
 
         t0 = A0/vreg
 
