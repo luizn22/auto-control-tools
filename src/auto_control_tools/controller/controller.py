@@ -40,11 +40,15 @@ class Controller:
 
 
 class ControllerView:
-    def __init__(self, controller):
+    def __init__(self, controller: Controller):
         self.controller = controller
 
-    def plot_controller_graph(self):
-        PlotUtils.plot_tf(self.controller.tf)
+    def plot_controller_graph(self, plot_model=True):
+        if plot_model:
+            PlotUtils.plot_tf(
+                {'Controller': self.controller.tf, 'Model': self.controller.model.tf}, pade=self.controller.model.pade)
+        else:
+            PlotUtils.plot_tf(self.controller.tf, pade=self.controller.model.pade)
 
     def get_controller_data(self) -> Dict[str, Any]:
         return dict(control.step_info(self.controller.tf))

@@ -57,9 +57,9 @@ class ModelView:
 
     def plot_model_graph(self):
         if self.model.source_data.empty:
-            PlotUtils.plot_tf(self.model.tf)
+            PlotUtils.plot_tf(self.model.tf, pade=self.model.pade)
         else:
-            PlotUtils.plot_tf(self.model.tf, self.model.source_data)
+            PlotUtils.plot_tf(self.model.tf, self.model.source_data, pade=self.model.pade)
 
     def get_model_data(self) -> Dict[str, Any]:
         return dict(control.step_info(self.model.tf))

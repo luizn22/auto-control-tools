@@ -1,4 +1,5 @@
-from typing import Union, Tuple, Any
+import copy
+from typing import Union, Tuple, Any, Dict
 
 import control
 import pandas as pd
@@ -13,9 +14,10 @@ class PlotUtils:
     @classmethod
     def plot_tf(
             cls,
-            tf: control.TransferFunction,
+            tf: Union[control.TransferFunction, Dict[str, control.TransferFunction]],
             discrete_data: Union[pd.Series, None] = None,
             settling_time: Union[float] = 0.02,
+            pade: control.TransferFunction = None
     ):
 
         if cls.jupyter_env:
@@ -30,36 +32,46 @@ class PlotUtils:
             }
             plt.switch_backend('TkAgg')
 
-        time, response = control.step_response(tf)
-        data = pd.Series(response, time)
-        info = control.step_info(tf, SettlingTimeThreshold=settling_time)
+        if isinstance(tf, control.TransferFunction):
+            tfs = {'': tf}
+        else:
+            tfs = tf
 
-        plt.plot(time, response, label='Tf', color='red')
-        if discrete_data is not None:
-            discrete_data.plot(label='Discrete Data', color='blue')
-        plt.xlabel('Time')
-        plt.ylabel('Response')
-        plt.title('Step Response of Model')
+        for sufix, tf in tfs.items():
+            tf = copy.copy(tf)
+            if pade is not None:
+                tf = tf * pade
 
-        plt.axhline(y=info['SteadyStateValue'], color='orange', label="vreg")
-        plt.axhline(y=info['SteadyStateValue'] * (1 + settling_time), color='orange', linestyle='--',
-                    label=f"vreg+/-{settling_time*100}%")
-        plt.axhline(y=info['SteadyStateValue'] * (1 - settling_time), color='orange', linestyle='--')
+            time, response = control.step_response(tf)
+            data = pd.Series(response, time)
+            info = control.step_info(tf, SettlingTimeThreshold=settling_time)
 
-        cls.plot_vertical(
-            (info['SettlingTime'], data.loc[min(data.index, key=lambda x: abs(x - info['SettlingTime']))]),
-            color='green',
-            label='ta',
-        )
+            plt.plot(time, response, label=f'{sufix} Tf', color='red')
+            if discrete_data is not None:
+                discrete_data.plot(label=f'{sufix} Discrete Data', color='blue')
 
-        if info['Overshoot'] != 0:
-            os = (1 + info['Overshoot']/100)*info['SteadyStateValue']
+            plt.axhline(y=info['SteadyStateValue'], color='orange', label=f"{sufix} vreg")
+            plt.axhline(y=info['SteadyStateValue'] * (1 + settling_time), color='orange', linestyle='--',
+                        label=f"{sufix} vreg+/-{settling_time*100}%")
+            plt.axhline(y=info['SteadyStateValue'] * (1 - settling_time), color='orange', linestyle='--')
+
             cls.plot_vertical(
-                ((data - os).abs().idxmin(), os),
-                color='purple',
-                label='So',
+                (info['SettlingTime'], data.loc[min(data.index, key=lambda x: abs(x - info['SettlingTime']))]),
+                color='green',
+                label=f'{sufix} ta',
             )
 
+            if info['Overshoot'] != 0:
+                os = (1 + info['Overshoot']/100)*info['SteadyStateValue']
+                cls.plot_vertical(
+                    ((data - os).abs().idxmin(), os),
+                    color='purple',
+                    label=f'{sufix} So',
+                )
+
+        plt.xlabel('Time')
+        plt.ylabel('Response')
+        plt.title('Step Response')
         plt.legend(**legend_kwargs)
         plt.show()
 
