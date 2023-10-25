@@ -10,6 +10,7 @@ from .envoirment import is_jupyter_environment
 
 class PlotUtils:
     jupyter_env = is_jupyter_environment()
+    _max_items_ploted = 5
 
     @classmethod
     def plot_tf(
@@ -19,7 +20,6 @@ class PlotUtils:
             settling_time: Union[float] = 0.02,
             pade: control.TransferFunction = None
     ):
-
         if cls.jupyter_env:
             legend_kwargs = {
                 'loc': 'upper center',
@@ -37,6 +37,8 @@ class PlotUtils:
         else:
             tfs = tf
 
+        colors = cls._generate_contrasting_colors(len(tfs) * cls._max_items_ploted)
+
         for sufix, tf in tfs.items():
             tf = copy.copy(tf)
             if pade is not None:
@@ -46,18 +48,19 @@ class PlotUtils:
             data = pd.Series(response, time)
             info = control.step_info(tf, SettlingTimeThreshold=settling_time)
 
-            plt.plot(time, response, label=f'{sufix} Tf', color='red')
+            plt.plot(time, response, label=f'{sufix} tf', color=colors.pop())
             if discrete_data is not None:
-                discrete_data.plot(label=f'{sufix} Discrete Data', color='blue')
+                discrete_data.plot(label=f'{sufix} Discrete Data', color=colors.pop())
 
-            plt.axhline(y=info['SteadyStateValue'], color='orange', label=f"{sufix} vreg")
-            plt.axhline(y=info['SteadyStateValue'] * (1 + settling_time), color='orange', linestyle='--',
+            steady_state_color = colors.pop()
+            plt.axhline(y=info['SteadyStateValue'], color=steady_state_color, label=f"{sufix} vreg")
+            plt.axhline(y=info['SteadyStateValue'] * (1 + settling_time), color=steady_state_color, linestyle='--',
                         label=f"{sufix} vreg+/-{settling_time*100}%")
-            plt.axhline(y=info['SteadyStateValue'] * (1 - settling_time), color='orange', linestyle='--')
+            plt.axhline(y=info['SteadyStateValue'] * (1 - settling_time), color=steady_state_color, linestyle='--')
 
             cls.plot_vertical(
                 (info['SettlingTime'], data.loc[min(data.index, key=lambda x: abs(x - info['SettlingTime']))]),
-                color='green',
+                color=colors.pop(),
                 label=f'{sufix} ta',
             )
 
@@ -65,7 +68,7 @@ class PlotUtils:
                 os = (1 + info['Overshoot']/100)*info['SteadyStateValue']
                 cls.plot_vertical(
                     ((data - os).abs().idxmin(), os),
-                    color='purple',
+                    color=colors.pop(),
                     label=f'{sufix} So',
                 )
 
@@ -88,3 +91,10 @@ class PlotUtils:
             display.display(tf)
         else:
             print(tf)
+
+    @staticmethod
+    def _generate_contrasting_colors(num_colors: int, saturation: float = 0.7, brightness: float = 0.7):
+        hues = [i / num_colors for i in range(num_colors)]
+        colors = [plt.colormaps.get_cmap('hsv')(h) for h in hues]
+        colors = [[h, saturation * s, brightness * v, x] for h, s, v, x in colors]
+        return colors
