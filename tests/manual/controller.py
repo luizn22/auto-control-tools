@@ -6,7 +6,7 @@ def run():
         teta=1.48
     )
 
-    controller = act.CohenCoonControllerAproximation.get_controller(model, act.P)
+    controller = act.CohenCoonControllerAproximation.get_controller(model, act.PID)
     controller.view.print_tf()
     print(controller.tf)
     model.view.plot_model_graph()

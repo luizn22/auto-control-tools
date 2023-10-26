@@ -1,24 +1,20 @@
-.. _class-ref:
+auto\_control\_tools package
+============================
 
-=====================
-Referência de Classes
-=====================
+Subpackages
+-----------
 
-intro
+.. toctree::
+   :maxdepth: 4
 
-Identificação de sistema
-========================
-.. automodule: auto_control_tools
-    :members:
-    :undoc-members:
-    :show-inheritance:
-    :inherited-members:
+   auto_control_tools.controller
+   auto_control_tools.model
+   auto_control_tools.utils
 
+Module contents
+---------------
 
-Aproximação de controlador
-==========================
-.. autosumary:
-    toctree: generated/
-    Controller
-
-
+.. automodule:: auto_control_tools
+   :members:
+   :undoc-members:
+   :show-inheritance:

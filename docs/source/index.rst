@@ -14,6 +14,7 @@ Documentação
     :maxdepth: 2
 
     introduction
+    auto_control_tools
     dev_scripts
 
 
