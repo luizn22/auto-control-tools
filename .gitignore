@@ -183,3 +183,6 @@ __init__.pyo
 
 # pycodestyle
 .pycode/
+
+
+docs/source/generated
