@@ -12,7 +12,7 @@ PID = P+I+D
 
 
 class BaseControllerAproximation:
-    accepted_controllers = [P, I, D, PI, PD, PID]
+    _accepted_controllers = [P, I, D, PI, PD, PID]
 
     @classmethod
     @abstractmethod
@@ -21,5 +21,5 @@ class BaseControllerAproximation:
 
     @classmethod
     def _parse_controller_option(cls, controller_type: str):
-        if controller_type not in cls.accepted_controllers:
-            raise ValueError(f'Invalid Controller option, must be one of {cls.accepted_controllers}')
+        if controller_type not in cls._accepted_controllers:
+            raise ValueError(f'Invalid Controller option, must be one of {cls._accepted_controllers}')

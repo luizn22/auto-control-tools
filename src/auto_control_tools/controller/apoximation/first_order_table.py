@@ -7,7 +7,7 @@ from ...controller.controller import Controller
 
 
 class FirstOrderTableControllerAproximationItem:
-    controller_type: str = ''  # replace with controller type
+    _controller_type: str = ''  # replace with controller type
 
     @classmethod
     @abstractmethod
@@ -16,7 +16,7 @@ class FirstOrderTableControllerAproximationItem:
 
 
 class FirstOrderTableControllerAproximation(BaseControllerAproximation):
-    controller_table: Dict[str, FirstOrderTableControllerAproximationItem] = {}
+    _controller_table: Dict[str, FirstOrderTableControllerAproximationItem] = {}
 
     @classmethod
     def get_controller(
@@ -25,4 +25,4 @@ class FirstOrderTableControllerAproximation(BaseControllerAproximation):
             controller_type: str
     ) -> Controller:
         cls._parse_controller_option(controller_type)
-        return cls.controller_table[controller_type].get_controller(model)
+        return cls._controller_table[controller_type].get_controller(model)
