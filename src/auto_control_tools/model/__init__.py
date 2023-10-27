@@ -1,4 +1,4 @@
-from .model import Model  # noqa
+from .model import Model, ModelView  # noqa
 from .first_order_model import FirstOrderModel  # noqa
 from .identification.ziegler_nichols import ZieglerNicholsModelIdentification # noqa
 from .identification.hagglund import HagglundModelIdentification # noqa
@@ -8,6 +8,7 @@ from .identification.sundaresan_krishnaswamy import SundaresanKrishnaswamyModelI
 
 __all__ = [
     "Model",
+    "ModelView",
     "FirstOrderModel",
     "ZieglerNicholsModelIdentification",
     "HagglundModelIdentification",
