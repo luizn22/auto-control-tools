@@ -1,20 +1,53 @@
-auto\_control\_tools package
-============================
+.. _class-ref:
+.. currentmodule:: auto_control_tools
 
-Subpackages
------------
+*********************
+Referência de Classes
+*********************
 
-.. toctree::
-   :maxdepth: 4
+CCCClass reference
 
-   auto_control_tools.controller
-   auto_control_tools.model
-   auto_control_tools.utils
 
-Module contents
----------------
+Modelo
+======
+.. autosummary::
+   :toctree: generated/
+   :template: custom-class-template.rst
 
-.. automodule:: auto_control_tools
-   :members:
-   :undoc-members:
-   :show-inheritance:
+    Model
+    ModelView
+
+    FirstOrderModel
+
+
+Identificação
+=============
+.. autosummary::
+   :toctree: generated/
+   :template: custom-class-template.rst
+
+    ZieglerNicholsModelIdentification
+    HagglundModelIdentification
+    SmithModelIdentification
+    SundaresanKrishnaswamyModelIdentification
+    NishikawaModelIdentification
+
+
+Controlador
+===========
+.. autosummary::
+   :toctree: generated/
+   :template: custom-class-template.rst
+
+    Controller
+    ControllerView
+
+
+Aproximação de Ganhos
+=====================
+.. autosummary::
+   :toctree: generated/
+   :template: custom-class-template.rst
+
+    ZieglerNicholsControllerAproximation
+    CohenCoonControllerAproximation
