@@ -1,15 +1,19 @@
 .. _class-ref:
+
 .. currentmodule:: auto_control_tools
 
 *********************
 Referência de Classes
 *********************
 
-CCCClass reference
+Filler text for class references
 
 
 Modelo
 ======
+
+Filler text for Model Classes
+
 .. autosummary::
    :toctree: generated/
    :template: custom-class-template.rst
@@ -22,6 +26,9 @@ Modelo
 
 Identificação
 =============
+
+Filler text for Identificação Classes
+
 .. autosummary::
    :toctree: generated/
    :template: custom-class-template.rst
@@ -35,6 +42,9 @@ Identificação
 
 Controlador
 ===========
+
+Filler text for Controlador Classes
+
 .. autosummary::
    :toctree: generated/
    :template: custom-class-template.rst
@@ -43,8 +53,13 @@ Controlador
     ControllerView
 
 
+.. _gain-aprox:
+
 Aproximação de Ganhos
 =====================
+
+Filler text for Aproximação de Ganhos Classes
+
 .. autosummary::
    :toctree: generated/
    :template: custom-class-template.rst
