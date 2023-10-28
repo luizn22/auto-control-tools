@@ -24,7 +24,6 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx.ext.coverage',
-    'sphinx.ext.imgmath',
     'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
@@ -172,11 +171,31 @@ def linkcode_resolve(domain, info):
     else:                       # specific version
         return base_url + "%s/src/%s%s" % (version, fn, linespec)
 
+
 # Don't automaticall show all members of class in Methods & Attributes section
 numpydoc_show_class_members = False
 
 # Don't create a Sphinx TOC for the lists of class methods and attributes
 numpydoc_class_members_toctree = False
+# -- Options for LaTeX output ------------------------------------------------
+
+latex_elements = {
+    # The paper size ('letterpaper' or 'a4paper').
+    #
+    # 'papersize': 'letterpaper',
+
+    # The font size ('10pt', '11pt' or '12pt').
+    #
+    # 'pointsize': '10pt',
+
+    # Additional stuff for the LaTeX preamble.
+    #
+    # 'preamble': '',
+
+    # Latex figure (float) alignment
+    #
+    # 'figure_align': 'htbp',
+}
 
 # -- Options for EPUB output
 epub_show_urls = 'footnote'
