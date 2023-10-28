@@ -113,6 +113,7 @@ class Model:
         self.view: ModelView = ModelView(self)
 
     def _identify_model_order(self) -> int:
+        """Identifies the order of self.tf and returns its value"""
         return int(self.tf.den[0][0].size) - 1
 
 
@@ -188,6 +189,7 @@ class ModelView:
         -----
         .. list-table:: Detalhamento dos termos retornados
             :header-rows: 1
+
             * - Chave
               - Nome
               - Descrição
@@ -218,6 +220,7 @@ class ModelView:
             * - SteadyStateValue
               - Valor de regime
               - Valor de regime do sistema.
+
         """
 
         return dict(control.step_info(self.model.tf, SettlingTimeThreshold=settling_time_threshold))
@@ -237,4 +240,11 @@ class ModelView:
         PlotUtils.pprint_dict(self.get_model_step_response_data(settling_time_threshold=settling_time_threshold))
 
     def print_tf(self):
+        """
+        Imprime a função de transferência na tela.
+
+        Utiliza o método :meth:`PlotUtils.print_tf`
+        Caso esteja em um ambiente `jupyter <https://jupyter.org/>`_, a função display() é chamada para que a função
+        de transferência seja mostrada com formatação matemática.
+        """
         PlotUtils.print_tf(self.model.tf_symbolic)
