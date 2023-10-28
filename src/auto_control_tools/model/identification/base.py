@@ -17,7 +17,7 @@ class BaseModelIdentification:
 
     @classmethod
     def _get_model_data_default(cls, path: str, sample_time: Union[None, float] = None,
-                               step_signal: Union[float, None] = None) -> pd.DataFrame:
+                                step_signal: Union[float, None] = None) -> pd.DataFrame:
         expected_fields = cls._expected_fields(sample_time, step_signal)
         df = DataInputUtils.read_table_with_fields(path, expected_fields)
 
