@@ -4,6 +4,7 @@ import numpy as np
 
 from ..first_order_model import FirstOrderModel
 from .base import BaseModelIdentification
+from ...utils.data import DataUtils
 
 
 class NishikawaModelIdentification(BaseModelIdentification):

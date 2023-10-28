@@ -2,6 +2,7 @@ from typing import Union
 
 from ..first_order_model import FirstOrderModel
 from .base import BaseModelIdentification
+from ...utils.data import DataUtils
 
 
 class ZieglerNicholsModelIdentification(BaseModelIdentification):
