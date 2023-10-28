@@ -28,18 +28,18 @@ class BaseModelIdentification:
         return df
 
     @classmethod
-    def setup_data_default(cls, df: pd.DataFrame, sample_time: Union[float, None] = None,
-                           step_signal: Union[float, None] = None,
-                           use_lin_filter: bool = False, linfilter_sothness: int = 5
-                           ) -> Tuple[pd.Series, float]:
+    def _setup_data_default(cls, df: pd.DataFrame, sample_time: Union[float, None] = None,
+                            step_signal: Union[float, None] = None,
+                            use_lin_filter: bool = False, linfilter_sothness: int = 5
+                            ) -> Tuple[pd.Series, float]:
         if sample_time is not None:
             df['time'] = df.index * step_signal
 
         if step_signal is None:  # in case step signal is not informed, get it and then remove column
             step_signal = max(df['input'])
-            df = cls.trunk_data_input(df)
+            df = cls._trunk_data_input(df)
 
-        df = cls.offset_data_output(df)
+        df = cls._offset_data_output(df)
 
         s = pd.Series(df['output'].values, index=df['time'])
 
@@ -49,13 +49,13 @@ class BaseModelIdentification:
         return s, step_signal
 
     @classmethod
-    def offset_data_output(cls, df: pd.DataFrame) -> pd.DataFrame:
+    def _offset_data_output(cls, df: pd.DataFrame) -> pd.DataFrame:
         df['output'] = df['output'].apply(lambda x: x if x > 0 else 0)
         df['output'] = df['output'] - min(df['output'])
         return df
 
     @classmethod
-    def trunk_data_input(cls, df: pd.DataFrame) -> pd.DataFrame:
+    def _trunk_data_input(cls, df: pd.DataFrame) -> pd.DataFrame:
         if 'input' not in df.columns:
             raise ValueError('input is not in df.columns')
         return df.loc[df['input'] != 0][[col for col in df if col != 'input']]
