@@ -4,12 +4,13 @@ from typing import Union, Tuple, Any, Dict
 import control
 import pandas as pd
 import matplotlib.pyplot as plt
+from IPython import display
 
 from .envoirment import is_jupyter_environment
 
 
 class PlotUtils:
-    jupyter_env = is_jupyter_environment()
+    _jupyter_env = is_jupyter_environment()
     _max_items_ploted = 5
 
     @classmethod
@@ -20,7 +21,8 @@ class PlotUtils:
             settling_time: Union[float] = 0.02,
             pade: control.TransferFunction = None
     ):
-        if cls.jupyter_env:
+        """Plot tf method!"""
+        if cls._jupyter_env:
             legend_kwargs = {
                 'loc': 'upper center',
                 'bbox_to_anchor': (1.25, 0.45)
@@ -86,7 +88,7 @@ class PlotUtils:
 
     @classmethod
     def print_tf(cls, tf: Any):
-        if cls.jupyter_env:
+        if cls._jupyter_env:
             from IPython import display
             display.display(tf)
         else:
@@ -98,3 +100,14 @@ class PlotUtils:
         colors = [plt.colormaps.get_cmap('hsv')(h) for h in hues]
         colors = [[item[0], saturation * item[1], brightness * item[2], item[3]] for item in colors]
         return colors
+
+    @classmethod
+    def pprint_dict(cls, di: Dict[str, Any]):
+        """
+         *Pretty Print* dict
+        """
+        if cls._jupyter_env:
+            df = pd.DataFrame([di])
+            display.display(df)
+        else:
+            pprint.pprint(di)

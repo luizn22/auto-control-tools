@@ -4,7 +4,6 @@ import control
 import sympy as sp
 
 from ..model.model import Model
-from ..utils.data import DataUtils
 from ..utils.plot import PlotUtils
 
 
@@ -54,7 +53,7 @@ class ControllerView:
         return dict(control.step_info(self.controller.tf))
 
     def print_controller_data(self, *args, **kwargs):
-        DataUtils.pprint_dict(self.get_controller_data())
+        PlotUtils.pprint_dict(self.get_controller_data())
 
     def print_tf(self):
         PlotUtils.print_tf(self.controller.tf_symbolic)

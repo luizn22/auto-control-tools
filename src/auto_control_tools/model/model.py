@@ -133,7 +133,7 @@ class ModelView:
         return dict(control.step_info(self.model.tf))
 
     def print_model_data(self, *args, **kwargs):
-        DataUtils.pprint_dict(self.get_model_data())
+        PlotUtils.pprint_dict(self.get_model_data())
 
     def print_tf(self):
         PlotUtils.print_tf(self.model.tf_symbolic)
