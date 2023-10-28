@@ -4,13 +4,12 @@ import control
 import pandas as pd
 import sympy as sp
 
-from ..utils.data import DataUtils
 from ..utils.plot import PlotUtils
 
 
 class Model:
     """
-    Classe representativa do modelo matemático de uma planta.
+    Classe representativa do modelo matemático de uma planta de sistemas de controle.
 
     Típicamente o modelo matemático de uma planta no domínio da frequenica pode ser definido por um numerador e um
     denominador em potências de s. Ex:
@@ -38,32 +37,6 @@ class Model:
         quanto com um objeto de função de transferência da bilbiotéca de controle
         (`TransferFunction
         <https://python-control.readthedocs.io/en/latest/generated/control.TransferFunction.html>`_).
-        Ex:
-
-        .. code-block:: python
-
-            num = [1, 2, 3]
-            den = [4, 5, 6, 7]
-            model = Model((num, den))
-            model.view.print_tf()
-            >>
-
-        .. math::
-
-            \\frac{ s^2 + 2s + 3 }{ 4s^3 + 5s^2 + 6s + 7 }
-
-        .. code-block:: python
-
-            num = [1, 2, 3]
-            den = [1, 1, 1, 0]
-            tf = control.TransferFunction(num, den)
-            model = Model(tf)
-            model.view.print_tf()
-            >>
-
-        .. math::
-
-            \\frac{ s^2 + 2s + 3 }{ s^3 + s^2 + s }
 
     source_data : [pd.Series, optional]
         Conjunto de dados representando a variação da saida em relação ao tempo.
@@ -87,6 +60,31 @@ class Model:
         Utilizado para visualização dos dados, estatísticas e gráficos referentes ao Modelo.
 
         Verificar a classe :class:`ModelView` para os métodos de visualização de dados.
+
+    source_data : pandas.Series, optional
+        Dados originários do modelo.
+
+    Examples
+    --------
+    >>> num = [1, 2, 3]
+    >>> den = [4, 5, 6, 7]
+    >>> model = Model((num, den))
+    >>> model.view.print_tf()
+
+    .. math::
+
+        \\frac{ s^2 + 2s + 3 }{ 4s^3 + 5s^2 + 6s + 7 }
+
+    >>> num = [1, 2, 3]
+    >>> den = [1, 1, 1, 0]
+    >>> tf = control.TransferFunction(num, den)
+    >>> model = Model(tf)
+    >>> model.view.print_tf()
+
+    .. math::
+
+        \\frac{ s^2 + 2s + 3 }{ s^3 + s^2 + s }
+
     """
     def __init__(
             self,
@@ -119,7 +117,43 @@ class Model:
 
 
 class ModelView:
+    """
+    Classe utilizada pra visualização de dados de um objeto da classe :class:`Model`.
+
+    Parameters
+    ----------
+
+    model : :class:`Model`
+        Um objeto da classe :class:`Model` para o qual deseja-se visualizar os dados.
+
+    Examples
+    --------
+    >>> num = [1]
+    >>> den = [1, 1]
+    >>> model = Model((num, den))
+    >>> model.view.print_tf()
+
+    .. math::
+        \\frac{ 1 }{ s + 1 }
+
+    >>> model.view.get_model_step_response_data()
+    {'Overshoot': 0,
+     'Peak': 0.9989999999999999,
+     'PeakTime': 6.907755278982137,
+     'RiseTime': 2.1630344812974367,
+     'SettlingMax': 1.0,
+     'SettlingMin': 0.9,
+     'SettlingTime': 3.9771924333533515,
+     'SteadyStateValue': 1.0,
+     'Undershoot': 0}
+
+    >>> model.view.plot_model_step_response_graph()
+
+    .. image:: ../image_resources/model_view_plot_model_graph.png
+
+    """
     def __init__(self, model: Model):
+        """Instancia :class:`ModelView`"""
         self.model = model
 
     def plot_model_step_response_graph(self, settling_time_threshold: float = 0.02):
@@ -133,7 +167,8 @@ class ModelView:
         PlotUtils.plot_tf(
             tf=self.model.tf,
             discrete_data=self.model.source_data,
-            pade=self.model.pade
+            pade=self.model.pade,
+            settling_time_threshold=settling_time_threshold,
         )
 
     def get_model_step_response_data(self, settling_time_threshold: float = 0.02) -> Dict[str, Any]:
