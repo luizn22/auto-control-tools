@@ -99,7 +99,7 @@ class PlotUtils:
     def _generate_contrasting_colors(num_colors: int, saturation: float = 0.7, brightness: float = 0.7):
         hues = [i / num_colors for i in range(num_colors)]
         colors = [plt.colormaps.get_cmap('hsv')(h) for h in hues]
-        colors = [[item[0], saturation * item[1], brightness * item[2], item[3]] for item in colors]
+        colors = [(item[0], saturation * item[1], brightness * item[2], item[3]) for item in colors]
         return colors
 
     @classmethod
