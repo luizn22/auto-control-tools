@@ -17,12 +17,12 @@ class ZieglerNicholsModelIdentification(BaseModelIdentification):
         df = cls._get_model_data_default(path, sample_time, step_signal)
         tf_data, step_signal = cls._setup_data_default(df, sample_time, step_signal)
 
-        idx_vreg, vreg = cls.get_vreg(tf_data)
-        idx_tan, tan = cls.get_max_tan(tf_data)
+        idx_vreg, vreg = DataUtils.get_vreg(tf_data)
+        idx_tan, tan = DataUtils.get_max_tan(tf_data)
         tan_point_value = tf_data.loc[tf_data.index == idx_tan].iloc[0]
 
-        t1 = cls.get_time_from_inclination(idx_tan, tan_point_value, tan_point_value, 0)
-        t3 = cls.get_time_from_inclination(idx_tan, tan_point_value, tan_point_value, vreg)
+        t1 = DataUtils.get_time_from_inclination(idx_tan, tan_point_value, tan_point_value, 0)
+        t3 = DataUtils.get_time_from_inclination(idx_tan, tan_point_value, tan_point_value, vreg)
 
         K = vreg / step_signal
         tau = t3 - t1

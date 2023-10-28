@@ -77,22 +77,3 @@ class BaseModelIdentification:
             fields.remove('input')
 
         return fields
-
-    @classmethod
-    def get_vreg(cls, tf_data: pd.Series, delta: float = 0.02) -> Tuple[float, float]:
-        for idx, value in tf_data.iloc[::1].items():
-            local_s = tf_data[idx:]
-            mean = local_s.mean()
-
-            if all((local_s < (1 + delta) * mean) & (local_s > (1 - delta) * mean)):
-                return idx, mean
-        return 0, 0
-
-    @classmethod
-    def get_max_tan(cls, tf_data: pd.Series) -> Tuple[float, float]:
-        diff = tf_data.diff()
-        return float(diff.idxmax()), float(max(diff[1:]))
-
-    @classmethod
-    def get_time_from_inclination(cls, ref_time: float, ref_value: float, inclination: float, value: float) -> float:
-        return (value - ref_value + inclination * ref_time) / inclination
