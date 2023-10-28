@@ -1,4 +1,5 @@
 import copy
+import pprint
 from typing import Union, Tuple, Any, Dict
 
 import control
@@ -18,7 +19,7 @@ class PlotUtils:
             cls,
             tf: Union[control.TransferFunction, Dict[str, control.TransferFunction]],
             discrete_data: Union[pd.Series, None] = None,
-            settling_time: Union[float] = 0.02,
+            settling_time_threshold: float = 0.02,
             pade: control.TransferFunction = None
     ):
         """Plot tf method!"""
@@ -48,7 +49,7 @@ class PlotUtils:
 
             time, response = control.step_response(tf)
             data = pd.Series(response, time)
-            info = control.step_info(tf, SettlingTimeThreshold=settling_time)
+            info = control.step_info(tf, SettlingTimeThreshold=settling_time_threshold)
 
             plt.plot(time, response, label=f'{sufix} tf', color=colors.pop())
             if discrete_data is not None:
@@ -56,9 +57,9 @@ class PlotUtils:
 
             steady_state_color = colors.pop()
             plt.axhline(y=info['SteadyStateValue'], color=steady_state_color, label=f"{sufix} vreg")
-            plt.axhline(y=info['SteadyStateValue'] * (1 + settling_time), color=steady_state_color, linestyle='--',
-                        label=f"{sufix} vreg+/-{settling_time*100}%")
-            plt.axhline(y=info['SteadyStateValue'] * (1 - settling_time), color=steady_state_color, linestyle='--')
+            plt.axhline(y=info['SteadyStateValue'] * (1 + settling_time_threshold), color=steady_state_color, linestyle='--',
+                        label=f"{sufix} vreg+/-{settling_time_threshold*100}%")
+            plt.axhline(y=info['SteadyStateValue'] * (1 - settling_time_threshold), color=steady_state_color, linestyle='--')
 
             cls.plot_vertical(
                 (info['SettlingTime'], data.loc[min(data.index, key=lambda x: abs(x - info['SettlingTime']))]),

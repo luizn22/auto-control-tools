@@ -122,18 +122,84 @@ class ModelView:
     def __init__(self, model: Model):
         self.model = model
 
-    def plot_model_graph(self):
+    def plot_model_step_response_graph(self, settling_time_threshold: float = 0.02):
+        """
+        Apresenta gráfico de resposta degrau do modelo.
+
+        Utiliza :meth:`PlotUtils.plot_tf` para plotar o gráfico da resposta a sinal degrau do modelo, bem como
+        as retas de tempo de acomodaçao, sobressinal, e valor de regime e os dados
+        discretos (:attr:`Model.source_data`) caso tenham sido informados.
+        """
         PlotUtils.plot_tf(
             tf=self.model.tf,
             discrete_data=self.model.source_data,
             pade=self.model.pade
         )
 
-    def get_model_data(self) -> Dict[str, Any]:
-        return dict(control.step_info(self.model.tf))
+    def get_model_step_response_data(self, settling_time_threshold: float = 0.02) -> Dict[str, Any]:
+        """
+        Retorna dados de resposta a sinal degrau do modelo.
 
-    def print_model_data(self, *args, **kwargs):
-        PlotUtils.pprint_dict(self.get_model_data())
+        Utiliza `control.step_info()
+        <https://python-control.readthedocs.io/en/latest/generated/control.step_info.html>`_
+        para obtenção dos dados de resposta a sinal degrau do sistema no formato de dicionário (:class:`dict`).
+
+        Parameters
+        ----------
+        settling_time_threshold : float
+            Percentual de desvio do valor de regime considerado do cálculo do tempo de acomodação.
+
+        Notes
+        -----
+        .. list-table:: Detalhamento dos termos retornados
+            :header-rows: 1
+            * - Chave
+              - Nome
+              - Descrição
+            * - RiseTime
+              - Tempo de Subida
+              - Tempo de 10% a 90% do valor de regime.
+            * - SettlingTime
+              - Tempo de Acomodação
+              - Tempo para até entrada em 2% de erro do valor de regime.
+            * - SettlingMin
+              - Valor Mínimo de Acom.
+              - Valor mínimo após o Tempo de Subida.
+            * - SettlingMax
+              - Valor Máximo de Acom.
+              - Valor máximo após o Tempo de Subida.
+            * - Overshoot
+              - Sobressinal
+              - Percentual do Pico em relação ao valor de regime.
+            * - Undershoot
+              - Subsinal
+              - Percentual de Subsinal em relação ao valor de regime.
+            * - Peak
+              - Pico
+              - Valor absoluto do pico.
+            * - PeakTime
+              - Tempo do Pico
+              - Tempo do pico.
+            * - SteadyStateValue
+              - Valor de regime
+              - Valor de regime do sistema.
+        """
+
+        return dict(control.step_info(self.model.tf, SettlingTimeThreshold=settling_time_threshold))
+
+    def print_model_step_response_data(self, settling_time_threshold: float = 0.02):
+        """
+        *Pretty Print* dos dados de resposta a sinal de grau do sistema.
+
+        Utiliza :meth:`PlotUtils.pprint_dict` para fazer o print dos dados.
+
+        Parameters
+        ----------
+        settling_time_threshold : float
+            Percentual de desvio do valor de regime considerado do cálculo do tempo de acomodação.
+        """
+
+        PlotUtils.pprint_dict(self.get_model_step_response_data(settling_time_threshold=settling_time_threshold))
 
     def print_tf(self):
         PlotUtils.print_tf(self.model.tf_symbolic)
