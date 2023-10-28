@@ -66,3 +66,14 @@ Filler text for Aproximação de Ganhos Classes
 
     ZieglerNicholsControllerAproximation
     CohenCoonControllerAproximation
+
+
+Vizualização de dados
+=====================
+
+.. autosummary::
+   :toctree: generated/
+   :template: custom-class-template.rst
+
+    PlotUtils
+
