@@ -70,7 +70,9 @@ class DataUtils:
 
         """
         if sample_time is not None:
-            df['time'] = df.index * step_signal
+            df['time'] = df.index * sample_time
+        elif 'time' not in df.columns:
+            raise ValueError('time column missing!')
 
         if step_signal is None:  # in case step signal is not informed, get it and then remove column
             step_signal = max(df['input'])
