@@ -70,7 +70,7 @@ Filler text for Aproximação de Ganhos Classes
     BaseControllerAproximation
 
 
-Vizualização de dados
+Visualização de dados
 =====================
 
 .. autosummary::
@@ -78,4 +78,15 @@ Vizualização de dados
    :template: custom-class-template.rst
 
     PlotUtils
+
+
+Manipulação de dados
+=====================
+
+.. autosummary::
+   :toctree: generated/
+   :template: custom-class-template.rst
+
+    DataInputUtils
+    DataUtils
 
