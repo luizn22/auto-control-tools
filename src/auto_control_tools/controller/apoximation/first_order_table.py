@@ -7,7 +7,7 @@ from ...controller.controller import Controller
 
 
 class FirstOrderTableControllerAproximationItem:
-    _controller_type: str = ''  # replace with controller type
+    controller_type: str = ''  # replace with controller type
 
     @classmethod
     @abstractmethod

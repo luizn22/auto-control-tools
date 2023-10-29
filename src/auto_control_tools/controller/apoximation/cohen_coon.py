@@ -5,7 +5,7 @@ from ...controller.controller import Controller
 
 
 class _PController(FirstOrderTableControllerAproximationItem):
-    _controller_type = P
+    controller_type = P
 
     @classmethod
     def get_controller(cls, model: FirstOrderModel) -> Controller:
@@ -20,7 +20,7 @@ class _PController(FirstOrderTableControllerAproximationItem):
 
 
 class _PIController(FirstOrderTableControllerAproximationItem):
-    _controller_type = PI
+    controller_type = PI
 
     @classmethod
     def get_controller(cls, model: FirstOrderModel) -> Controller:
@@ -36,7 +36,7 @@ class _PIController(FirstOrderTableControllerAproximationItem):
 
 
 class _PIDController(FirstOrderTableControllerAproximationItem):
-    _controller_type = PID
+    controller_type = PID
 
     @classmethod
     def get_controller(cls, model: FirstOrderModel) -> Controller:
@@ -55,5 +55,7 @@ class _PIDController(FirstOrderTableControllerAproximationItem):
 class CohenCoonControllerAproximation(FirstOrderTableControllerAproximation):
     _accepted_controllers = [P, PI, PID]
     _controller_table = {
-        i._controller_type: i for i in [_PController(), _PIController(), _PIDController()]
+        _PController.controller_type: _PController(),
+        _PIController.controller_type: _PIController(),
+        _PIDController.controller_type: _PIDController()
     }
