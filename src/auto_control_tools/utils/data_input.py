@@ -53,7 +53,10 @@ class DataInputUtils:
     def expected_fields(cls, sample_time: Union[float, bool, None] = None,
                         step_signal: Union[float, bool, None] = None) -> List[str]:
         """
-        Retorna a lista :attr:`standard_fields` com exeção dos campos sample_time ou step_signal caso sejam
+        Retorna os campos esperados.
+
+        Retorna a lista :attr:`standard_fields` com exeção dos campos :paramref:`sample_time` ou
+        :paramref:`step_signal` caso sejam
         informados nos parâmetros.
         """
         fields = copy(cls.standard_fields)
@@ -70,6 +73,8 @@ class DataInputUtils:
     def get_model_data_default(cls, path: str, sample_time: Union[None, float] = None,
                                step_signal: Union[float, None] = None) -> pd.DataFrame:
         """
+        Salva planilha de leiaute para preenchimento.
+
         Obtém os campos esperados, lê os dados do arquivo indicado através de
         :meth:`DataInputUtils.read_table_with_fields` verifica se não existem campos faltantes
         e retorna o pandas.DataFrame resultante.
@@ -77,7 +82,8 @@ class DataInputUtils:
         Parameters
         ----------
         path : str
-            Caminho até o arquivo a ser lido. O leiaute pode ser obtido através de :meth:`get_data_input_layout`.
+            Caminho até o arquivo a ser lido. O leiaute pode ser obtido através de
+            :meth:`~BaseModelIdentification.get_data_input_layout`.
 
         sample_time : float, optional
             Valor do invervalo de amostragem. Caso informado, o intervalo de amostragem é considerado constante e
