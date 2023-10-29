@@ -1,0 +1,367 @@
+[
+  {
+    "in": {
+      "method": "<class 'auto_control_tools.model.identification.ziegler_nichols.ZieglerNicholsModelIdentification'>",
+      "method_kwargs": {
+        "path": "C:\\Users\\luiz\\PycharmProjects\\auto-control-tools\\tests\\resources\\no_delay_constant_sample_time_identification_cases\\no_delay_test_case_1.csv",
+        "sample_time": 1,
+        "step_signal": 1,
+        "ignore_delay_threshold": 1
+      }
+    },
+    "out": {
+      "num": [
+        20.0
+      ],
+      "den": [
+        0.8,
+        1.0
+      ],
+      "order": 1,
+      "K": 20.0,
+      "tau": 0.8,
+      "theta": 1.0
+    }
+  },
+  {
+    "in": {
+      "method": "<class 'auto_control_tools.model.identification.ziegler_nichols.ZieglerNicholsModelIdentification'>",
+      "method_kwargs": {
+        "path": "C:\\Users\\luiz\\PycharmProjects\\auto-control-tools\\tests\\resources\\no_delay_constant_sample_time_identification_cases\\no_delay_test_case_2.csv",
+        "sample_time": 1,
+        "step_signal": 1,
+        "ignore_delay_threshold": 1
+      }
+    },
+    "out": {
+      "num": [
+        74.8
+      ],
+      "den": [
+        1.7000000000000002,
+        1.0
+      ],
+      "order": 1,
+      "K": 74.8,
+      "tau": 1.7000000000000002,
+      "theta": 5.0
+    }
+  },
+  {
+    "in": {
+      "method": "<class 'auto_control_tools.model.identification.ziegler_nichols.ZieglerNicholsModelIdentification'>",
+      "method_kwargs": {
+        "path": "C:\\Users\\luiz\\PycharmProjects\\auto-control-tools\\tests\\resources\\no_delay_constant_sample_time_identification_cases\\no_delay_test_case_3.csv",
+        "sample_time": 1,
+        "step_signal": 1,
+        "ignore_delay_threshold": 1
+      }
+    },
+    "out": {
+      "num": [
+        57.0
+      ],
+      "den": [
+        1.4250000000000007,
+        1.0
+      ],
+      "order": 1,
+      "K": 57.0,
+      "tau": 1.4250000000000007,
+      "theta": 8.0
+    }
+  },
+  {
+    "in": {
+      "method": "<class 'auto_control_tools.model.identification.hagglund.HagglundModelIdentification'>",
+      "method_kwargs": {
+        "path": "C:\\Users\\luiz\\PycharmProjects\\auto-control-tools\\tests\\resources\\no_delay_constant_sample_time_identification_cases\\no_delay_test_case_1.csv",
+        "sample_time": 1,
+        "step_signal": 1,
+        "ignore_delay_threshold": 1
+      }
+    },
+    "out": {
+      "num": [
+        20.0
+      ],
+      "den": [
+        9.0,
+        1.0
+      ],
+      "order": 1,
+      "K": 20.0,
+      "tau": 9.0,
+      "theta": 1.0
+    }
+  },
+  {
+    "in": {
+      "method": "<class 'auto_control_tools.model.identification.hagglund.HagglundModelIdentification'>",
+      "method_kwargs": {
+        "path": "C:\\Users\\luiz\\PycharmProjects\\auto-control-tools\\tests\\resources\\no_delay_constant_sample_time_identification_cases\\no_delay_test_case_2.csv",
+        "sample_time": 1,
+        "step_signal": 1,
+        "ignore_delay_threshold": 1
+      }
+    },
+    "out": {
+      "num": [
+        74.8
+      ],
+      "den": [
+        2.0,
+        1.0
+      ],
+      "order": 1,
+      "K": 74.8,
+      "tau": 2.0,
+      "theta": 5.0
+    }
+  },
+  {
+    "in": {
+      "method": "<class 'auto_control_tools.model.identification.hagglund.HagglundModelIdentification'>",
+      "method_kwargs": {
+        "path": "C:\\Users\\luiz\\PycharmProjects\\auto-control-tools\\tests\\resources\\no_delay_constant_sample_time_identification_cases\\no_delay_test_case_3.csv",
+        "sample_time": 1,
+        "step_signal": 1,
+        "ignore_delay_threshold": 1
+      }
+    },
+    "out": {
+      "num": [
+        57.0
+      ],
+      "den": [
+        1.0,
+        1.0
+      ],
+      "order": 1,
+      "K": 57.0,
+      "tau": 1.0,
+      "theta": 8.0
+    }
+  },
+  {
+    "in": {
+      "method": "<class 'auto_control_tools.model.identification.smith.SmithModelIdentification'>",
+      "method_kwargs": {
+        "path": "C:\\Users\\luiz\\PycharmProjects\\auto-control-tools\\tests\\resources\\no_delay_constant_sample_time_identification_cases\\no_delay_test_case_1.csv",
+        "sample_time": 1,
+        "step_signal": 1,
+        "ignore_delay_threshold": 1
+      }
+    },
+    "out": {
+      "num": [
+        20.0
+      ],
+      "den": [
+        13.5,
+        1.0
+      ],
+      "order": 1,
+      "pade": null,
+      "K": 20.0,
+      "tau": 13.5,
+      "theta": 0
+    }
+  },
+  {
+    "in": {
+      "method": "<class 'auto_control_tools.model.identification.smith.SmithModelIdentification'>",
+      "method_kwargs": {
+        "path": "C:\\Users\\luiz\\PycharmProjects\\auto-control-tools\\tests\\resources\\no_delay_constant_sample_time_identification_cases\\no_delay_test_case_2.csv",
+        "sample_time": 1,
+        "step_signal": 1,
+        "ignore_delay_threshold": 1
+      }
+    },
+    "out": {
+      "num": [
+        74.8
+      ],
+      "den": [
+        4.5,
+        1.0
+      ],
+      "order": 1,
+      "K": 74.8,
+      "tau": 4.5,
+      "theta": 2.5
+    }
+  },
+  {
+    "in": {
+      "method": "<class 'auto_control_tools.model.identification.smith.SmithModelIdentification'>",
+      "method_kwargs": {
+        "path": "C:\\Users\\luiz\\PycharmProjects\\auto-control-tools\\tests\\resources\\no_delay_constant_sample_time_identification_cases\\no_delay_test_case_3.csv",
+        "sample_time": 1,
+        "step_signal": 1,
+        "ignore_delay_threshold": 1
+      }
+    },
+    "out": {
+      "num": [
+        57.0
+      ],
+      "den": [
+        9.0,
+        1.0
+      ],
+      "order": 1,
+      "pade": null,
+      "K": 57.0,
+      "tau": 9.0,
+      "theta": 0
+    }
+  },
+  {
+    "in": {
+      "method": "<class 'auto_control_tools.model.identification.sundaresan_krishnaswamy.SundaresanKrishnaswamyModelIdentification'>",
+      "method_kwargs": {
+        "path": "C:\\Users\\luiz\\PycharmProjects\\auto-control-tools\\tests\\resources\\no_delay_constant_sample_time_identification_cases\\no_delay_test_case_1.csv",
+        "sample_time": 1,
+        "step_signal": 1,
+        "ignore_delay_threshold": 1
+      }
+    },
+    "out": {
+      "num": [
+        20.0
+      ],
+      "den": [
+        6.03,
+        1.0
+      ],
+      "order": 1,
+      "pade": null,
+      "K": 20.0,
+      "tau": 6.03,
+      "theta": 0
+    }
+  },
+  {
+    "in": {
+      "method": "<class 'auto_control_tools.model.identification.sundaresan_krishnaswamy.SundaresanKrishnaswamyModelIdentification'>",
+      "method_kwargs": {
+        "path": "C:\\Users\\luiz\\PycharmProjects\\auto-control-tools\\tests\\resources\\no_delay_constant_sample_time_identification_cases\\no_delay_test_case_2.csv",
+        "sample_time": 1,
+        "step_signal": 1,
+        "ignore_delay_threshold": 1
+      }
+    },
+    "out": {
+      "num": [
+        74.8
+      ],
+      "den": [
+        4.0200000000000005,
+        1.0
+      ],
+      "order": 1,
+      "K": 74.8,
+      "tau": 4.0200000000000005,
+      "theta": 2.3000000000000003
+    }
+  },
+  {
+    "in": {
+      "method": "<class 'auto_control_tools.model.identification.sundaresan_krishnaswamy.SundaresanKrishnaswamyModelIdentification'>",
+      "method_kwargs": {
+        "path": "C:\\Users\\luiz\\PycharmProjects\\auto-control-tools\\tests\\resources\\no_delay_constant_sample_time_identification_cases\\no_delay_test_case_3.csv",
+        "sample_time": 1,
+        "step_signal": 1,
+        "ignore_delay_threshold": 1
+      }
+    },
+    "out": {
+      "num": [
+        57.0
+      ],
+      "den": [
+        13.4,
+        1.0
+      ],
+      "order": 1,
+      "pade": null,
+      "K": 57.0,
+      "tau": 13.4,
+      "theta": 0
+    }
+  },
+  {
+    "in": {
+      "method": "<class 'auto_control_tools.model.identification.nishikawa.NishikawaModelIdentification'>",
+      "method_kwargs": {
+        "path": "C:\\Users\\luiz\\PycharmProjects\\auto-control-tools\\tests\\resources\\no_delay_constant_sample_time_identification_cases\\no_delay_test_case_1.csv",
+        "sample_time": 1,
+        "step_signal": 1,
+        "ignore_delay_threshold": 1
+      }
+    },
+    "out": {
+      "num": [
+        20.0
+      ],
+      "den": [
+        1.0
+      ],
+      "order": 0,
+      "pade": null,
+      "K": 20.0,
+      "tau": 0.0,
+      "theta": 0
+    }
+  },
+  {
+    "in": {
+      "method": "<class 'auto_control_tools.model.identification.nishikawa.NishikawaModelIdentification'>",
+      "method_kwargs": {
+        "path": "C:\\Users\\luiz\\PycharmProjects\\auto-control-tools\\tests\\resources\\no_delay_constant_sample_time_identification_cases\\no_delay_test_case_2.csv",
+        "sample_time": 1,
+        "step_signal": 1,
+        "ignore_delay_threshold": 1
+      }
+    },
+    "out": {
+      "num": [
+        74.8
+      ],
+      "den": [
+        7.955998604975587,
+        1.0
+      ],
+      "order": 1,
+      "pade": null,
+      "K": 74.8,
+      "tau": 7.955998604975587,
+      "theta": 0
+    }
+  },
+  {
+    "in": {
+      "method": "<class 'auto_control_tools.model.identification.nishikawa.NishikawaModelIdentification'>",
+      "method_kwargs": {
+        "path": "C:\\Users\\luiz\\PycharmProjects\\auto-control-tools\\tests\\resources\\no_delay_constant_sample_time_identification_cases\\no_delay_test_case_3.csv",
+        "sample_time": 1,
+        "step_signal": 1,
+        "ignore_delay_threshold": 1
+      }
+    },
+    "out": {
+      "num": [
+        57.0
+      ],
+      "den": [
+        5.673150266971778,
+        1.0
+      ],
+      "order": 1,
+      "K": 57.0,
+      "tau": 5.673150266971778,
+      "theta": 1.8005339435545382
+    }
+  }
+]
