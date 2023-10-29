@@ -3,6 +3,7 @@ import pprint
 from typing import Union, Tuple, Any, Dict
 
 import control
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -46,9 +47,19 @@ class PlotUtils:
             if pade is not None:
                 tf = tf * pade
 
-            time, response = control.step_response(tf)
-            data = pd.Series(response, time)
             info = control.step_info(tf, SettlingTimeThreshold=settling_time_threshold)
+
+            max_time = info['SettlingTime']*1.25
+            qt_points = 1000
+
+            if discrete_data is not None:
+                max_time = discrete_data.index[-1]
+                qt_points = 2*len(discrete_data)
+
+            time = np.linspace(0, max_time, num=qt_points)
+            time, response = control.forced_response(tf, time, np.ones_like(time))
+
+            data = pd.Series(response, time)
 
             plt.plot(time, response, label=f'{sufix} tf', color=colors.pop())
             if discrete_data is not None:
