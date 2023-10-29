@@ -5,6 +5,7 @@ import numpy as np
 from ..first_order_model import FirstOrderModel
 from .base import BaseModelIdentification
 from ...utils.data import DataUtils
+from ...utils.data_input import DataInputUtils
 
 
 class NishikawaModelIdentification(BaseModelIdentification):
@@ -17,8 +18,8 @@ class NishikawaModelIdentification(BaseModelIdentification):
             ignore_delay_threshold: float = 0.5,
 
     ) -> FirstOrderModel:
-        df = cls._get_model_data_default(path, sample_time, step_signal)
-        tf_data, step_signal = cls._setup_data_default(df, sample_time, step_signal)
+        df = DataInputUtils.get_model_data_default(path, sample_time, step_signal)
+        tf_data, step_signal = DataUtils.setup_data_default(df, sample_time, step_signal)
 
         idx_vreg, vreg = DataUtils.get_vreg(tf_data)
 

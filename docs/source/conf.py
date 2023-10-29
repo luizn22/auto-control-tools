@@ -56,6 +56,8 @@ autodoc_default_options = {
     'class-doc-from-first': True,
 }
 
+autodoc_member_order = 'bysource'
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
