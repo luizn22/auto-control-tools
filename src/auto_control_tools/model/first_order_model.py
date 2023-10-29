@@ -83,8 +83,8 @@ class FirstOrderModel(Model):
 
     Notes
     -----
-    O atributo :attr:`pade` é utilizado apenas para plotagem dos gráficos, visto que interfere nos cálculos de
-    aproximação de controlador.
+    O atributo :attr:`pade` é utilizado apenas para plotagem dos gráficos e por métodos de aproximação de controlador
+    que fizerem uso direto dele, visto que interfere nos cálculos de alguns métodos aproximação de controlador.
 
     Examples
     --------
