@@ -124,7 +124,7 @@ class ModelView:
     Parameters
     ----------
 
-    model : :class:`Model`
+    model : Model
         Um objeto da classe :class:`Model` para o qual deseja-se visualizar os dados.
 
     Examples
