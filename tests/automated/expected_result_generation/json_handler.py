@@ -1,9 +1,9 @@
 import json
 import os
-from typing import Tuple, Iterable
+from typing import Tuple, Iterable, Dict, Any
 
 
-def save_result_set_to_json(path: str, name: str, in_out: Iterable[Tuple[dict, dict]]):
+def save_result_set_to_json(path: str, name: str, in_out: Iterable[Tuple[Dict[str, Any], Dict[str, Any]]]):
     """
 
     :param path: path to folder where json will be saved
@@ -32,7 +32,7 @@ def save_result_set_to_json(path: str, name: str, in_out: Iterable[Tuple[dict, d
         json.dump(j_li, json_file)
 
 
-def compare_to_json(inputs: dict, outputs: dict, json_path: str):
+def compare_to_json(inputs: Dict[str, Any], outputs: Dict[str, Any], json_path: str):
     with open(json_path, 'r') as json_file:
         j = json.load(json_file)
 
@@ -41,7 +41,7 @@ def compare_to_json(inputs: dict, outputs: dict, json_path: str):
             if item.get('in') == inputs:
                 return item.get('out')
 
-    return search() == {k: v for k,v in outputs.items() if is_serializable(v)}
+    return search() == {k: v for k, v in outputs.items() if is_serializable(v)}
 
 
 def is_serializable(obj):

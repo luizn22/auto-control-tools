@@ -1,6 +1,8 @@
 import random
 import os
 
+prev_path = os.getcwd()
+
 # Get the directory of the current script (conftest.py)
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -61,3 +63,6 @@ CONTROLLER_GAIN_EXAMPLES = [  # KI, KP, KD
 CONTROLLER_TEST_CASES = [
     (m, c) for m in MODEL_EXAMPLES for c in CONTROLLER_GAIN_EXAMPLES
 ]
+
+
+os.chdir(prev_path)

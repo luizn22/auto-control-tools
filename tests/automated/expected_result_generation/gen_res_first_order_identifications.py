@@ -1,4 +1,3 @@
-import pytest
 import os
 
 from auto_control_tools import (
