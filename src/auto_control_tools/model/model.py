@@ -228,7 +228,11 @@ class ModelView:
 
         """
 
-        return dict(control.step_info(self.model.tf, SettlingTimeThreshold=settling_time_threshold))
+        tf = copy(self.model.tf)
+        if self.model.pade is not None:
+            tf = tf * self.model.pade
+
+        return dict(control.step_info(tf, SettlingTimeThreshold=settling_time_threshold))
 
     def print_model_step_response_data(self, settling_time_threshold: float = 0.02):
         """
