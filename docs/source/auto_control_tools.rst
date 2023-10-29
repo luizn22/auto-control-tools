@@ -38,6 +38,7 @@ Filler text for Identificação Classes
     SmithModelIdentification
     SundaresanKrishnaswamyModelIdentification
     NishikawaModelIdentification
+    BaseModelIdentification
 
 
 Controlador
@@ -66,6 +67,7 @@ Filler text for Aproximação de Ganhos Classes
 
     ZieglerNicholsControllerAproximation
     CohenCoonControllerAproximation
+    BaseControllerAproximation
 
 
 Vizualização de dados
