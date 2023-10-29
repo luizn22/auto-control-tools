@@ -6,3 +6,4 @@ mypy==1.6.1
 control~=0.9.4
 pandas~=2.1.0
 numpy~=1.26.1
+ipython==8.16.1
