@@ -8,3 +8,4 @@ numpydoc
 nbsphinx
 ipykernel==6.26.0
 docutils==0.20.1
+sphinx-paramlinks==0.6.0

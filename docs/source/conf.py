@@ -35,7 +35,9 @@ extensions = [
     'sphinx.ext.napoleon',
     'nbsphinx',
     'numpydoc',
-    'sphinx.ext.linkcode'
+    'sphinx.ext.linkcode',
+
+    'sphinx_paramlinks',
 ]
 
 autoclass_content = "class"
