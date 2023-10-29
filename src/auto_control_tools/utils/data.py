@@ -41,6 +41,8 @@ class DataUtils:
                            use_lin_filter: bool = False, linfilter_sothness: int = 5
                            ) -> Tuple[pd.Series, float]:
         """
+        Prepara os dados para uso dos métodos de identificação.
+
         Faz o preparo dos dados de :paramref:`df` adicionando campos informadas pelos parâmetros
         :paramref:`sample_time` e :paramref:`step_signal` e aplicando um filtro linear, caso solicitado.
         Retorna a pandas.Series referente ao sinal de saida em relação ao tempo e o valor do sinal degrau.
@@ -90,6 +92,8 @@ class DataUtils:
     @classmethod
     def trunk_data_input(cls, df: pd.DataFrame) -> pd.DataFrame:
         """
+        Remove dados onde o valo de entrada é nulo.
+
         Recebe pandas.DataFrame com dados de resposta a sinal degrau de um sistema. Caso o sinal degrau inicie zerado
         e suba posteriormente, os momentos onde ele era igual a zero são removidos, deixando no DataFrame apenas
         dados onde o sinal degrau é ativo. Retorna o pandas.DataFrame com as alterações realizadas.
@@ -101,6 +105,8 @@ class DataUtils:
     @classmethod
     def offset_data_output(cls, df: pd.DataFrame) -> pd.DataFrame:
         """
+        Remove valores negativos e interpola os dados para encostarem no eixo :math:`t`
+
         Recebe pandas.DataFrame com dados de resposta a sinal degrau de um sistema, zera valores de saida
         abaixo de zero, e translada os dados de saida (sutrai um mesmo escalar de todos os valores de output) com
         base no valor de saida mais baixo presente, garantindo que a curva de saida encoste no eixo do tempo.
