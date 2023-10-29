@@ -13,7 +13,7 @@ class ZieglerNicholsModelIdentification(BaseModelIdentification):
             path: str,
             sample_time: Union[None, float] = None,
             step_signal: Union[None, float] = None,
-            ignore_delay_threshold: float = 0.5,
+            ignore_delay_threshold: Union[None, float] = 0.5,
 
     ) -> FirstOrderModel:
         df = DataInputUtils.get_model_data_default(path, sample_time, step_signal)
@@ -30,7 +30,7 @@ class ZieglerNicholsModelIdentification(BaseModelIdentification):
         tau = t3 - t1
         theta = t1
 
-        if theta < ignore_delay_threshold:
+        if ignore_delay_threshold is not None and theta < ignore_delay_threshold:
             theta = 0
 
         return FirstOrderModel(K, tau, theta, source_data=tf_data)

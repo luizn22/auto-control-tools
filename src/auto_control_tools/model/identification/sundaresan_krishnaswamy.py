@@ -13,7 +13,7 @@ class SundaresanKrishnaswamyModelIdentification(BaseModelIdentification):
             path: str,
             sample_time: Union[None, float] = None,
             step_signal: Union[None, float] = None,
-            ignore_delay_threshold: float = 0.5,
+            ignore_delay_threshold: Union[None, float] = 0.5,
 
     ) -> FirstOrderModel:
         df = DataInputUtils.get_model_data_default(path, sample_time, step_signal)
@@ -28,7 +28,7 @@ class SundaresanKrishnaswamyModelIdentification(BaseModelIdentification):
         tau = 0.67*(t2 - t1)
         theta = 1.3 * t1 - 0.29 * t2
 
-        if theta < ignore_delay_threshold:
+        if ignore_delay_threshold is not None and theta < ignore_delay_threshold:
             theta = 0
 
         return FirstOrderModel(K, tau, theta, source_data=tf_data)
