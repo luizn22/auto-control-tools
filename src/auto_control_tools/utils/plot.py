@@ -5,7 +5,6 @@ from typing import Union, Tuple, Any, Dict
 import control
 import pandas as pd
 import matplotlib.pyplot as plt
-from IPython import display
 
 from .envoirment import is_jupyter_environment
 
@@ -108,6 +107,7 @@ class PlotUtils:
          *Pretty Print* dict
         """
         if cls._jupyter_env:
+            from IPython import display
             df = pd.DataFrame([di])
             display.display(df)
         else:
