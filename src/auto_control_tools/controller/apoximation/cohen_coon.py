@@ -11,11 +11,11 @@ class _PController(FirstOrderTableControllerAproximationItem):
     def get_controller(cls, model: FirstOrderModel) -> Controller:
         k = model.K
         tau = model.tau
-        teta = model.teta
+        theta = model.theta
 
         return Controller(
             model,
-            kp=(1 / k) * (tau / teta) * (1 + teta / (3 * tau))
+            kp=(1 / k) * (tau / theta) * (1 + theta / (3 * tau))
         )
 
 
@@ -26,12 +26,12 @@ class _PIController(FirstOrderTableControllerAproximationItem):
     def get_controller(cls, model: FirstOrderModel) -> Controller:
         k = model.K
         tau = model.tau
-        teta = model.teta
+        theta = model.theta
 
         return Controller(
             model,
-            kp=(1 / k) * (tau / teta) * (0.9 + teta / (12 * tau)),
-            ki=(teta * (30 + 3 * (teta / tau))) / (9 + 20 * (teta / tau))
+            kp=(1 / k) * (tau / theta) * (0.9 + theta / (12 * tau)),
+            ki=(theta * (30 + 3 * (theta / tau))) / (9 + 20 * (theta / tau))
         )
 
 
@@ -42,13 +42,13 @@ class _PIDController(FirstOrderTableControllerAproximationItem):
     def get_controller(cls, model: FirstOrderModel) -> Controller:
         k = model.K
         tau = model.tau
-        teta = model.teta
+        theta = model.theta
 
         return Controller(
             model,
-            kp=(1 / k) * (tau / teta) * ((16 * tau + 3 * teta) / (12 * tau)),
-            ki=(teta * (32 + 6 * (teta / tau))) / (13 + 8 * (teta / tau)),
-            kd=(4*teta) / (11 + 2 * (teta / tau))
+            kp=(1 / k) * (tau / theta) * ((16 * tau + 3 * theta) / (12 * tau)),
+            ki=(theta * (32 + 6 * (theta / tau))) / (13 + 8 * (theta / tau)),
+            kd=(4 * theta) / (11 + 2 * (theta / tau))
         )
 
 

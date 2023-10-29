@@ -16,17 +16,17 @@ class FirstOrderModel(Model):
             self,
             K: float,
             tau: float,
-            teta: float = 0,
+            theta: float = 0,
             pade_degree: int = 5,
             source_data: Union[pd.Series, None] = None,
     ):
-        super().__init__([[K], [tau, 1]], source_data=source_data)
+        super().__init__(([K], [tau, 1]), source_data=source_data)
         self.K = K
         self.tau = tau
-        self.teta = teta
+        self.theta = theta
 
-        if teta != 0 and pade_degree > 0:
-            self.pade = control.tf(*control.pade(teta, pade_degree))
+        if theta != 0 and pade_degree > 0:
+            self.pade = control.tf(*control.pade(theta, pade_degree))
 
             s = sp.symbols('s')
-            self.tf_symbolic = self.tf_symbolic * sp.exp(-teta*s)
+            self.tf_symbolic = self.tf_symbolic * sp.exp(-theta * s)

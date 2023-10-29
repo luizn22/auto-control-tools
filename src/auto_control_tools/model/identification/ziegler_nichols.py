@@ -27,9 +27,9 @@ class ZieglerNicholsModelIdentification(BaseModelIdentification):
 
         K = vreg / step_signal
         tau = t3 - t1
-        teta = t1
+        theta = t1
 
-        if teta < ignore_delay_threshold:
-            teta = 0
+        if theta < ignore_delay_threshold:
+            theta = 0
 
-        return FirstOrderModel(K, tau, teta, source_data=tf_data)
+        return FirstOrderModel(K, tau, theta, source_data=tf_data)

@@ -31,9 +31,9 @@ class NishikawaModelIdentification(BaseModelIdentification):
         K = vreg / step_signal
 
         tau = A1/(0.368*vreg)
-        teta = t0 - tau
+        theta = t0 - tau
 
-        if teta < ignore_delay_threshold:
-            teta = 0
+        if theta < ignore_delay_threshold:
+            theta = 0
 
-        return FirstOrderModel(K, tau, teta, source_data=tf_data)
+        return FirstOrderModel(K, tau, theta, source_data=tf_data)

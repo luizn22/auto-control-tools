@@ -25,9 +25,9 @@ class SundaresanKrishnaswamyModelIdentification(BaseModelIdentification):
 
         K = vreg / step_signal
         tau = 0.67*(t2 - t1)
-        teta = 1.3*t1 - 0.29*t2
+        theta = 1.3 * t1 - 0.29 * t2
 
-        if teta < ignore_delay_threshold:
-            teta = 0
+        if theta < ignore_delay_threshold:
+            theta = 0
 
-        return FirstOrderModel(K, tau, teta, source_data=tf_data)
+        return FirstOrderModel(K, tau, theta, source_data=tf_data)

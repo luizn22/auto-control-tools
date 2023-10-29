@@ -25,9 +25,9 @@ class SmithModelIdentification(BaseModelIdentification):
 
         K = vreg / step_signal
         tau = 1.5*(t2 - t1)
-        teta = t2 - tau
+        theta = t2 - tau
 
-        if teta < ignore_delay_threshold:
-            teta = 0
+        if theta < ignore_delay_threshold:
+            theta = 0
 
-        return FirstOrderModel(K, tau, teta, source_data=tf_data)
+        return FirstOrderModel(K, tau, theta, source_data=tf_data)
