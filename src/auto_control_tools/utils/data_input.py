@@ -5,6 +5,7 @@ import pandas as pd
 
 
 class DataInputUtils:
+    default_table_name = 'data_input'  # update BaseModelIdentification.get_data_input_layout docstring if changed
     standard_fields = ['time', 'input', 'output']
     allowed_file_type = ['csv', 'xlsx']
 
@@ -13,7 +14,7 @@ class DataInputUtils:
             cls,
             path: str,
             fields: List[str],
-            table_name: str = 'data_input',
+            table_name: str = default_table_name,
             save_as: str = 'csv'
     ) -> str:
         if save_as not in cls.allowed_file_type:
