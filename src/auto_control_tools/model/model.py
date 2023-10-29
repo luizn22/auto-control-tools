@@ -31,14 +31,14 @@ class Model:
 
     Parameters
     ----------
-    tf : ~control.TransferFunction, tuple[list[float], list[float]]]
+    tf : ~control.TransferFunction or tuple[list[float], list[float]]]
         Função de transferência que representa o processo da planta,
         pode ser tanto as listas dos coeficientes,
         quanto com um objeto de função de transferência da bilbiotéca de controle
         (`TransferFunction
         <https://python-control.readthedocs.io/en/latest/generated/control.TransferFunction.html>`_).
 
-    source_data : [pd.Series, optional]
+    source_data : pd.Series, optional
         Conjunto de dados representando a variação da saida em relação ao tempo.
         Deve um objeto do tipo `Series <https://pandas.pydata.org/docs/reference/api/pandas.Series.html>`_
         da bilbioteca `pandas <https://pandas.pydata.org/docs/index.html>`_, sendo os valores representativos da saida
@@ -164,6 +164,11 @@ class ModelView:
         Utiliza :meth:`PlotUtils.plot_tf` para plotar o gráfico da resposta a sinal degrau do modelo, bem como
         as retas de tempo de acomodaçao, sobressinal, e valor de regime e os dados
         discretos (:attr:`Model.source_data`) caso tenham sido informados.
+
+        Parameters
+        ----------
+        settling_time_threshold : float, optional
+            Percentual de desvio do valor de regime considerado do cálculo do tempo de acomodação.
         """
         PlotUtils.plot_tf(
             tf=self.model.tf,
@@ -182,7 +187,7 @@ class ModelView:
 
         Parameters
         ----------
-        settling_time_threshold : float
+        settling_time_threshold : float, optional
             Percentual de desvio do valor de regime considerado do cálculo do tempo de acomodação.
 
         Notes
@@ -233,7 +238,7 @@ class ModelView:
 
         Parameters
         ----------
-        settling_time_threshold : float
+        settling_time_threshold : float, optional
             Percentual de desvio do valor de regime considerado do cálculo do tempo de acomodação.
         """
 

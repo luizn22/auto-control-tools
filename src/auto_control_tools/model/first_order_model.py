@@ -35,29 +35,25 @@ class FirstOrderModel(Model):
 
         O termo K, se refere ao ganho do sistema, ele descreve a relação de amplificação entre a entrada e a saída de um
         sistema dinâmico. É um parâmetro crucial que determina a escala da resposta do sistema às mudanças na entrada.
-
     tau : float
         Constante de tempo de reação do sistema.
 
         A constante de tempo τ representa a velocidade com que o sistema atinge sua resposta estacionária ou valor de regime
         após uma perturbação. Em sistemas de primeira ordem, τ indica o tempo necessário para que a resposta atinja
         cerca de 63,2% de sua mudança total. Uma constante de tempo menor denota uma resposta mais rápida.
-
     theta : float
         Termo de atraso do sistema.
 
         O termo θ está associado a um atraso de tempo no sistema. Ele representa o tempo adicional que o sistema
         leva para responder a uma mudança na entrada, introduzindo uma componente de defasagem temporal na resposta.
-
-    pade_degree : int
+    pade_degree : int, optional
         Grau do denominador de aproximação de atraso.
 
         Valor utilizado na aproximação do atributo :attr:`pade`, caso o sistema possua atraso (theta != 0).
         Quanto maior o grau mais próxima a aproximação, e consequentemente mais termos são adicionados a aproximação.
 
         Para mais detalhes sopre a aproximação do atraso verificar atributo :attr:`pade`.
-
-    source_data : [pd.Series, optional]
+    source_data : pd.Series, optional
         Conjunto de dados representando a variação da saida em relação ao tempo.
         Deve um objeto do tipo `Series <https://pandas.pydata.org/docs/reference/api/pandas.Series.html>`_
         da bilbioteca `pandas <https://pandas.pydata.org/docs/index.html>`_, sendo os valores representativos da saida
