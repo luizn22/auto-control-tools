@@ -1,4 +1,7 @@
 def is_jupyter_environment():
+    """
+    Checks if package is being run in an Jypyter envoirment and return True if so else False
+    """
     try:
         # Attempt to import the IPython module
         import IPython
