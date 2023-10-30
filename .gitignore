@@ -186,3 +186,4 @@ __init__.pyo
 
 
 docs/source/generated
+/tests/automated/expected_result_generation/generated/
