@@ -56,6 +56,10 @@ class SmithModelIdentification(BaseModelIdentification):
 
     Notes
     -----
+    - .. include:: ../shared/estim_params_obs.rst
+
+    - .. include:: ../shared/non_lin_obs.rst
+
     Referências:
         .. footbibliography::
 
