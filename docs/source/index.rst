@@ -15,6 +15,7 @@ Documentação
 
     introduction
     auto_control_tools
+    bibliography
     dev_scripts
 
 

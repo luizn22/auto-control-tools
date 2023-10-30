@@ -38,6 +38,7 @@ extensions = [
     'sphinx.ext.linkcode',
 
     'sphinx_paramlinks',
+    'sphinxcontrib.bibtex',
 ]
 
 autoclass_content = "class"
@@ -99,6 +100,9 @@ intersphinx_mapping = {
 
 intersphinx_disabled_domains = ['std']
 
+
+bibtex_bibfiles = ['bibliography.bib']
+bibtex_default_style = 'unsrt'
 
 # If this is True, todo and todolist produce output, else they produce nothing.
 # The default is False.
