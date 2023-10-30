@@ -15,6 +15,8 @@ def gen_res_first_order_get_model(method, method_kwargs):
 
     result = method(**method_kwargs)
 
+    method_kwargs = method_kwargs.copy()
+    method_kwargs['path'] = os.path.basename(method_kwargs['path'])
     return {
                'method': str(method.__self__),
                'method_kwargs': method_kwargs

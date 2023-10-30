@@ -1,3 +1,5 @@
+import os
+
 import pytest
 
 from auto_control_tools import (
@@ -22,6 +24,9 @@ from tests.conftest import FIRST_ORDER_IDENTIFICATION_TEST_CASES, NO_DELAY_CONST
 @pytest.mark.parametrize("results", [NO_DELAY_CONST_SAMPLE_TIME_IDENTIFICATION_RESULTS])
 def test_first_order_get_model(method, method_kwargs, results):
     model = method(**method_kwargs)
+
+    method_kwargs = method_kwargs.copy()
+    method_kwargs['path'] = os.path.basename(method_kwargs['path'])
     ins = {
             'method': str(method.__self__),
             'method_kwargs': method_kwargs
