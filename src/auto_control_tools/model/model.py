@@ -236,7 +236,7 @@ class ModelView:
 
         tf = copy(self.model.tf)
         if self.model.pade is not None:
-            tf = tf * self.model.pade
+            tf = tf * self.model.pade  # type: ignore
 
         return dict(control.step_info(tf, SettlingTimeThreshold=settling_time_threshold))
 
