@@ -107,7 +107,7 @@ class HagglundModelIdentification(BaseModelIdentification):
           :meth:`DataUtils.get_time_from_inclination` e dos valores de :math:`y(t)` referentes aos pontos desejados,
           :math:`y(t) = 0` e :math:`y(t) = y_f*0.632`, respectivamente.
         * Obtém :math:`K` dividindo o valor de regime, :math:`y_f`, pelo valor do sinal degrau.
-        * Com os valores de :math:`t_1` e :math:`t_2` em mãos calcula o valor de :attr:`tau` e :attr:`theta`,
+        * Com os valores de :math:`t_1` e :math:`t_2` em mãos, calcula o valor de :attr:`tau` e :attr:`theta`,
           sendo :math:`\\tau = t_2 - t_1` e :math:`\\theta = t_1`.
         * Dependendo do valor de :attr:`theta` e de :paramref:`ignore_delay_threshold` zera o valor de :attr:`theta`.
         * Instancia um objeto da classe :class:`FirstOrderModel` com os valores obtidos.
