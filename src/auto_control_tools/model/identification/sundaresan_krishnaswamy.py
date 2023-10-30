@@ -100,6 +100,43 @@ class SundaresanKrishnaswamyModelIdentification(BaseModelIdentification):
             settling_time_threshold: float = 0.02
 
     ) -> FirstOrderModel:
+        """
+        Calcula um modelo baseado nos dados fornecidos.
+
+
+        * Utiliza :meth:`DataInputUtils.get_model_data_default` para obter a tabela (pandas.DataFrame) com os dados de
+          resposta do modelo.
+        * Então obtém a pandas.Series :attr:`tf_data` (lista cujo index representa o tempo e os valores a saida)
+          e o valor do sinal degrau através do método :meth:`DataUtils.setup_data_default`.
+        * Obtém o valor de regime e o momento de entrada em valor de regime através do método
+          :meth:`DataUtils.get_vreg`.
+        * Calcula :math:`t_1` e :math:`t_2` baseado no instante em que a curva atinge 35.3% e 85.3% do valor de regime,
+          respectivamente.
+        * Obtém :math:`K` dividindo o valor de regime, pelo valor do sinal degrau.
+        * Com os valores de :math:`t_1` e :math:`t_2` em mãos, calcula o valor de :attr:`tau` e :attr:`theta`,
+          sendo :math:`\\tau = 0.67*(t_2 - t_1)` e :math:`\\theta = 1.3t_1 - 0.29t_2`.
+        * Dependendo do valor de :attr:`theta` e de :paramref:`ignore_delay_threshold` zera o valor de :attr:`theta`.
+        * Instancia um objeto da classe :class:`FirstOrderModel` com os valores obtidos.
+
+        Parameters
+        ----------
+        path : str
+            Caminho até o arquivo a ser lido. O leiaute pode ser obtido através de :meth:`get_data_input_layout`.
+        sample_time : float, optional
+            Valor do invervalo de amostragem. Caso informado, o intervalo de amostragem é considerado constante e
+            igual ao valor fornecido.
+        step_signal : float, optional
+            Valor do sinal degrau de entrada. Se informado é considerado que o sinal está ativo em todos os momentos
+            nos dados recebidos.
+        ignore_delay_threshold : float, optional
+            Valor mínimo de theta para que ele não seja zerado.
+        settling_time_threshold : float, optional
+            Percentual de desvio do valor de regime considerado do cálculo do tempo de acomodação.
+
+        Returns
+        -------
+        Objeto :class:`FirstOrderModel` referente ao modelo gerado pelo método.
+        """
         df = DataInputUtils.get_model_data_default(path, sample_time, step_signal)
         tf_data, step_signal = DataUtils.setup_data_default(df, sample_time, step_signal)
 
