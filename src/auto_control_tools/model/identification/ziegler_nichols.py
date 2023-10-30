@@ -50,6 +50,13 @@ class ZieglerNicholsModelIdentification(BaseModelIdentification):
 
     Notes
     -----
+    - .. include:: ../shared/zn_hag_noise_obs.rst
+
+    - .. include:: ../shared/estim_params_obs.rst
+
+    - .. include:: ../shared/non_lin_obs.rst
+
+
     Referências:
         .. footbibliography::
 
