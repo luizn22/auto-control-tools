@@ -29,7 +29,8 @@ class ZieglerNicholsModelIdentification(BaseModelIdentification):
     A reta traçada corresponde à tangente no ponto de máxima inclinação da curva de reação.
 
     A constante de tempo :math:`\\tau` é determinada pelo intervalo de tempo entre :math:`t_1`, e o instante
-    :math:`t_3`, onde a reta tangente toca o eixo :math:`t` e a reta reta :math:`y(t)` = :math:`y_f`, respectivamente.
+    :math:`t_3`, onde a reta tangente toca o eixo :math:`t`, e onde cruza com a reta :math:`y(t)` = :math:`y_f`,
+    respectivamente.
     O valor de  :math:`\\theta` é considerado como :math:`t_1`, o intervalo entre a aplicação do sinal degrau e o
     momento em que a reta tangente toca o eixo :math:`t`. Por fim o valor de :math:`K` pode ser obtido a través da
     equação,
@@ -76,8 +77,6 @@ class ZieglerNicholsModelIdentification(BaseModelIdentification):
     >>> model.view.plot_model_step_response_graph()
 
     .. image:: ../image_resources/zn_ident_plot.png
-
-
     """
     @classmethod
     def get_model(
