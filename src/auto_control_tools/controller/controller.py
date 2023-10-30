@@ -50,7 +50,15 @@ class ControllerView:
             PlotUtils.plot_tf(self.controller.tf, pade=self.controller.model.pade)
 
     def get_controller_data(self) -> Dict[str, Any]:
-        return dict(control.step_info(self.controller.tf))
+        data = {
+            'Ki': self.controller.ki,
+            'Kp': self.controller.kp,
+            'Kd': self.controller.kd
+        }
+
+        data.update(dict(control.step_info(self.controller.tf)))
+
+        return data
 
     def print_controller_data(self, *args, **kwargs):
         PlotUtils.pprint_dict(self.get_controller_data())
