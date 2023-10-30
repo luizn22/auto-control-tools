@@ -42,14 +42,14 @@ class ControllerView:
     def __init__(self, controller: Controller):
         self.controller = controller
 
-    def plot_controller_graph(self, plot_model=True):
+    def plot_controller_step_response_graph(self, plot_model=True):
         if plot_model:
             PlotUtils.plot_tf(
                 {'Controller': self.controller.tf, 'Model': self.controller.model.tf}, pade=self.controller.model.pade)
         else:
             PlotUtils.plot_tf(self.controller.tf, pade=self.controller.model.pade)
 
-    def get_controller_data(self) -> Dict[str, Any]:
+    def get_controller_step_response_data(self) -> Dict[str, Any]:
         data = {
             'Ki': self.controller.ki,
             'Kp': self.controller.kp,
@@ -60,8 +60,8 @@ class ControllerView:
 
         return data
 
-    def print_controller_data(self, *args, **kwargs):
-        PlotUtils.pprint_dict(self.get_controller_data())
+    def print_controller_step_response_data(self, *args, **kwargs):
+        PlotUtils.pprint_dict(self.get_controller_step_response_data())
 
     def print_tf(self):
         PlotUtils.print_tf(self.controller.tf_symbolic)
