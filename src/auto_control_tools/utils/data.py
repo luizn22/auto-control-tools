@@ -17,12 +17,12 @@ class DataUtils:
         return pd.Series(lfilter(b, a, series), name=series.name)
 
     @staticmethod
-    def get_vreg(tf_data: pd.Series, delta: float = 0.02) -> Tuple[float, float]:
+    def get_vreg(tf_data: pd.Series, settling_time_threshold: float = 0.02) -> Tuple[float, float]:
         for idx, value in tf_data.iloc[::1].items():
             local_s = tf_data[idx:]
             mean = local_s.mean()
 
-            if all((local_s < (1 + delta) * mean) & (local_s > (1 - delta) * mean)):
+            if all((local_s < (1 + settling_time_threshold) * mean) & (local_s > (1 - settling_time_threshold) * mean)):
                 return idx, mean
         return 0, 0
 
