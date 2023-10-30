@@ -24,7 +24,7 @@ class HagglundModelIdentification(BaseModelIdentification):
     .. figure:: ../image_resources/zn_hg_ident_meth.png
         :align: center
 
-        Figura 4.3 - Métodos de ZN e HAG para a modelagem de processos de primeira ordem :footcite:p:`CoelhoChapter4`.
+        Métodos de ZN e HAG para a modelagem de processos de primeira ordem :footcite:p:`CoelhoChapter4`.
 
     A reta traçada corresponde à tangente no ponto de máxima inclinação da curva de reação.
 

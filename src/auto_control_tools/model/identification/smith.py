@@ -24,7 +24,7 @@ class SmithModelIdentification(BaseModelIdentification):
     .. figure:: ../image_resources/sm_ident_meth.png
         :align: center
 
-        Figura 4.4 — Método de Smith para a modelagem de processos de primeira ordem :footcite:p:`CoelhoChapter4`.
+        Método de Smith para a modelagem de processos de primeira ordem :footcite:p:`CoelhoChapter4`.
 
     No metodo Smith são obtidas as constantes de tempo :math:`t_1` e o instante :math:`t_2`, que correspondem as
     passagens da resposta pelos pontos :math:`y(t) = y(0) + 0.283y(\\infty)` e :math:`y(t) = y(0) + 0.632y(\\infty)`,
