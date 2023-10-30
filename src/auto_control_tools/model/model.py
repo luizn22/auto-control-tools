@@ -1,3 +1,4 @@
+from copy import copy
 from typing import Union, List, Dict, Any, Tuple
 
 import control
@@ -12,7 +13,7 @@ class Model:
     Classe representativa do modelo matemático de uma planta de sistemas de controle.
 
     Típicamente o modelo matemático de uma planta no domínio da frequenica pode ser definido por um numerador e um
-    denominador em potências de s. Ex:
+    denominador em potências de :math:`s`. Ex:
 
     .. math::
 
@@ -34,7 +35,7 @@ class Model:
     tf : ~control.TransferFunction or tuple[list[float], list[float]]]
         Função de transferência que representa o processo da planta,
         pode ser tanto as listas dos coeficientes,
-        quanto com um objeto de função de transferência da bilbiotéca de controle
+        quanto com um objeto de função de transferência da bilbioteca de controle
         (`TransferFunction
         <https://python-control.readthedocs.io/en/latest/generated/control.TransferFunction.html>`_).
 
@@ -66,6 +67,8 @@ class Model:
 
     Examples
     --------
+    Definindo modelo com listas de numerador e denominador:
+
     >>> num = [1, 2, 3]
     >>> den = [4, 5, 6, 7]
     >>> model = Model((num, den))
@@ -74,6 +77,9 @@ class Model:
     .. math::
 
         \\frac{ s^2 + 2s + 3 }{ 4s^3 + 5s^2 + 6s + 7 }
+
+    Definindo modelo com uma função de transferência da biblioteca
+    `control <https://python-control.readthedocs.io/en/latest/index.html>`_:
 
     >>> num = [1, 2, 3]
     >>> den = [1, 1, 1, 0]
