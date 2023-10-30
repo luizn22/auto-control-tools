@@ -96,7 +96,7 @@ class NishikawaModelIdentification(BaseModelIdentification):
 
     >>> model.view.plot_model_step_response_graph()
 
-    .. image:: ../image_resources/ni_kr_ident_plot.png
+    .. image:: ../image_resources/ni_ident_plot.png
     """
     @classmethod
     def get_model(
