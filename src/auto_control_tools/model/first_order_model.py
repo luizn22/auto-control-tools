@@ -11,45 +11,50 @@ class FirstOrderModel(Model):
     """
     Classe para modelos clássicos de primeira ordem com atraso.
 
-    Essa classe é voltada para casos específicos de modelos de primeira ordem que respeitam o formato:
+    Essa classe é voltada um modelo paramétrico da dinâmica de um processo comumente encontrado na indústria,
+    caracterizado pela seguinte função de transferência :footcite:p:`CoelhoChapter4`:
 
     .. math::
         \\frac{K}{\\tau s + 1}e^{-\\theta s}
 
     Onde:
 
-    * K é o ganho do sistema, representando a amplificação do sinal.
-    * τ é uma constante de tempo, que indica o quão rápido o sistema responde a uma mudança.
-    * θ é um termo relacionado ao atraso ou tempo morto no sistema.
+    * :math:`K` é o ganho do sistema, representando a amplificação do sinal.
+    * :math:`\\tau` é uma constante de tempo, que indica o quão rápido o sistema responde a uma mudança.
+    * :math:`\\theta` é um termo relacionado ao atraso ou tempo morto no sistema.
 
     Essa forma específica da função de transferência é comumente usada para representar sistemas de primeira ordem
-    com um atraso de tempo. Mas também pode ser usada para casos tem atraso, quando θ for zero.
+    com um atraso de tempo. Mas também pode ser usada para casos tem atraso, quando :math:`\\theta` for zero.
 
     Sendo uma subclasse de :class:`Model`, essa classe adiciona suporte a definição de um modelo com os parâmetros
-    K, tau e theta mas ainda mantém todas as funcionalidades da classe pai.
+    :paramref:`K` (:math:`K`), :paramref:`tau` (:math:`\\tau`) e :paramref:`theta` (:math:`\\theta`)
+    mas ainda mantém todas as funcionalidades da classe pai.
 
     Parameters
     ----------
     K : float
         Ganho do sistema.
 
-        O termo K, se refere ao ganho do sistema, ele descreve a relação de amplificação entre a entrada e a saída de um
-        sistema dinâmico. É um parâmetro crucial que determina a escala da resposta do sistema às mudanças na entrada.
+        O termo :math:`K`, se refere ao ganho do sistema, ele descreve a relação de amplificação entre a entrada e a
+        saída de um sistema dinâmico. É um parâmetro crucial que determina a escala da resposta do sistema às mudanças
+        na entrada.
     tau : float
         Constante de tempo de reação do sistema.
 
-        A constante de tempo τ representa a velocidade com que o sistema atinge sua resposta estacionária ou valor de regime
-        após uma perturbação. Em sistemas de primeira ordem, τ indica o tempo necessário para que a resposta atinja
-        cerca de 63,2% de sua mudança total. Uma constante de tempo menor denota uma resposta mais rápida.
+        A constante de tempo :math:`\\tau` representa a velocidade com que o sistema atinge sua resposta estacionária
+        ou valor de regime após uma perturbação. Em sistemas de primeira ordem, :math:`\\tau` indica o tempo necessário
+        para que a  resposta atinja cerca de 63,2% de sua mudança total. Uma constante de tempo menor denota uma
+        resposta mais rápida.
     theta : float
         Termo de atraso do sistema.
 
-        O termo θ está associado a um atraso de tempo no sistema. Ele representa o tempo adicional que o sistema
-        leva para responder a uma mudança na entrada, introduzindo uma componente de defasagem temporal na resposta.
+        O termo :math:`\\theta` está associado a um atraso de tempo no sistema. Ele representa o tempo adicional que o
+        sistema leva para responder a uma mudança na entrada, introduzindo uma componente de defasagem temporal na
+        resposta.
     pade_degree : int, optional
         Grau do denominador de aproximação de atraso.
 
-        Valor utilizado na aproximação do atributo :attr:`pade`, caso o sistema possua atraso (theta != 0).
+        Valor utilizado na aproximação do atributo :attr:`pade`, caso o sistema possua atraso (:math:`\\theta` != 0).
         Quanto maior o grau mais próxima a aproximação, e consequentemente mais termos são adicionados a aproximação.
 
         Para mais detalhes sopre a aproximação do atraso verificar atributo :attr:`pade`.
@@ -67,13 +72,13 @@ class FirstOrderModel(Model):
     pade : control.TransferFunction
         Função de transferência representante do atraso do sistema.
 
-        Caso haja atraso no sistema (theta != 0), é calculada a função de transferência que representa o termo de
-        atraso:
+        Caso haja atraso no sistema (:math:`\\theta` != 0), é calculada a função de transferência que representa o
+        termo de atraso:
 
         .. math:: e^{-\\theta s}
 
         A aproximação é feita através do método de Padé, utilizando a função `pade
-        <https://python-control.readthedocs.io/en/latest/generated/control.matlab.pade.html>`_ da biblioteca de
+        <https://python-control.readthedocs.io/en/latest/generated/control.pade.html>`_ da biblioteca de
         `controle <https://python-control.readthedocs.io/en/latest/index.html>`_, que resulta nos coeficientes de
         numerador e denominador de uma função de trasnferência que aproxima o atraso desejado.
 
@@ -83,8 +88,12 @@ class FirstOrderModel(Model):
 
     Notes
     -----
-    O atributo :attr:`pade` é utilizado apenas para plotagem dos gráficos e por métodos de aproximação de controlador
-    que fizerem uso direto dele, visto que interfere nos cálculos de alguns métodos aproximação de controlador.
+    O atributo :attr:`pade` é mantido em separado do atributo :attr:`tf`, visto que o aumento nos graus do numerador
+    e denominador interfere nos cálculos de alguns métodos aproximação de controlador.
+
+    Referencias:
+
+        .. footbibliography::
 
     Examples
     --------
