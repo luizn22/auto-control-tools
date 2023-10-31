@@ -42,12 +42,15 @@ class ControllerView:
     def __init__(self, controller: Controller):
         self.controller = controller
 
-    def plot_controller_step_response_graph(self, plot_model=True):
-        if plot_model:
-            PlotUtils.plot_tf(
-                {'Controller': self.controller.tf, 'Model': self.controller.model.tf}, pade=self.controller.model.pade)
-        else:
-            PlotUtils.plot_tf(self.controller.tf, pade=self.controller.model.pade)
+    def plot_controller_step_response_graph(self, plot_model=True, use_pade: bool = True,
+                                            settling_time_threshold: float = 0.02):
+
+        PlotUtils.plot_tf(
+            tf={'Controller': self.controller.tf, 'Model': self.controller.model.tf
+                } if plot_model else self.controller.tf,
+            settling_time_threshold=settling_time_threshold,
+            pade=self.controller.model.pade if use_pade else None
+        )
 
     def get_controller_step_response_data(self) -> Dict[str, Any]:
         data = {
