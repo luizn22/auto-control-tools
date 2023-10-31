@@ -22,6 +22,7 @@ class PlotUtils:
             settling_time_threshold: float = 0.02,
             pade: control.TransferFunction = None,
             scale: Union[float, Dict[str, float]] = 1,
+            simulation_time: Union[float, None] = None
     ):
         """Plot tf method!"""
         if cls._jupyter_env:
@@ -51,7 +52,7 @@ class PlotUtils:
             if pade is not None:
                 tf = tf * pade
 
-            info = control.step_info(tf, SettlingTimeThreshold=settling_time_threshold)
+            info = control.step_info(tf, T=simulation_time, SettlingTimeThreshold=settling_time_threshold)
 
             max_time = info['SettlingTime']*3
             qt_points = 1000

@@ -124,6 +124,9 @@ class Model:
         """Identifies the order of self.tf and returns its value"""
         return int(self.tf.den[0][0].size) - 1
 
+    def get_simulation_time(self) -> Union[float, None]:
+        return self.source_data.index[-1] if self.source_data is not None else None
+
 
 class ModelView:
     """

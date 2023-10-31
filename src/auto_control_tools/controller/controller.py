@@ -49,7 +49,8 @@ class ControllerView:
             tf={'Controller': self.controller.tf, 'Model': self.controller.model.tf
                 } if plot_model else self.controller.tf,
             settling_time_threshold=settling_time_threshold,
-            pade=self.controller.model.pade if use_pade else None
+            pade=self.controller.model.pade if use_pade else None,
+            simulation_time=self.controller.model.get_simulation_time(),
         )
 
     def get_controller_step_response_data(self) -> Dict[str, Any]:
@@ -59,7 +60,14 @@ class ControllerView:
             'Kd': self.controller.kd
         }
 
-        data.update(dict(control.step_info(self.controller.tf)))
+        tf = copy.copy(self.controller.tf)
+        if self.controller.model.pade is not None:
+            tf = tf * self.controller.model.pade
+
+        data.update(dict(control.step_info(
+            tf,
+            T=self.controller.model.get_simulation_time()
+        )))
 
         return data
 
