@@ -165,7 +165,8 @@ class ModelView:
         """Instancia :class:`ModelView`"""
         self.model = model
 
-    def plot_model_step_response_graph(self, settling_time_threshold: float = 0.02):
+    def plot_model_step_response_graph(self, plot_discrete_data: bool = True, settling_time_threshold: float = 0.02,
+                                       upscale_model: Union[bool, None] = None):
         """
         Apresenta gráfico de resposta degrau do modelo.
 
@@ -175,14 +176,22 @@ class ModelView:
 
         Parameters
         ----------
+        plot_discrete_data : bool, optional
+            Plotar ou não os dados discretos juntamente ao modelo calculado.
         settling_time_threshold : float, optional
             Percentual de desvio do valor de regime considerado do cálculo do tempo de acomodação.
+        upscale_model : bool, optional
+            Fazer ou não *upscale* dos outputs de model pelo valor do setpoint dos dados discretos.
+            Facilita comparação visual entre o modelo e os dados discretos.
         """
+        upscale_model = True if plot_discrete_data and upscale_model is None else upscale_model
+
         PlotUtils.plot_tf(
             tf=self.model.tf,
             discrete_data=self.model.source_data,
             pade=self.model.pade,
             settling_time_threshold=settling_time_threshold,
+            scale=self.model.step_signal if upscale_model else 1
         )
 
     def get_model_step_response_data(self, settling_time_threshold: float = 0.02) -> Dict[str, Any]:
