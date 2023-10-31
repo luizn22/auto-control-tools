@@ -127,8 +127,9 @@ class FirstOrderModel(Model):
             theta: float = 0,
             pade_degree: int = 5,
             source_data: Union[pd.Series, None] = None,
+            step_signal: float = 1,
     ):
-        super().__init__(([K], [tau, 1]), source_data=source_data)
+        super().__init__(([K], [tau, 1]), source_data=source_data, step_signal=step_signal)
         self.K = K
         self.tau = tau
         self.theta = theta

@@ -155,4 +155,4 @@ class ZieglerNicholsModelIdentification(BaseModelIdentification):
         if ignore_delay_threshold is not None and theta < ignore_delay_threshold:
             theta = 0
 
-        return FirstOrderModel(K, tau, theta, source_data=tf_data)
+        return FirstOrderModel(K, tau, theta, source_data=tf_data, step_signal=step_signal)

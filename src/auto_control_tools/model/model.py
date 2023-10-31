@@ -95,7 +95,8 @@ class Model:
     def __init__(
             self,
             tf: Union[control.TransferFunction, Tuple[List[float], List[float]]],
-            source_data: Union[pd.Series, None] = None
+            source_data: Union[pd.Series, None] = None,
+            step_signal: float = 1,
     ):
         """Instancia Modelo matemático de uma planta"""
         if isinstance(tf, control.TransferFunction):
@@ -114,6 +115,7 @@ class Model:
         self.order = self._identify_model_order()
 
         self.source_data = source_data
+        self.step_signal = step_signal
         self.pade = None
 
         self.view: ModelView = ModelView(self)
