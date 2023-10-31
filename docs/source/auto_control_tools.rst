@@ -20,7 +20,6 @@ Filler text for Model Classes
 
     Model
     ModelView
-
     FirstOrderModel
 
 
@@ -68,6 +67,8 @@ Filler text for Aproximação de Ganhos Classes
     ZieglerNicholsControllerAproximation
     CohenCoonControllerAproximation
     BaseControllerAproximation
+    FirstOrderTableControllerAproximation
+    FirstOrderTableControllerAproximationItem
 
 
 Visualização de dados
