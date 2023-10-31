@@ -25,11 +25,11 @@ class Controller:
         pid_symbolic = kp + (ki / s) + (kd * s)
 
         self.tf_symbolic = model.tf_symbolic * pid_symbolic / (1 + model.tf_symbolic * pid_symbolic)
-        self.tf_symbolic = sp.simplify(sp.trigsimp(sp.nsimplify(sp.trigsimp(self.tf_symbolic, tolerance=1e-4, rational=True))))
+        self.tf_symbolic = sp.trigsimp(self.tf_symbolic, tolerance=1e-4, rational=True)
 
         s = control.TransferFunction.s
-        pid = kd * s + kp + ki/s
-        # pid = control.TransferFunction([kd, kp, ki], [1])
+        pid = kd * s + kp + ki / s
+        # pid = control.TransferFunction([kd, kp, ki], [1, 0])
         self.tf = (model.tf * pid) / (1 + model.tf * pid)
         if (self.tf.num[0][0][-1] == 0) and (self.tf.den[0][0][-1] == 0):
             self.tf = control.TransferFunction(self.tf.num[0][0][:-1], self.tf.den[0][0][:-1])
