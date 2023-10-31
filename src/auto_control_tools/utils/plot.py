@@ -20,7 +20,8 @@ class PlotUtils:
             tf: Union[control.TransferFunction, Dict[str, control.TransferFunction]],
             discrete_data: Union[pd.Series, None] = None,
             settling_time_threshold: float = 0.02,
-            pade: control.TransferFunction = None
+            pade: control.TransferFunction = None,
+            scale: Union[float, Dict[str, float]] = 1,
     ):
         """Plot tf method!"""
         if cls._jupyter_env:
@@ -40,6 +41,9 @@ class PlotUtils:
         else:
             tfs = tf
 
+        if isinstance(scale, (int, float)):
+            scale = {'': scale}
+
         colors = cls._generate_contrasting_colors(len(tfs) * cls._max_items_ploted)
 
         for sufix, tf in tfs.items():
@@ -49,7 +53,7 @@ class PlotUtils:
 
             info = control.step_info(tf, SettlingTimeThreshold=settling_time_threshold)
 
-            max_time = info['SettlingTime']*1.25
+            max_time = info['SettlingTime']*3
             qt_points = 1000
 
             if discrete_data is not None:
@@ -59,6 +63,8 @@ class PlotUtils:
             time = np.linspace(0, max_time, num=qt_points)
             time, response = control.forced_response(tf, time, np.ones_like(time))
 
+            response = response * scale.get(sufix, 1)
+
             data = pd.Series(response, time)
 
             plt.plot(time, response, label=f'{sufix} tf', color=colors.pop())
@@ -66,10 +72,21 @@ class PlotUtils:
                 discrete_data.plot(label=f'{sufix} Discrete Data', color=colors.pop())
 
             steady_state_color = colors.pop()
-            plt.axhline(y=info['SteadyStateValue'], color=steady_state_color, label=f"{sufix} vreg")
-            plt.axhline(y=info['SteadyStateValue'] * (1 + settling_time_threshold), color=steady_state_color, linestyle='--',
-                        label=f"{sufix} vreg+/-{settling_time_threshold*100}%")
-            plt.axhline(y=info['SteadyStateValue'] * (1 - settling_time_threshold), color=steady_state_color, linestyle='--')
+            plt.axhline(
+                y=info['SteadyStateValue'] * scale.get(sufix, 1),
+                color=steady_state_color,
+                label=f"{sufix} vreg"
+            )
+            plt.axhline(
+                y=info['SteadyStateValue'] * (1 + settling_time_threshold) * scale.get(sufix, 1),
+                color=steady_state_color, linestyle='--',
+                label=f"{sufix} vreg+/-{settling_time_threshold*100}%"
+            )
+            plt.axhline(
+                y=info['SteadyStateValue'] * (1 - settling_time_threshold) * scale.get(sufix, 1),
+                color=steady_state_color,
+                linestyle='--'
+            )
 
             cls.plot_vertical(
                 (info['SettlingTime'], data.loc[min(data.index, key=lambda x: abs(x - info['SettlingTime']))]),
@@ -78,7 +95,7 @@ class PlotUtils:
             )
 
             if info['Overshoot'] != 0:
-                os = (1 + info['Overshoot']/100)*info['SteadyStateValue']
+                os = (1 + info['Overshoot']/100)*info['SteadyStateValue'] * scale.get(sufix, 1)
                 cls.plot_vertical(
                     ((data - os).abs().idxmin(), os),
                     color=colors.pop(),
