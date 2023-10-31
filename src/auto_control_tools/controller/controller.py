@@ -275,7 +275,7 @@ class ControllerView:
 
         tf = copy.copy(self.controller.tf)
         if self.controller.model.pade is not None:
-            tf = tf * self.controller.model.pade
+            tf = tf * self.controller.model.pade  # type: ignore[unreachable]
 
         data.update(dict(control.step_info(
             tf,
