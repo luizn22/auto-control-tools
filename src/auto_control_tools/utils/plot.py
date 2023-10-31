@@ -1,4 +1,5 @@
 import copy
+import math
 import pprint
 from typing import Union, Tuple, Any, Dict
 
@@ -55,6 +56,7 @@ class PlotUtils:
             info = control.step_info(tf, T=simulation_time, SettlingTimeThreshold=settling_time_threshold)
 
             max_time = info['SettlingTime']*3
+            max_time = 100 if math.isnan(max_time) else max_time
             qt_points = 1000
 
             if discrete_data is not None:
