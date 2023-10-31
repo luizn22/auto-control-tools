@@ -13,12 +13,8 @@ Documentação
 .. toctree::
     :maxdepth: 2
 
+    about
     introduction
     auto_control_tools
     bibliography
-    dev_scripts
-
-
-Desenvolvimento
----------------
-Scripts para desenvolvimento podem ser encontrados em :doc:`dev_scripts`
+    dev

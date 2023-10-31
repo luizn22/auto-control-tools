@@ -1,6 +1,15 @@
-===========
+===============
+Desenvolvimento
+===============
+
+Sobre
+-----
+
+Sobre o desenvolvimento da biblioteca
+
+
 Dev Scripts
-===========
+-----------
 
 Clone:
 
