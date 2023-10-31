@@ -48,14 +48,15 @@ class ZieglerNicholsControllerAproximation(FirstOrderTableControllerAproximation
     pelo seu método de indentificação :class:`ZieglerNicholsModelIdentification`, o objetivo deste método é obter
     parâmetros de ganho PID que façam sintonia do controlador.
 
-    Em espessífico, esse método se baseia na curva de reação do sistema a resposta de sinal degrau, que é exatamente o
+    Em espessífico, este método se baseia na curva de reação do sistema a resposta de sinal degrau, que é exatamente o
     que :class:`FirstOrderModel` obtém, com o adicional de que os parâmetros :math:`K`, :math:`\\tau` e :math:`\\theta`
     já foram obtidos, e estão disponíveis para análise.
 
     Com isso basta aplicar as fórmulas descritas pelo Método de Ziegler e Nichols para Curva de Reação:
 
 
-    .. list-table:: Tipos aceitos
+    .. list-table:: Método de Ziegler e Nichols para Curva de Reação
+        :widths: 100 100 100 100
         :header-rows: 1
 
         * - Controlador
