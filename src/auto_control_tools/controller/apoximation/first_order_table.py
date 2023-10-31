@@ -75,6 +75,17 @@ class FirstOrderTableControllerAproximation(BaseControllerAproximation):
 
         Verifica se controller_type é permitido, então chama o método
         :meth:`FirstOrderTableControllerAproximationItem.get_controller` apropriado.
+
+        Parameters
+        ----------
+        model : FirstOrderModel
+            Modelo para o qual deve ser feita a aproximação.
+        controller_type : str
+            Tipo de controlador desejado.
+
+        Returns
+        -------
+        Controlador com os parâmetros encontrados
         """
         cls._parse_controller_option(controller_type)
         return cls._controller_table[controller_type].get_controller(model)
