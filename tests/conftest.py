@@ -41,7 +41,7 @@ FIRST_ORDER_IDENTIFICATION_TEST_CASES = [
     {  # Test kwargs
         "path": file,
         "sample_time": spec.get('sample_time'),
-        "step_signal": spec.get('sample_time'),
+        "step_signal": spec.get('step_signal'),
         "ignore_delay_threshold": spec.get('sample_time'),
     }
     for resource_files, spec in [
