@@ -17,7 +17,7 @@ class Model:
 
     .. math::
 
-        G(s) = \\frac{ s + 1 }{ s^2 + s + 1 }
+        P(s) = \\frac{ s + 1 }{ s^2 + s + 1 }
 
 
     Essa classe funciona guardando um objeto de função de transferência (:attr:`tf`) da biblioteca de sistemas de
@@ -169,7 +169,8 @@ class ModelView:
         self.model = model
 
     def plot_model_step_response_graph(self, plot_discrete_data: bool = True, settling_time_threshold: float = 0.02,
-                                       upscale_model: Union[bool, None] = None):
+                                       upscale_model: Union[bool, None] = None,
+                                       simulation_time: Union[float, None] = None):
         """
         Apresenta gráfico de resposta degrau do modelo.
 
@@ -186,6 +187,8 @@ class ModelView:
         upscale_model : bool, optional
             Fazer ou não *upscale* dos outputs de model pelo valor do setpoint dos dados discretos.
             Facilita comparação visual entre o modelo e os dados discretos.
+        simulation_time : float, optional
+            Unidade de tempo que a simulação deve durar. Calculado automaticamente se não for fornecido.
         """
         upscale_model = True if plot_discrete_data and upscale_model is None else upscale_model
 
@@ -195,7 +198,7 @@ class ModelView:
             pade=self.model.pade,
             settling_time_threshold=settling_time_threshold,
             scale=self.model.step_signal if upscale_model else 1,
-            simulation_time=self.model.get_simulation_time()
+            simulation_time=self.model.get_simulation_time() if simulation_time is None else simulation_time,
         )
 
     def get_model_step_response_data(self, settling_time_threshold: float = 0.02) -> Dict[str, Any]:
