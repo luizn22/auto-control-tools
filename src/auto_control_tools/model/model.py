@@ -194,7 +194,8 @@ class ModelView:
             discrete_data=self.model.source_data,
             pade=self.model.pade,
             settling_time_threshold=settling_time_threshold,
-            scale=self.model.step_signal if upscale_model else 1
+            scale=self.model.step_signal if upscale_model else 1,
+            simulation_time=self.model.get_simulation_time()
         )
 
     def get_model_step_response_data(self, settling_time_threshold: float = 0.02) -> Dict[str, Any]:
@@ -252,7 +253,8 @@ class ModelView:
         if self.model.pade is not None:
             tf = tf * self.model.pade  # type: ignore
 
-        return dict(control.step_info(tf, SettlingTimeThreshold=settling_time_threshold))
+        return dict(control.step_info(tf, T=self.model.get_simulation_time(),
+                                      SettlingTimeThreshold=settling_time_threshold))
 
     def print_model_step_response_data(self, settling_time_threshold: float = 0.02):
         """
