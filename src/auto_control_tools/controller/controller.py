@@ -10,7 +10,7 @@ from ..utils.plot import PlotUtils
 
 class Controller:
     """
-    Classe base para controle PID
+    Classe base para controle PID.
 
     Esta é uma classe representativa do modelo matemático de uma planta de sistemas de controle em malha fechada com
     controlador PID (Proporcional-Itegrador-Derivativo). Esse tipo de controlador é muito difundido na indústria,
