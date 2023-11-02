@@ -8,7 +8,11 @@ from .envoirment import is_jupyter_environment
 
 class DataUtils:
     """
-    Classe
+    Classe utilitaria para manipulação de dados.
+
+    Aqui são implementados diversos metodos para operação e extração de informações de
+    `Series <https://pandas.pydata.org/docs/reference/api/pandas.Series.html>`_ e
+    `DataFrames <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_.
     """
     _jupyter_env = is_jupyter_environment()
 
