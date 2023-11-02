@@ -23,6 +23,7 @@ Install requirements:
 
     pip install -r requirements.txt
     pip install -r requirements_dev.txt
+    pip install -r docs/requirements.txt
 
 Install project as package:
 
@@ -35,12 +36,13 @@ Run typing check:
 .. code-block:: console
 
     mypy src
+    mypy tests
 
 Run format check:
 
 .. code-block:: console
 
-    flake8 src
+    flake8 src tests
 
 Run tests:
 
