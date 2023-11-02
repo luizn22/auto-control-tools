@@ -141,10 +141,9 @@ class HagglundModelIdentification(BaseModelIdentification):
         tf_data, step_signal = DataUtils.setup_data_default(df, sample_time, step_signal)
 
         idx_vreg, vreg = DataUtils.get_vreg(tf_data, settling_time_threshold=settling_time_threshold)
-        idx_tan, tan = DataUtils.get_max_tan(tf_data)
-        tan_point_value = tf_data.loc[tf_data.index == idx_tan].iloc[0]
+        idx_tan, tan_point_value, tan = DataUtils.get_max_tan(tf_data)
 
-        t1 = DataUtils.get_time_from_inclination(idx_tan, tan_point_value, tan_point_value, 0)
+        t1 = DataUtils.get_time_at_value(idx_tan, tan_point_value, tan_point_value, 0)
         t2 = tf_data[tf_data == min(tf_data[tf_data >= vreg*0.632])].index[0]
 
         K = vreg / step_signal

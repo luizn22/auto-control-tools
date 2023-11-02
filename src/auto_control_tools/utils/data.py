@@ -7,10 +7,39 @@ from .envoirment import is_jupyter_environment
 
 
 class DataUtils:
+    """
+    Classe
+    """
     _jupyter_env = is_jupyter_environment()
 
     @staticmethod
     def linfilter(series: pd.Series, smothness: int) -> pd.Series:
+        """
+        Aplica um filtro linear à série temporal de entrada para suavização.
+
+        Parameters
+        ----------
+        series : pandas.Series
+            Dados da série temporal (`pandas.Series <https://pandas.pydata.org/docs/reference/api/pandas.Series.html>`_)
+            de entrada a serem suavizados.
+        smothness : int
+            Número inteiro que representa o nível de suavização. Quanto maior o valor, mais suave será a curva
+            resultante.
+
+        Returns
+        -------
+        `pandas.Series <https://pandas.pydata.org/docs/reference/api/pandas.Series.html>`_
+            Dados suavizados da série temporal.
+
+        Notes
+        -----
+        A suavização é realizada usando o método `lfilter
+        <https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.lfilter.html>`_ da biblioteca SciPy.
+
+        Examples
+        --------
+        >>> dados_suavizados = DataUtils.linfilter(serie_entrada, 3)
+        """
         # the larger smothness is, the smoother curve will be
         b = [1.0 / smothness] * smothness
         a = 1
@@ -18,6 +47,31 @@ class DataUtils:
 
     @staticmethod
     def get_vreg(tf_data: pd.Series, settling_time_threshold: float = 0.02) -> Tuple[float, float]:
+        """
+        Obtém o valor de regime de uma resposta a sinal degrau.
+
+        Baseado em uma série temporal representativa da resposta de um sistema a um sinal degrau, obtém o valor de
+        regime da resposta dentro do :paramref:`settling_time_threshold` especificado.
+
+        Parameters
+        ----------
+        tf_data : pandas.Series
+            Série temporal (`pandas.Series <https://pandas.pydata.org/docs/reference/api/pandas.Series.html>`_)
+            representativa da resposta de um sistema a um sinal degrau.
+
+        settling_time_threshold : float, optional
+            Limiar de tempo de acomodação para determinar o valor de regime.
+            O padrão é 0.02 (2%).
+
+        Returns
+        -------
+        Tuple[float, float]
+            Um tupla contendo o tempo de acomodação e o valor médio de regime.
+
+        Examples
+        --------
+        >>> tempo_acomodacao, valor_regime = DataUtils.get_vreg(dados_resposta_degrau, 0.02)
+        """
         for idx, value in tf_data.iloc[::1].items():
             local_s = tf_data[idx:]
             mean = local_s.mean()
@@ -27,13 +81,62 @@ class DataUtils:
         return 0, 0
 
     @staticmethod
-    def get_max_tan(tf_data: pd.Series) -> Tuple[float, float]:
+    def get_max_tan(tf_data: pd.Series) -> Tuple[float, float, float]:
+        """
+        Obtém as coordenadas e o valor da inclinação do ponto de maior inclinação.
+
+        Deriva os dados da série temporal representativa da resposta de um sistema a um sinal degrau e
+        retorna as coordenadas (tempo e valor) e o valor da inclinação do ponto de maior inclinação.
+
+        Parameters
+        ----------
+        tf_data : pandas.Series
+            Série temporal (`pandas.Series <https://pandas.pydata.org/docs/reference/api/pandas.Series.html>`_)
+            representativa da resposta de um sistema a um sinal degrau.
+
+        Returns
+        -------
+        Tuple[float, float, float]
+            Um tupla contendo as coordenadas (tempo e valor) do ponto de maior inclinação
+            e o valor da inclinação nesse ponto.
+
+        Examples
+        --------
+        >>> tempo, valor, inclinacao = DataUtils.get_max_tan(dados_resposta_degrau)
+        """
         diff = tf_data.diff()
-        return float(diff.idxmax()), float(max(diff[1:]))
+        idx_tan = float(diff.idxmax())
+        return idx_tan, tf_data.loc[tf_data.index == idx_tan].iloc[0], float(max(diff[1:]))
 
     @staticmethod
-    def get_time_from_inclination(ref_time: float, ref_value: float, inclination: float, value: float) -> float:
-        return (value - ref_value + inclination * ref_time) / inclination
+    def get_time_at_value(reference_time: float, reference_value: float, slope: float, target_value: float) -> float:
+        """
+        Encontra o tempo para um valor de uma reta.
+
+        Dados um ponto de referência (tempo e valor) pelo qual a reta de inclinação passa,
+        a inclinação e um valor específico, calcula e retorna o tempo em que a reta passa por esse valor.
+
+        Parameters
+        ----------
+        reference_time : float
+            Tempo de referência pelo qual a reta de inclinação passa.
+        reference_value : float
+            Valor correspondente ao tempo de referência.
+        slope : float
+            Inclinação da reta.
+        target_value : float
+            Valor para o qual deseja-se encontrar o tempo correspondente.
+
+        Returns
+        -------
+        float
+            O valor correspondente ao tempo em que a reta passa por :paramref:`target_value`.
+
+        Examples
+        --------
+        >>> tempo_correspondente = DataUtils.get_time_at_value(tempo_referencia, valor_referencia, inclinacao, valor_desejado)
+        """
+        return (target_value - reference_value + slope * reference_time) / slope
 
     @classmethod
     def setup_data_default(cls, df: pd.DataFrame, sample_time: Union[float, None] = None,
@@ -67,8 +170,10 @@ class DataUtils:
 
         Returns
         -------
-        Retorna tupla com a pandas.Series referente ao sinal de saida em relação ao tempo e o valor do sinal degrau
-        (informado em :paramref:`step_signal` ou obtido a partir dos dados).
+        Tuple[pandas.Series, float]
+            Retorna tupla com a `pandas.Series <https://pandas.pydata.org/docs/reference/api/pandas.Series.html>`_
+            referente ao sinal de saida em relação ao tempo e o valor do sinal degrau (informado em
+            :paramref:`step_signal` ou obtido a partir dos dados).
 
         """
         if sample_time is not None:
@@ -92,11 +197,31 @@ class DataUtils:
     @classmethod
     def trunk_data_input(cls, df: pd.DataFrame) -> pd.DataFrame:
         """
-        Remove dados onde o valo de entrada é nulo.
+        Remove dados onde o valor de entrada é nulo.
 
-        Recebe pandas.DataFrame com dados de resposta a sinal degrau de um sistema. Caso o sinal degrau inicie zerado
-        e suba posteriormente, os momentos onde ele era igual a zero são removidos, deixando no DataFrame apenas
-        dados onde o sinal degrau é ativo. Retorna o pandas.DataFrame com as alterações realizadas.
+        Recebe um `pandas.DataFrame <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_ com dados de
+        resposta a um sinal degrau de um sistema. Caso o sinal degrau inicie zerado e suba posteriormente, os momentos
+        onde ele era igual a zero são removidos, deixando no DataFrame apenas dados onde o sinal degrau é ativo.
+        Retorna o pandas.DataFrame com as alterações realizadas.
+
+        Parameters
+        ----------
+        df : pandas.DataFrame
+            DataFrame contendo dados de resposta a um sinal degrau de um sistema.
+
+        Returns
+        -------
+        `pandas.DataFrame <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_
+            DataFrame com os dados alterados, removendo os momentos onde o sinal degrau é igual a zero.
+
+        Raises
+        ------
+        ValueError
+            Se a coluna 'input' não estiver presente no DataFrame.
+
+        Examples
+        --------
+        >>> df_alterado = DataUtils.trunk_data_input(dataframe_resposta_degrau)
         """
         if 'input' not in df.columns:
             raise ValueError('input is not in df.columns')
@@ -105,12 +230,34 @@ class DataUtils:
     @classmethod
     def offset_data_output(cls, df: pd.DataFrame) -> pd.DataFrame:
         """
-        Remove valores negativos e interpola os dados para encostarem no eixo :math:`t`
+        Remove valores negativos e interpola os dados para encostarem no eixo do tempo.
 
-        Recebe pandas.DataFrame com dados de resposta a sinal degrau de um sistema, zera valores de saida
-        abaixo de zero, e translada os dados de saida (sutrai um mesmo escalar de todos os valores de output) com
-        base no valor de saida mais baixo presente, garantindo que a curva de saida encoste no eixo do tempo.
-        Retorna o pandas.DataFrame com as alterações realizadas.
+        Recebe um `pandas.DataFrame <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_
+        com dados de resposta a um sinal degrau de um sistema, zera valores de saída abaixo de zero, e translada
+        os dados de saída (subtrai um mesmo escalar de todos os valores de saída) com base no valor de saída mais baixo
+        presente, garantindo que a curva de saída encoste no eixo do tempo. Retorna o pandas.DataFrame com as alterações
+        realizadas.
+
+        Parameters
+        ----------
+        df : pandas.DataFrame
+            `pandas.DataFrame <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_
+            contendo dados de resposta a um sinal degrau de um sistema.
+
+        Returns
+        -------
+        `pandas.DataFrame <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_
+            DataFrame com os dados alterados, removendo valores negativos e garantindo que a curva de saída encoste no
+            eixo do tempo.
+
+        Notes
+        -----
+        A alteração dos valores negetivos para zero incorre na interpretação de um possível sistema com fase
+        não mínima como apenas um sistema com atraso; isso pode ou não ser relevante dependendo do sistema específico.
+
+        Examples
+        --------
+        >>> df_alterado = DataUtils.offset_data_output(dataframe_resposta_degrau)
         """
         df['output'] = df['output'].apply(lambda x: x if x > 0 else 0)
         df['output'] = df['output'] - min(df['output'])
