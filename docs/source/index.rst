@@ -16,5 +16,5 @@ Documentação
     about
     introduction
     auto_control_tools
-    bibliography
+    references
     dev
