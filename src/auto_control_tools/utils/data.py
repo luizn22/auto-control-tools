@@ -10,7 +10,7 @@ class DataUtils:
     """
     Classe utilitaria para manipulação de dados.
 
-    Aqui são implementados diversos metodos para operação e extração de informações de
+    Aqui são implementados diversos métodos para operação e extração de informações de
     `Series <https://pandas.pydata.org/docs/reference/api/pandas.Series.html>`_ e
     `DataFrames <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_.
     """
