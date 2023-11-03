@@ -70,7 +70,7 @@ class PlotUtils:
 
         Examples
         --------
-        >>> PlotUtils.plot_tf(tf, discrete_data, scale=step_signal_value)
+        >>> act.PlotUtils.plot_tf(tf, discrete_data, scale=step_signal_value)
 
         .. image:: ../image_resources/plot_utills_plot_tf_example.png
         """

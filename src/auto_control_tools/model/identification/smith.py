@@ -67,7 +67,7 @@ class SmithModelIdentification(BaseModelIdentification):
     Examples
     --------
     >>> file_path = r'path/to/layout/data_input.csv'
-    >>> model = SmithModelIdentification.get_model(file_path)
+    >>> model = act.SmithModelIdentification.get_model(file_path)
     >>> model.view.print_tf()
 
     .. math::

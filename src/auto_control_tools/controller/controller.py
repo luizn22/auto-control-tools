@@ -90,8 +90,8 @@ class Controller:
     --------
     Usando Controller:
 
-    >>> model = FirstOrderModel(K=1.95, tau=8.33, theta=1)
-    >>> controller = Controller(model, ki=3.393417131440939, kp=3.9766689766689765, kd=0.5213405222539381)
+    >>> model = act.FirstOrderModel(K=1.95, tau=8.33, theta=1)
+    >>> controller = act.Controller(model, ki=3.393417131440939, kp=3.9766689766689765, kd=0.5213405222539381)
     >>> controller.view.print_tf()
 
     .. math::
@@ -145,8 +145,8 @@ class ControllerView:
     --------
     Usando Controller:
 
-    >>> model = FirstOrderModel(K=1.95, tau=8.33, theta=1)
-    >>> controller = Controller(model, ki=3.393417131440939, kp=3.9766689766689765, kd=0.5213405222539381)
+    >>> model = act.FirstOrderModel(K=1.95, tau=8.33, theta=1)
+    >>> controller = act.Controller(model, ki=3.393417131440939, kp=3.9766689766689765, kd=0.5213405222539381)
     >>> controller.view.print_tf()
 
     .. math::

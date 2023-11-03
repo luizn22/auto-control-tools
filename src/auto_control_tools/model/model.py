@@ -71,7 +71,7 @@ class Model:
 
     >>> num = [1, 2, 3]
     >>> den = [4, 5, 6, 7]
-    >>> model = Model((num, den))
+    >>> model = act.Model((num, den))
     >>> model.view.print_tf()
 
     .. math::
@@ -84,7 +84,7 @@ class Model:
     >>> num = [1, 2, 3]
     >>> den = [1, 1, 1, 0]
     >>> tf = control.TransferFunction(num, den)
-    >>> model = Model(tf)
+    >>> model = act.Model(tf)
     >>> model.view.print_tf()
 
     .. math::
@@ -142,7 +142,7 @@ class ModelView:
     --------
     >>> num = [1]
     >>> den = [1, 1]
-    >>> model = Model((num, den))
+    >>> model = act.Model((num, den))
     >>> model.view.print_tf()
 
     .. math::

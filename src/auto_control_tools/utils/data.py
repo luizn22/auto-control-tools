@@ -42,7 +42,7 @@ class DataUtils:
 
         Examples
         --------
-        >>> dados_suavizados = DataUtils.linfilter(serie_entrada, 3)
+        >>> dados_suavizados = act.DataUtils.linfilter(serie_entrada, 3)
         """
         # the larger smothness is, the smoother curve will be
         b = [1.0 / smothness] * smothness
@@ -74,7 +74,7 @@ class DataUtils:
 
         Examples
         --------
-        >>> tempo_acomodacao, valor_regime = DataUtils.get_vreg(dados_resposta_degrau, 0.02)
+        >>> tempo_acomodacao, valor_regime = act.DataUtils.get_vreg(dados_resposta_degrau, 0.02)
         """
         for idx, value in tf_data.iloc[::1].items():
             local_s = tf_data[idx:]
@@ -106,7 +106,7 @@ class DataUtils:
 
         Examples
         --------
-        >>> tempo, valor, inclinacao = DataUtils.get_max_tan(dados_resposta_degrau)
+        >>> tempo, valor, inclinacao = act.DataUtils.get_max_tan(dados_resposta_degrau)
         """
         diff = tf_data.diff()
         idx_tan = float(diff.idxmax())
@@ -138,7 +138,7 @@ class DataUtils:
 
         Examples
         --------
-        >>> tempo_correspondente = DataUtils.get_time_at_value(tempo_referencia, valor_referencia, inclinacao, valor_desejado)
+        >>> tempo_correspondente = act.DataUtils.get_time_at_value(tempo_referencia, valor_referencia, inclinacao, valor_desejado)
         """
         return (target_value - reference_value + slope * reference_time) / slope
 
@@ -225,7 +225,7 @@ class DataUtils:
 
         Examples
         --------
-        >>> df_alterado = DataUtils.trunk_data_input(dataframe_resposta_degrau)
+        >>> df_alterado = act.DataUtils.trunk_data_input(dataframe_resposta_degrau)
         """
         if 'input' not in df.columns:
             raise ValueError('input is not in df.columns')
@@ -261,7 +261,7 @@ class DataUtils:
 
         Examples
         --------
-        >>> df_alterado = DataUtils.offset_data_output(dataframe_resposta_degrau)
+        >>> df_alterado = act.DataUtils.offset_data_output(dataframe_resposta_degrau)
         """
         df['output'] = df['output'].apply(lambda x: x if x > 0 else 0)
         df['output'] = df['output'] - min(df['output'])

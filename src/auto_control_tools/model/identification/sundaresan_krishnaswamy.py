@@ -69,7 +69,7 @@ class SundaresanKrishnaswamyModelIdentification(BaseModelIdentification):
     Examples
     --------
     >>> file_path = r'path/to/layout/data_input.csv'
-    >>> model = SundaresanKrishnaswamyModelIdentification.get_model(file_path)
+    >>> model = act.SundaresanKrishnaswamyModelIdentification.get_model(file_path)
     >>> model.view.print_tf()
 
     .. math::

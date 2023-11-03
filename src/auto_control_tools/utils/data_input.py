@@ -65,7 +65,7 @@ class DataInputUtils:
 
         Examples
         --------
-        >>> file_path = DataInputUtils.create_table_with_fields('/path/to/save', ['time', 'input', 'output'])
+        >>> file_path = act.DataInputUtils.create_table_with_fields('/path/to/save', ['time', 'input', 'output'])
         """
         if save_as not in cls.allowed_file_type:
             raise ValueError(f'{save_as} is not an allowed file type')
@@ -115,7 +115,7 @@ class DataInputUtils:
 
         Examples
         --------
-        >>> df = DataInputUtils.read_table_with_fields('/path/to/table.xlsx', ['input', 'output'])
+        >>> df = act.DataInputUtils.read_table_with_fields('/path/to/table.xlsx', ['input', 'output'])
         """
         if fields is None:
             fields = cls.standard_fields

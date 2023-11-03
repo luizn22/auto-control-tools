@@ -85,8 +85,8 @@ class ZieglerNicholsControllerAproximation(FirstOrderTableControllerAproximation
     Examples
     --------
 
-    >>> model = FirstOrderModel(K=1.95, tau=8.33, theta=1.48)
-    >>> controller = ZieglerNicholsControllerAproximation.get_controller(model, PID)
+    >>> model = act.FirstOrderModel(K=1.95, tau=8.33, theta=1.48)
+    >>> controller = act.ZieglerNicholsControllerAproximation.get_controller(model, PID)
     >>> controller.view.print_tf()
 
     .. math::

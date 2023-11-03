@@ -63,7 +63,7 @@ class HagglundModelIdentification(BaseModelIdentification):
     Examples
     --------
     >>> file_path = r'path/to/layout/data_input.csv'
-    >>> model = HagglundModelIdentification.get_model(file_path)
+    >>> model = act.HagglundModelIdentification.get_model(file_path)
     >>> model.view.print_tf()
 
     .. math::

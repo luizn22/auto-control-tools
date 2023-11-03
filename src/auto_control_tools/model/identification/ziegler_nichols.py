@@ -64,7 +64,7 @@ class ZieglerNicholsModelIdentification(BaseModelIdentification):
     Examples
     --------
     >>> file_path = r'path/to/layout/data_input.csv'
-    >>> model = ZieglerNicholsModelIdentification.get_model(file_path)
+    >>> model = act.ZieglerNicholsModelIdentification.get_model(file_path)
     >>> model.view.print_tf()
 
     .. math::

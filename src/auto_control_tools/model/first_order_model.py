@@ -99,7 +99,7 @@ class FirstOrderModel(Model):
     --------
     Uso básico:
 
-    >>> model = FirstOrderModel(K=1, tau=2, theta=0.5)
+    >>> model = act.FirstOrderModel(K=1, tau=2, theta=0.5)
     >>> model.view.print_tf()
 
     .. math::
@@ -108,13 +108,13 @@ class FirstOrderModel(Model):
 
     Diferenças de :paramref:`pade_degree`:
 
-    >>> model = FirstOrderModel(K=1, tau=2, theta=0.5, pade_degree=2)
+    >>> model = act.FirstOrderModel(K=1, tau=2, theta=0.5, pade_degree=2)
     >>> model.view.plot_model_step_response_graph()
 
     .. image:: ../image_resources/first_order_model_pade_deg_2.png
 
 
-    >>> model = FirstOrderModel(K=1, tau=2, theta=0.5, pade_degree=10)
+    >>> model = act.FirstOrderModel(K=1, tau=2, theta=0.5, pade_degree=10)
     >>> model.view.plot_model_step_response_graph()
 
     .. image:: ../image_resources/first_order_model_pade_deg_10.png

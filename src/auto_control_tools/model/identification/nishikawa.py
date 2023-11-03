@@ -77,7 +77,7 @@ class NishikawaModelIdentification(BaseModelIdentification):
     Examples
     --------
     >>> file_path = r'path/to/layout/data_input.csv'
-    >>> model = NishikawaModelIdentification.get_model(file_path)
+    >>> model = act.NishikawaModelIdentification.get_model(file_path)
     >>> model.view.print_tf()
 
     .. math::
