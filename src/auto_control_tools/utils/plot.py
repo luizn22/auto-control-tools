@@ -249,7 +249,7 @@ class PlotUtils:
         )
 
         # plot response data (plot1)
-        plt.plot(data.index, data.values, legend_sufix=f'{legend_sufix} tf', color=colors.pop())
+        plt.plot(data.index, data.values, label=f'{legend_sufix} tf', color=colors.pop())
 
         # plot steady state horizontal lines (plot2)
         steady_state_color = colors.pop()
