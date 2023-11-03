@@ -249,7 +249,7 @@ class PlotUtils:
         )
 
         # plot response data (plot1)
-        plt.plot(data.index, data.values, label=f'{legend_sufix} tf', color=colors.pop())
+        plt.plot(data.index, data.values, legend_sufix=f'{legend_sufix} tf', color=colors.pop())
 
         # plot steady state horizontal lines (plot2)
         steady_state_color = colors.pop()
@@ -265,7 +265,7 @@ class PlotUtils:
         cls.plot_vertical(
             (info['SettlingTime'], data.loc[min(data.index, key=lambda x: abs(x - info['SettlingTime']))]),
             color=colors.pop(),
-            label=f'{legend_sufix} ta',
+            legend_sufix=f'{legend_sufix} ta',
         )
 
         # plot overshoot vertical line (plot4)
@@ -274,7 +274,7 @@ class PlotUtils:
             cls.plot_vertical(
                 ((data - overshoot).abs().idxmin(), overshoot),
                 color=colors.pop(),
-                label=f'{legend_sufix} So',
+                legend_sufix=f'{legend_sufix} So',
             )
 
         # up to 4 plots!
