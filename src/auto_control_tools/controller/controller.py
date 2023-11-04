@@ -30,9 +30,7 @@ class Controller:
     Essa classe se destina a armazenar os valores de ganhos de controlador, bem como realizar o fechamento da manha
     de controle utilizando os parâmetros PID (:paramref:`kp`, :paramref:`ki`, :paramref:`kd`) e o objeto de modelo
     (:paramref:`model`). Para isso, atua encima do objeto de função de transferência da biblioteca de controle
-    :attr:`Model.tf` (`TransferFunction
-    <https://python-control.readthedocs.io/en/latest/generated/control.TransferFunction.html>`_) presente no
-    :attr:`Model` fornecido.
+    :attr:`Model.tf` (:class:`control.TransferFunction`) presente no :attr:`Model` fornecido.
 
 
     Além disso o atributo :attr:`view` possibilita a visualização de dados, estatísticas e gráficos referentes ao
@@ -66,16 +64,15 @@ class Controller:
     kd : float, optional
         Valor referente ao ganho Derivativo, :math:`K_d` do controlador, utilizado no cálculo de :attr:`tf` e
         :attr:`tf_symbolic`.
-    tf : `TransferFunction <https://python-control.readthedocs.io/en/latest/generated/control.TransferFunction.html>`_
-        Função de transferência que representa o processo da planta em malha fechada com controlador (`TransferFunction
-        <https://python-control.readthedocs.io/en/latest/generated/control.TransferFunction.html>`_).
+    tf : control.TransferFunction
+        Função de transferência que representa o processo da planta em malha fechada com controlador (
+        :class:`control.TransferFunction`).
 
         Utilizada pelas classe de visualização de dados :class:`ControllerView`.
 
         Calculada a partir do fechamento da malha do controlador junto ao processo.
-    tf_symbolic : `Expr <https://docs.sympy.org/latest/modules/core.html#module-sympy.core.expr>`_
-        Guarda representação simbolica
-        (`Expr <https://docs.sympy.org/latest/modules/core.html#module-sympy.core.expr>`_) de :attr:`tf`.
+    tf_symbolic : ~sympy.core.expr.Expr
+        Guarda representação simbolica (:class:`~sympy.core.expr.Expr`) de :attr:`tf`.
 
         Atributos da class control.TransferFunction funcionam apenas com as listas dos coeficientes de s de seus
         numeradores e denominadores, expressões mais complexas, como exponenciais, não podem ser representadas de
@@ -212,9 +209,8 @@ class ControllerView:
         """
         Retorna dados de resposta a sinal degrau do controlador.
 
-        Utiliza `control.step_info()
-        <https://python-control.readthedocs.io/en/latest/generated/control.step_info.html>`_
-        para obtenção dos dados de resposta a sinal degrau do sistema no formato de dicionário (:class:`dict`).
+        Utiliza :class:`control.step_info()` para obtenção dos dados de resposta a sinal degrau do sistema no formato
+        de dicionário (:class:`dict`).
 
         Parameters
         ----------
@@ -304,7 +300,7 @@ class ControllerView:
         Imprime a função de transferência na tela.
 
         Utiliza o método :meth:`PlotUtils.print_tf`
-        Caso esteja em um ambiente `jupyter <https://jupyter.org/>`_, a função display() é chamada para que a função
-        de transferência seja mostrada com formatação matemática.
+        Caso esteja em um ambiente `jupyter <https://jupyter.org/>`_, a função :func:`~IPython.display.display` é
+        chamada para que a função de transferência seja mostrada com formatação matemática.
         """
         PlotUtils.print_tf(self.controller.tf_symbolic)

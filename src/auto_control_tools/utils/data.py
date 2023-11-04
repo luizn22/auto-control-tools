@@ -11,8 +11,7 @@ class DataUtils:
     Classe utilitária para manipulação de dados.
 
     Aqui são implementados diversos métodos para operação e extração de informações de
-    `Series <https://pandas.pydata.org/docs/reference/api/pandas.Series.html>`_ e
-    `DataFrames <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_.
+    :class:`pandas.Series` e :class:`pandas.DataFrame`.
     """
     _jupyter_env = is_jupyter_environment()
 
@@ -24,7 +23,7 @@ class DataUtils:
         Parameters
         ----------
         series : pandas.Series
-            Dados da série temporal (`pandas.Series <https://pandas.pydata.org/docs/reference/api/pandas.Series.html>`_)
+            Dados da série temporal (:class:`pandas.Series`)
             de entrada a serem suavizados.
         smothness : int
             Número inteiro que representa o nível de suavização. Quanto maior o valor, mais suave será a curva
@@ -32,13 +31,12 @@ class DataUtils:
 
         Returns
         -------
-        `pandas.Series <https://pandas.pydata.org/docs/reference/api/pandas.Series.html>`_
+        pandas.Series
             Dados suavizados da série temporal.
 
         Notes
         -----
-        A suavização é realizada usando o método `lfilter
-        <https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.lfilter.html>`_ da biblioteca SciPy.
+        A suavização é realizada usando o método `lfilter :func:`scipy.signal.lfilter` da biblioteca SciPy.
 
         Examples
         --------
@@ -60,8 +58,7 @@ class DataUtils:
         Parameters
         ----------
         tf_data : pandas.Series
-            Série temporal (`pandas.Series <https://pandas.pydata.org/docs/reference/api/pandas.Series.html>`_)
-            representativa da resposta de um sistema a um sinal degrau.
+            Série temporal (:class:`pandas.Series`) representativa da resposta de um sistema a um sinal degrau.
 
         settling_time_threshold : float, optional
             Limiar de tempo de acomodação para determinar o valor de regime.
@@ -95,8 +92,7 @@ class DataUtils:
         Parameters
         ----------
         tf_data : pandas.Series
-            Série temporal (`pandas.Series <https://pandas.pydata.org/docs/reference/api/pandas.Series.html>`_)
-            representativa da resposta de um sistema a um sinal degrau.
+            Série temporal (:class:`pandas.Series`) representativa da resposta de um sistema a um sinal degrau.
 
         Returns
         -------
@@ -175,7 +171,7 @@ class DataUtils:
         Returns
         -------
         Tuple[pandas.Series, float]
-            Retorna tupla com a `pandas.Series <https://pandas.pydata.org/docs/reference/api/pandas.Series.html>`_
+            Retorna tupla com a :class:`pandas.Series`
             referente ao sinal de saida em relação ao tempo e o valor do sinal degrau (informado em
             :paramref:`step_signal` ou obtido a partir dos dados).
 
@@ -203,7 +199,7 @@ class DataUtils:
         """
         Remove dados onde o valor de entrada é nulo.
 
-        Recebe um `pandas.DataFrame <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_ com dados de
+        Recebe um :class:`pandas.DataFrame` com dados de
         resposta a um sinal degrau de um sistema. Caso o sinal degrau inicie zerado e suba posteriormente, os momentos
         onde ele era igual a zero são removidos, deixando no DataFrame apenas dados onde o sinal degrau é ativo.
         Retorna o pandas.DataFrame com as alterações realizadas.
@@ -215,7 +211,7 @@ class DataUtils:
 
         Returns
         -------
-        `pandas.DataFrame <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_
+        pandas.DataFrame
             DataFrame com os dados alterados, removendo os momentos onde o sinal degrau é igual a zero.
 
         Raises
@@ -236,7 +232,7 @@ class DataUtils:
         """
         Remove valores negativos e interpola os dados para encostarem no eixo do tempo.
 
-        Recebe um `pandas.DataFrame <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_
+        Recebe um :class:`pandas.DataFrame`
         com dados de resposta a um sinal degrau de um sistema, zera valores de saída abaixo de zero, e translada
         os dados de saída (subtrai um mesmo escalar de todos os valores de saída) com base no valor de saída mais baixo
         presente, garantindo que a curva de saída encoste no eixo do tempo. Retorna o pandas.DataFrame com as alterações
@@ -245,12 +241,11 @@ class DataUtils:
         Parameters
         ----------
         df : pandas.DataFrame
-            `pandas.DataFrame <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_
-            contendo dados de resposta a um sinal degrau de um sistema.
+            :class:`pandas.DataFrame` contendo dados de resposta a um sinal degrau de um sistema.
 
         Returns
         -------
-        `pandas.DataFrame <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_
+        pandas.DataFrame
             DataFrame com os dados alterados, removendo valores negativos e garantindo que a curva de saída encoste no
             eixo do tempo.
 

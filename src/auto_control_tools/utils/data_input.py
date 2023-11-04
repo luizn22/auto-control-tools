@@ -86,11 +86,11 @@ class DataInputUtils:
     def read_table_with_fields(cls, path: str, fields: Union[List[str], None] = None) -> pd.DataFrame:
         """
         Lê um arquivo contendo uma tabela e retorna um
-        `DataFrame <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_ com **apenas** os campos
+        :class:`pandas.DataFrame` com **apenas** os campos
         especificados.
 
         Lê um arquivo (CSV ou Excel) contendo uma tabela e retorna um
-        `DataFrame <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_ com apenas
+        :class:`pandas.DataFrame` com apenas
         os campos especificados.
         O caminho do arquivo e os campos desejados são fornecidos como parâmetros.
 
@@ -104,8 +104,8 @@ class DataInputUtils:
 
         Returns
         -------
-        `pandas.DataFrame <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_
-            `DataFrame <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_
+        pandas.DataFrame
+            :class:`pandas.DataFrame`
             contendo os dados da tabela e os campos especificados.
 
         Raises
@@ -177,7 +177,7 @@ class DataInputUtils:
 
         Returns
         -------
-        `pandas.DataFrame <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_
+        pandas.DataFrame
             os dados do arquivo recebido e as colunas esperadas.
         """
         expected_fields = cls.expected_fields(sample_time, step_signal)

@@ -29,7 +29,7 @@ class BaseControllerAproximation:
     @abstractmethod
     def get_controller(cls, model: Model, controller_type: str) -> Controller:
         """
-        `Método abstrato <https://docs.python.org/3/library/abc.html#abc.abstractmethod>`_
+        Método abstrato :func:`abc.abstractmethod`
         para obtenção de um :class:`Controller`.
         """
         raise NotImplementedError('get_controller must be implemented in a subclass')

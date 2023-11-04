@@ -40,13 +40,12 @@ class PlotUtils:
         Parameters
         ----------
         tf : Union[control.TransferFunction, Dict[str, control.TransferFunction]]
-            Função de transferência (`TransferFunction
-            <https://python-control.readthedocs.io/en/latest/generated/control.TransferFunction.html>`_)
+            Função de transferência (:class:`control.TransferFunction`)
             ou dicionário de funções de transferência a serem plotadas.
             As chaves do dicionário serão usadas como sufixo dos itens de legenda.
 
         discrete_data : pandas.Series, optional
-            Série temporal (`pandas.Series <https://pandas.pydata.org/docs/reference/api/pandas.Series.html>`_)
+            Série temporal (:class:`pandas.Series`)
             referente aos dados discretos de resposta a sinal degrau a serem sobrepostos ao gráfico.
 
         settling_time_threshold : float, optional
@@ -146,14 +145,13 @@ class PlotUtils:
     ) -> Tuple[Dict[str, float], pd.Series]:
         """
         Calcula as informações e cria uma série temporal
-        (`pandas.Series <https://pandas.pydata.org/docs/reference/api/pandas.Series.html>`_)
+        (:class:`pandas.Series`)
         referentes a resposta a sinal degrau da função de transferência.
 
         Parameters
         ----------
         tf : control.TransferFunction
-            Função de transferência (`TransferFunction
-            <https://python-control.readthedocs.io/en/latest/generated/control.TransferFunction.html>`_).
+            Função de transferência (:class:`control.TransferFunction`).
 
         settling_time_threshold : float, optional
             Limiar de tempo de acomodação, por padrão 0.02 (2%).
@@ -214,8 +212,7 @@ class PlotUtils:
         Parameters
         ----------
         tf : control.TransferFunction
-            Função de transferência (`TransferFunction
-            <https://python-control.readthedocs.io/en/latest/generated/control.TransferFunction.html>`_).
+            Função de transferência (:class:`control.TransferFunction`).
 
         colors : List[Any]
             Lista de cores para o plot (cores utilizadas serão removidas da lista com o método :meth:`list.pop`).
@@ -391,7 +388,7 @@ class PlotUtils:
         Gera uma lista de cores contrastantes.
 
         As cores geradas estão em um formato aceito como valor de cor pelas ferramentas de plot da bilblioteca
-        `matplotlib <https://matplotlib.org/>`_.
+        :mod:`matplotlib`.
 
         Parameters
         ----------
@@ -420,7 +417,7 @@ class PlotUtils:
         Imprime a função de transferência na tela.
 
         Caso esteja em um ambiente `jupyter <https://jupyter.org/>`_, a função
-        `display <https://ipython.readthedocs.io/en/stable/api/generated/IPython.display.html#IPython.display.display>`_
+        :func:`~IPython.display.display`
         é chamada para que a função de transferência seja mostrada com formatação matemática.
         """
         if cls._jupyter_env:
@@ -435,8 +432,8 @@ class PlotUtils:
         Exibe um dicionário de forma formatada.
 
         Caso esteja em um ambiente `jupyter <https://jupyter.org/>`_, os dados do dicionario são transformados em um
-        `pandas.DataFrame <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_ e a função
-        `display <https://ipython.readthedocs.io/en/stable/api/generated/IPython.display.html#IPython.display.display>`_
+        :class:`pandas.DataFrame` e a função
+        :func:`~IPython.display.display`
         e utilizada para plota-lo de forma formatada.
 
         Parameters

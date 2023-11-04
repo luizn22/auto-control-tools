@@ -25,7 +25,7 @@ class FirstOrderTableControllerAproximationItem:
     @abstractmethod
     def get_controller(cls, model: FirstOrderModel) -> Controller:
         """
-        `Método abstrato <https://docs.python.org/3/library/abc.html#abc.abstractmethod>`_
+        `Método abstrato :func:`abc.abstractmethod`
         para obtenção de um :class:`Controller` baseado em um :class:`FirstOrderModel`.
         """
         raise NotImplementedError('get_controller must be implemented in a subclass')

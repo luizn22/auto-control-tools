@@ -147,8 +147,7 @@ class NishikawaModelIdentification(BaseModelIdentification):
 
         Notes
         -----
-        As integrais calculadas utilizaram a função `numpy.trapz
-        <https://numpy.org/doc/stable/reference/generated/numpy.trapz.html>`_
+        As integrais calculadas utilizaram a função :class:`numpy.trapz`
         que utiliza a regra dos trapezoides compostos para realizar a integração de dados discretos.
 
         Returns

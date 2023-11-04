@@ -22,8 +22,7 @@ class BaseModelIdentification:
     @abstractmethod
     def get_model(cls, *args, **kwargs) -> Model:
         """
-        `Método abstrato <https://docs.python.org/3/library/abc.html#abc.abstractmethod>`_
-        para obtenção de um :class:`Model`.
+        Método abstrato :func:`abc.abstractmethod` para obtenção de um :class:`Model`.
         """
         raise NotImplementedError('get_model must be implemented in a subclass')
 

@@ -60,8 +60,8 @@ class FirstOrderModel(Model):
         Para mais detalhes sopre a aproximação do atraso verificar atributo :attr:`pade`.
     source_data : pd.Series, optional
         Conjunto de dados representando a variação da saida em relação ao tempo.
-        Deve um objeto do tipo `Series <https://pandas.pydata.org/docs/reference/api/pandas.Series.html>`_
-        da bilbioteca `pandas <https://pandas.pydata.org/docs/index.html>`_, sendo os valores representativos da saida
+        Deve um objeto do tipo :class:`pandas.Series` da bilbioteca
+        :mod:`pandas`, sendo os valores representativos da saida
         e os valores de index representativos do tempo.
 
         Essa classe não faz nenhuma análise desses dados por si só, porém eles ficam salvos, e podem ser utilizados
@@ -77,9 +77,8 @@ class FirstOrderModel(Model):
 
         .. math:: e^{-\\theta s}
 
-        A aproximação é feita através do método de Padé, utilizando a função `pade
-        <https://python-control.readthedocs.io/en/latest/generated/control.pade.html>`_ da biblioteca de
-        `controle <https://python-control.readthedocs.io/en/latest/index.html>`_, que resulta nos coeficientes de
+        A aproximação é feita através do método de Padé, utilizando a função :func:`control.pade` da biblioteca de
+        :mod:`control`, que resulta nos coeficientes de
         numerador e denominador de uma função de trasnferência que aproxima o atraso desejado.
 
         O parâmetro :paramref:`theta` representa o atraso de tempo, enquanto o parâmetro

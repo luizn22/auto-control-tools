@@ -92,10 +92,14 @@ pygments_style = 'sphinx'
 # should be linked to in this documentation.
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3/', None),
+    'control': ('https://python-control.readthedocs.io/en/latest/', None),
     'sphinx': ('https://www.sphinx-doc.org/en/master/', None),
     'scipy': ('https://docs.scipy.org/doc/scipy/reference', None),
+    'sympy': ('https://docs.sympy.org/latest/', None),
     'numpy': ('https://numpy.org/doc/stable', None),
     'matplotlib': ('https://matplotlib.org/', None),
+    'Ipython': ('https://ipython.readthedocs.io/en/stable/', None),
+    'pandas': ('https://pandas.pydata.org/pandas-docs/stable/', None),
 }
 
 intersphinx_disabled_domains = ['std']

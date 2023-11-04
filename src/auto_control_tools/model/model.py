@@ -21,7 +21,7 @@ class Model:
 
 
     Essa classe funciona guardando um objeto de função de transferência (:attr:`tf`) da biblioteca de sistemas de
-    controle do python (`control <https://python-control.readthedocs.io/en/latest/index.html>`_), representando o modelo
+    controle do python (:mod:`control`), representando o modelo
     matemático de uma planta no domínio da frequenica, além de guardar alguns outros metadados sobre a função de
     transferência, que poderão ser utilizados para identificação de modelo posteriormente, por exemplo.
 
@@ -36,13 +36,12 @@ class Model:
         Função de transferência que representa o processo da planta,
         pode ser tanto as listas dos coeficientes,
         quanto com um objeto de função de transferência da bilbioteca de controle
-        (`TransferFunction
-        <https://python-control.readthedocs.io/en/latest/generated/control.TransferFunction.html>`_).
+        (:class:`control.TransferFunction`).
 
     source_data : pd.Series, optional
         Conjunto de dados representando a variação da saida em relação ao tempo.
-        Deve um objeto do tipo `Series <https://pandas.pydata.org/docs/reference/api/pandas.Series.html>`_
-        da bilbioteca `pandas <https://pandas.pydata.org/docs/index.html>`_, sendo os valores representativos da saida
+        Deve um objeto do tipo :class:`pandas.Series` da bilbioteca
+        :mod:`pandas`, sendo os valores representativos da saida
         e os valores de index representativos do tempo.
 
         Essa classe não faz nenhuma análise desses dados por si só, porém eles ficam salvos, e podem ser utilizados
@@ -51,8 +50,7 @@ class Model:
     Attributes
     ----------
     tf : control.TransferFunction
-        Função de transferência que representa o processo da planta (`TransferFunction
-        <https://python-control.readthedocs.io/en/latest/generated/control.TransferFunction.html>`_).
+        Função de transferência que representa o processo da planta (:class:`control.TransferFunction`).
 
         Utilizada pelas classes de visualização de dados (:class:`ModelView` e :class:`ControllerView`) e pelas
         classes de aproximação de modelo para aproximação de ganhos (:ref:`gain-aprox`).
@@ -79,7 +77,7 @@ class Model:
         \\frac{ s^2 + 2s + 3 }{ 4s^3 + 5s^2 + 6s + 7 }
 
     Definindo modelo com uma função de transferência da biblioteca
-    `control <https://python-control.readthedocs.io/en/latest/index.html>`_:
+    :mod:`control`:
 
     >>> num = [1, 2, 3]
     >>> den = [1, 1, 1, 0]
@@ -125,6 +123,14 @@ class Model:
         return int(self.tf.den[0][0].size) - 1
 
     def get_simulation_time(self) -> Union[float, None]:
+        """
+        Retorna a duração dos dados discretos
+
+        Returns
+        -------
+        float | None
+            Valor da duração dos dados discretos, se existirem, se não, None
+        """
         return self.source_data.index[-1] if self.source_data is not None else None
 
 
@@ -205,8 +211,7 @@ class ModelView:
         """
         Retorna dados de resposta a sinal degrau do modelo.
 
-        Utiliza `control.step_info()
-        <https://python-control.readthedocs.io/en/latest/generated/control.step_info.html>`_
+        Utiliza :func:`control.step_info`
         para obtenção dos dados de resposta a sinal degrau do sistema no formato de dicionário (:class:`dict`).
 
         Parameters
@@ -278,7 +283,8 @@ class ModelView:
         Imprime a função de transferência na tela.
 
         Utiliza o método :meth:`PlotUtils.print_tf`
-        Caso esteja em um ambiente `jupyter <https://jupyter.org/>`_, a função display() é chamada para que a função
+        Caso esteja em um ambiente `jupyter <https://jupyter.org/>`_, a função :func:`~IPython.display.display`
+        é chamada para que a função
         de transferência seja mostrada com formatação matemática.
         """
         PlotUtils.print_tf(self.model.tf_symbolic)
