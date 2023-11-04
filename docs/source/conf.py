@@ -93,13 +93,9 @@ intersphinx_mapping = {
 
 intersphinx_disabled_domains = ['std']
 
-
+# bibtex settings
 bibtex_bibfiles = ['bibliography.bib']
 bibtex_default_style = 'unsrt'
-
-# If this is True, todo and todolist produce output, else they produce nothing.
-# The default is False.
-todo_include_todos = True
 
 # -- Options for HTML output
 
@@ -180,23 +176,3 @@ numpydoc_show_class_members = False
 numpydoc_class_members_toctree = False
 # -- Options for LaTeX output ------------------------------------------------
 
-latex_elements = {
-    # The paper size ('letterpaper' or 'a4paper').
-    #
-    # 'papersize': 'letterpaper',
-
-    # The font size ('10pt', '11pt' or '12pt').
-    #
-    # 'pointsize': '10pt',
-
-    # Additional stuff for the LaTeX preamble.
-    #
-    # 'preamble': '',
-
-    # Latex figure (float) alignment
-    #
-    # 'figure_align': 'htbp',
-}
-
-# -- Options for EPUB output
-epub_show_urls = 'footnote'
