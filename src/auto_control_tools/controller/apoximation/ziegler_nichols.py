@@ -86,7 +86,7 @@ class ZieglerNicholsControllerAproximation(FirstOrderTableControllerAproximation
     --------
 
     >>> model = act.FirstOrderModel(K=1.95, tau=8.33, theta=1.48)
-    >>> controller = act.ZieglerNicholsControllerAproximation.get_controller(model, PID)
+    >>> controller = act.ZieglerNicholsControllerAproximation.get_controller(model, act.PID)
     >>> controller.view.print_tf()
 
     .. math::
