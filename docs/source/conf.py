@@ -158,7 +158,7 @@ def linkcode_resolve(domain, info):
 
     # Ignore re-exports as their source files are not within the numpy repo
     module = inspect.getmodule(obj)
-    if module is not None and not module.__name__.startswith("src"):
+    if module is not None and not module.__name__.startswith("auto_control_tools"):
         return None
 
     try:
