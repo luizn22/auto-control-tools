@@ -8,3 +8,5 @@
 - run typing check: `mypy src`
 - run format check: `flake8 src`
 - run tests: `pytest`
+- auto generate modules .rst: `sphinx-apidoc -o .\docs\source .\src\auto_control_tools\ -f`
+- build docs locally: `sphinx-build -b html .\docs\source\ .\rtd_build\`

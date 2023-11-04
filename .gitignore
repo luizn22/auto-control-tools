@@ -9,6 +9,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 build/
+rtd_build/
 develop-eggs/
 dist/
 downloads/
@@ -182,3 +183,7 @@ __init__.pyo
 
 # pycodestyle
 .pycode/
+
+
+docs/source/generated
+/tests/automated/expected_result_generation/generated/

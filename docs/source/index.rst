@@ -1,18 +1,20 @@
-Welcome to Auto Control Tools documentation!
-============================================
+Bem vindo a documentação do Auto Control Tools!
+===============================================
 
-Auto Control Tools is a Python library that automates the process of identification and controller aproximation
-for simple control systems.
-
-Check out the :doc:`useful_scripts` for some nice scripts regarding lib maintenance
+Auto Control Tools é uma biblioteca em python que visa automatizar os processos de identificação e aproximação de
+controlador para sistemas de controle simples.
 
 .. note::
 
    This project is under active development.
 
-Contents
---------
-
+Documentação
+------------
 .. toctree::
+    :maxdepth: 2
 
-   useful_scripts
+    about
+    introduction
+    auto_control_tools
+    references
+    dev
