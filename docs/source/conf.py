@@ -19,21 +19,15 @@ version = '0.0.1'
 # -- General configuration
 
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
-    'sphinx.ext.mathjax',
-
-    'sphinx.ext.duration',
-    'sphinx.ext.autosummary',
-
-    'sphinx.ext.napoleon',
-    'nbsphinx',
-    'numpydoc',
-    'sphinx.ext.linkcode',
-
-    'sphinx_paramlinks',
-    'sphinxcontrib.bibtex',
+    'sphinx.ext.autodoc',  # automatic documentation
+    'sphinx.ext.intersphinx',  # links between different lib documentations
+    'sphinx.ext.mathjax',  # support for latex math expressions rendered by javascript
+    'sphinx.ext.autosummary',  # automatic documentation
+    'sphinx.ext.napoleon',  # ease of docstring sintax
+    'numpydoc',  # ease of docstring sintax
+    'sphinx.ext.linkcode',  # link documentation to code repository
+    'sphinx_paramlinks',  # allow param link references
+    'sphinxcontrib.bibtex',  # support for bibtex
 ]
 
 autoclass_content = "class"
