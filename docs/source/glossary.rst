@@ -10,6 +10,9 @@ Glossário
         circuitos elétricos, sistemas biológicos, entre outros. Este termo abrange uma variedade de entidades,
         desde processos industriais até sistemas biológicos e econômicos :cite:`CoelhoIdentificacao`.
 
+    Função de Transferência
+        asdasda
+
     Modelo
         Em controle de processos, um modelo refere-se a uma representação matemática abstrata de um :term:`Sistema`,
         capturando seus aspectos essenciais para análise, simulação e tomada de decisões. Geralmente, o modelo é
