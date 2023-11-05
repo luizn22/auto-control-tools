@@ -185,6 +185,6 @@ class DataInputUtils:
 
         if any(f not in df.columns for f in expected_fields):
             missing_fields = [f for f in expected_fields if f not in df.columns]
-            raise ValueError(f'The fields {missing_fields} are required and were informed in the input data')
+            raise ValueError(f'The fields {missing_fields} are required and were not informed in the input data')
 
         return df
