@@ -1,8 +1,8 @@
 Bem vindo a documentação do Auto Control Tools!
 ===============================================
 
-Auto Control Tools é uma biblioteca em python que visa automatizar os processos de identificação e aproximação de
-controlador para sistemas de controle simples.
+Auto Control Tools é uma biblioteca em python que visa automatizar os processos de :term:`Identificação` e
+:term:`Aproximação de Ganhos` de :term:`Controlador PID` para sistemas de controle simples.
 
 .. note::
 

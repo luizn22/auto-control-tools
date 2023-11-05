@@ -144,7 +144,7 @@ Identificação
 Para a :term:`Identificação` por dados discretos, são necessários os dados, e para isso todos os :ref:`identif`
 fornecem o método :meth:`~auto_control_tools.BaseModelIdentification.get_data_input_layout`, que faz o salvamento da
 planilha de leiaute vazia no formato escolhido, com os campos resultantes (Alguns campos podem ser informados de forma
-estática na identificação do modelo, não havendo necessidade de estarem no leiaute de input mais detalhes em
+estática na :term:`Identificação` do modelo, não havendo necessidade de estarem no leiaute de input mais detalhes em
 :meth:`~auto_control_tools.BaseModelIdentification.get_data_input_layout`). Todos os :ref:`identif` possuem o método
 :meth:`~auto_control_tools.BaseModelIdentification.get_model` que espera o caminho dos dados preenchidos.
 

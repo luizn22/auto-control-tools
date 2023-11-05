@@ -35,13 +35,13 @@ class FirstOrderTableControllerAproximation(BaseControllerAproximation):
     """
     Classe base para métodos de aproximação de primeira ordem baseados em tabelas.
 
-    Diversos métodos de aproximação de controlador utilizam tabelas dependentes apenas nos valores do modelo
-    paramétrico caracterizado pela seguinte função de transferência :footcite:p:`CoelhoChapter4`:
+    Diversos métodos de aproximação de controlador utilizam tabelas dependentes apenas nos valores do :term:`Modelo`
+    paramétrico caracterizado pela seguinte :term:`Função de Transferência` :footcite:p:`CoelhoChapter4`:
 
     .. math::
         \\frac{K}{\\tau s + 1}e^{-\\theta s}
 
-    A classe :class:`FirstOrderModel` é especializada nesse tipo de modelo.
+    A classe :class:`FirstOrderModel` é especializada nesse tipo de :term:`Modelo`.
 
     Esta classe visa facilitar a implementação destes comumente referidos como "Métodos de Tabela", pois possuem
     formulas simples e espessíficas para o ganho de cada parâmetro de PID, a depender do controlador desejado.
@@ -79,7 +79,7 @@ class FirstOrderTableControllerAproximation(BaseControllerAproximation):
         Parameters
         ----------
         model : FirstOrderModel
-            Modelo para o qual deve ser feita a aproximação.
+            :term:`Modelo` para o qual deve ser feita a aproximação.
         controller_type : str
             Tipo de controlador desejado.
 

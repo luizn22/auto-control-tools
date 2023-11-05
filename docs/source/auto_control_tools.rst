@@ -35,7 +35,7 @@ Classes de modelo, representativas do :term:`Modelo` matemático de uma planta d
 Métodos de Identificação
 ========================
 
-Classes de identificação são subclasses de :class:`BaseModelIdentification`, e implementam o método
+Classes de :term:`Identificação` são subclasses de :class:`BaseModelIdentification`, e implementam o método
 :meth:`~BaseModelIdentification.get_model`, que faz a :term:`Identificação` de dados discretos de resposta a sinal
 degrau de um sistema de controle e retorna objeto da classe :class:`Model` ou de uma de suas subclasses.
 

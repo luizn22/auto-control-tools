@@ -57,12 +57,12 @@ class CohenCoonControllerAproximation(FirstOrderTableControllerAproximation):
     Método de Aproximação de Controlador Cohen Coon.
 
     Proposto por Cohen e Coon, como uma forma de obter os ganhos de controlador para os modelos itentificados
-    pelo método clássico de identificação de controladores, descrito em :class:`FirstOrderModel`. O objetivo deste
-    método de aproximação é obter parâmetros de ganho PID que façam sintonia do controlador.
+    pelo método clássico de :term:`Identificação` de controladores, descrito em :class:`FirstOrderModel`. O objetivo
+    deste método de aproximação é obter parâmetros de ganho PID que façam :term:`sintonia` do controlador.
 
-    Em espessífico, este método se baseia na curva de reação do sistema a resposta de sinal degrau, que é exatamente o
-    que :class:`FirstOrderModel` obtém, com o adicional de que os parâmetros :math:`K`, :math:`\\tau` e :math:`\\theta`
-    já foram obtidos, e estão disponíveis para análise.
+    Em espessífico, este método se baseia na curva de reação do :term:`Sistema` a resposta de sinal degrau, que é
+    exatamente o que :class:`FirstOrderModel` obtém, com o adicional de que os parâmetros
+    :math:`K`, :math:`\\tau` e :math:`\\theta` já foram obtidos, e estão disponíveis para análise.
 
     Com isso basta aplicar as fórmulas descritas pelo Método de Cohen e Coon para Curva de Reação:
 

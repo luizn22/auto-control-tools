@@ -17,7 +17,7 @@ class BaseControllerAproximation:
 
         Métodos de aproximação de controladores devem ser subclasses desta classe. Elas devem implementar o método
         :meth:`get_controller` para retornar um objeto da classe :class:`Controller` com os ganhos referentes de
-        controlador PID.
+        :term:`Controlador PID`.
 
         Subclasses podem sobreescrever o atributo :attr:`B_accepted_controllers`
         com os tipos de controlador suportados e utilizar o método

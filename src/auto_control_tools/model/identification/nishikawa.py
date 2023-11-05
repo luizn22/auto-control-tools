@@ -12,11 +12,12 @@ class NishikawaModelIdentification(BaseModelIdentification):
     """
     Método de Identicação Nishikawa.
 
-    Este é um método clássico da literatura para identificação de modelos dinâmicos de processos industriais.
+    Este é um método clássico da literatura para :term:`Identificação` de modelos dinâmicos de processos industriais.
     Desenvolvido por Nishikawa, em 1984 :footcite:p:`CoelhoChapter4`.
 
-    O processo de identificação de modelo pelo método de Nishikawa envolve a análise da resposta ao
-    degrau de um sistema, com base em uma função de transferência de primeira ordem com tempo morto (FOPDT).
+    O processo de identificação de :term:`Modelo` pelo método de Nishikawa envolve a análise da resposta ao
+    degrau de um :term:`Sistema`, com base em uma :term:`Função de Transferência` de primeira ordem com tempo morto
+    (FOPDT).
     Os parâmetros chave a serem determinados são o ganho estático (:math:`K`), a constante de tempo (:math:`\\tau`),
     e o atraso de transporte (:math:`\\theta`) :footcite:p:`CoelhoChapter4`.
 
@@ -61,8 +62,8 @@ class NishikawaModelIdentification(BaseModelIdentification):
     :meth:`get_model`.
 
     Os parâmetros obtidos são utilizados para instanciar um objeto da classe :class:`FirstOrderModel`, que se
-    especializa em modelos como o gerado por esse método, e possibilita o uso de métodos de aproximação de ganhos de
-    controlador PID também especializados neste tipo de modelo.
+    especializa em modelos como o gerado por esse método, e possibilita o uso de métodos de :term:`Aproximação de Ganhos` de
+    :term:`Controlador PID` também especializados neste tipo de modelo.
 
     Notes
     -----

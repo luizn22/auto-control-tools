@@ -52,13 +52,13 @@ class DataUtils:
         """
         Obtém o valor de regime de uma resposta a sinal degrau.
 
-        Baseado em uma série temporal representativa da resposta de um sistema a um sinal degrau, obtém o valor de
-        regime da resposta dentro do :paramref:`settling_time_threshold` especificado.
+        Baseado em uma série temporal representativa da resposta de um :term:`Sistema` a um sinal degrau, obtém o valor
+        de regime da resposta dentro do :paramref:`settling_time_threshold` especificado.
 
         Parameters
         ----------
         tf_data : pandas.Series
-            Série temporal (:class:`pandas.Series`) representativa da resposta de um sistema a um sinal degrau.
+            Série temporal (:class:`pandas.Series`) representativa da resposta de um :term:`Sistema` a um sinal degrau.
 
         settling_time_threshold : float, optional
             Limiar de tempo de acomodação para determinar o valor de regime.
@@ -86,13 +86,13 @@ class DataUtils:
         """
         Obtém as coordenadas e o valor da inclinação do ponto de maior inclinação.
 
-        Deriva os dados da série temporal representativa da resposta de um sistema a um sinal degrau e
+        Deriva os dados da série temporal representativa da resposta de um :term:`Sistema` a um sinal degrau e
         retorna as coordenadas (tempo e valor) e o valor da inclinação do ponto de maior inclinação.
 
         Parameters
         ----------
         tf_data : pandas.Series
-            Série temporal (:class:`pandas.Series`) representativa da resposta de um sistema a um sinal degrau.
+            Série temporal (:class:`pandas.Series`) representativa da resposta de um :term:`Sistema` a um sinal degrau.
 
         Returns
         -------
@@ -144,7 +144,7 @@ class DataUtils:
                            use_lin_filter: bool = False, linfilter_sothness: int = 5
                            ) -> Tuple[pd.Series, float]:
         """
-        Prepara os dados para uso dos métodos de identificação.
+        Prepara os dados para uso dos métodos de :term:`Identificação`.
 
         Faz o preparo dos dados de :paramref:`df` adicionando campos informadas pelos parâmetros
         :paramref:`sample_time` e :paramref:`step_signal` e aplicando um filtro linear, caso solicitado.
@@ -153,7 +153,7 @@ class DataUtils:
         Parameters
         ----------
         df : pandas.DataFrame
-            DataFrame com os dados de resposta a sinal degrau do sistema.
+            DataFrame com os dados de resposta a sinal degrau do :term:`Sistema`.
         sample_time : float, optional
             Valor do invervalo de amostragem. Caso informado, o intervalo de amostragem é considerado constante e
             igual ao valor fornecido.
@@ -200,14 +200,14 @@ class DataUtils:
         Remove dados onde o valor de entrada é nulo.
 
         Recebe um :class:`pandas.DataFrame` com dados de
-        resposta a um sinal degrau de um sistema. Caso o sinal degrau inicie zerado e suba posteriormente, os momentos
-        onde ele era igual a zero são removidos, deixando no DataFrame apenas dados onde o sinal degrau é ativo.
-        Retorna o pandas.DataFrame com as alterações realizadas.
+        resposta a um sinal degrau de um :term:`Sistema`. Caso o sinal degrau inicie zerado e suba posteriormente, os
+        momentos onde ele era igual a zero são removidos, deixando no DataFrame apenas dados onde o sinal degrau é
+        ativo. Retorna o pandas.DataFrame com as alterações realizadas.
 
         Parameters
         ----------
         df : pandas.DataFrame
-            DataFrame contendo dados de resposta a um sinal degrau de um sistema.
+            DataFrame contendo dados de resposta a um sinal degrau de um :term:`Sistema`.
 
         Returns
         -------
@@ -233,7 +233,7 @@ class DataUtils:
         Remove valores negativos e interpola os dados para encostarem no eixo do tempo.
 
         Recebe um :class:`pandas.DataFrame`
-        com dados de resposta a um sinal degrau de um sistema, zera valores de saída abaixo de zero, e translada
+        com dados de resposta a um sinal degrau de um :term:`Sistema`, zera valores de saída abaixo de zero, e translada
         os dados de saída (subtrai um mesmo escalar de todos os valores de saída) com base no valor de saída mais baixo
         presente, garantindo que a curva de saída encoste no eixo do tempo. Retorna o pandas.DataFrame com as alterações
         realizadas.
@@ -241,7 +241,7 @@ class DataUtils:
         Parameters
         ----------
         df : pandas.DataFrame
-            :class:`pandas.DataFrame` contendo dados de resposta a um sinal degrau de um sistema.
+            :class:`pandas.DataFrame` contendo dados de resposta a um sinal degrau de um :term:`Sistema`.
 
         Returns
         -------
@@ -251,8 +251,9 @@ class DataUtils:
 
         Notes
         -----
-        A alteração dos valores negetivos para zero incorre na interpretação de um possível sistema com fase
-        não mínima como apenas um sistema com atraso; isso pode ou não ser relevante dependendo do sistema específico.
+        A alteração dos valores negetivos para zero incorre na interpretação de um possível :term:`Sistema` com fase
+        não mínima como apenas um :term:`Sistema` com atraso; isso pode ou não ser relevante dependendo do
+        sistema específico.
 
         Examples
         --------

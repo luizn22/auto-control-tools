@@ -10,7 +10,7 @@ class DataInputUtils:
     Classe utilitária para a entrada de dados.
 
     Aqui são implementados diversos métodos para criação e leitura de tabelas referentes a entrada dos dados utilizados
-    para identificação de plantas de sistemas de controle.
+    para :term:`Identificação` de plantas de sistemas de controle.
 
     Attributes
     ----------

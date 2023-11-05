@@ -10,7 +10,7 @@ from ..utils.plot import PlotUtils
 
 class Model:
     """
-    Classe representativa do modelo matemático de uma planta de sistemas de controle.
+    Classe representativa do :term:`Modelo` matemático de uma planta de sistemas de controle.
 
     Típicamente o modelo matemático de uma planta no domínio da frequenica pode ser definido por um numerador e um
     denominador em potências de :math:`s`. Ex:
@@ -20,10 +20,10 @@ class Model:
         P(s) = \\frac{ s + 1 }{ s^2 + s + 1 }
 
 
-    Essa classe funciona guardando um objeto de função de transferência (:attr:`tf`) da biblioteca de sistemas de
-    controle do python (:mod:`control`), representando o modelo
+    Essa classe funciona guardando um objeto de :term:`Função de Transferência` (:attr:`tf`) da biblioteca de sistemas
+    de controle do python (:mod:`control`), representando o modelo
     matemático de uma planta no domínio da frequenica, além de guardar alguns outros metadados sobre a função de
-    transferência, que poderão ser utilizados para identificação de modelo posteriormente, por exemplo.
+    transferência, que poderão ser utilizados para :term:`Identificação` de modelo posteriormente, por exemplo.
 
 
     Além disso o atributo :attr:`view` possibilita a visualização de dados, estatísticas e gráficos referentes a
@@ -33,9 +33,9 @@ class Model:
     Parameters
     ----------
     tf : ~control.TransferFunction or tuple[list[float], list[float]]]
-        Função de transferência que representa o processo da planta,
+        :term:`Função de Transferência` que representa o processo da planta,
         pode ser tanto as listas dos coeficientes,
-        quanto com um objeto de função de transferência da bilbioteca de controle
+        quanto com um objeto de :term:`Função de Transferência` da bilbioteca de controle
         (:class:`control.TransferFunction`).
 
     source_data : pd.Series, optional
@@ -50,22 +50,22 @@ class Model:
     Attributes
     ----------
     tf : control.TransferFunction
-        Função de transferência que representa o processo da planta (:class:`control.TransferFunction`).
+        :term:`Função de Transferência` que representa o processo da planta (:class:`control.TransferFunction`).
 
         Utilizada pelas classes de visualização de dados (:class:`ModelView` e :class:`ControllerView`) e pelas
-        classes de aproximação de modelo para aproximação de ganhos (:ref:`gain-aprox`).
+        classes de aproximação de :term:`Modelo` para :term:`Aproximação de Ganhos` (:ref:`gain-aprox`).
 
     view : ModelView
-        Utilizado para visualização dos dados, estatísticas e gráficos referentes ao Modelo.
+        Utilizado para visualização dos dados, estatísticas e gráficos referentes ao :term:`Modelo`.
 
         Verificar a classe :class:`ModelView` para os métodos de visualização de dados.
 
     source_data : pandas.Series, optional
-        Dados originários do modelo.
+        Dados originários do :term:`Modelo`.
 
     Examples
     --------
-    Definindo modelo com listas de numerador e denominador:
+    Definindo :term:`Modelo` com listas de numerador e denominador:
 
     >>> num = [1, 2, 3]
     >>> den = [4, 5, 6, 7]
@@ -76,7 +76,7 @@ class Model:
 
         \\frac{ s^2 + 2s + 3 }{ 4s^3 + 5s^2 + 6s + 7 }
 
-    Definindo modelo com uma função de transferência da biblioteca
+    Definindo :term:`Modelo` com uma :term:`Função de Transferência` da biblioteca
     :mod:`control`:
 
     >>> num = [1, 2, 3]
@@ -96,7 +96,7 @@ class Model:
             source_data: Union[pd.Series, None] = None,
             step_signal: float = 1,
     ):
-        """Instancia Modelo matemático de uma planta"""
+        """Instancia :term:`Modelo` matemático de uma planta"""
         if isinstance(tf, control.TransferFunction):
             self.tf = tf
         else:
@@ -178,21 +178,21 @@ class ModelView:
                                        upscale_model: Union[bool, None] = None,
                                        simulation_time: Union[float, None] = None):
         """
-        Apresenta gráfico de resposta degrau do modelo.
+        Apresenta gráfico de resposta degrau do :term:`Modelo`.
 
-        Utiliza :meth:`PlotUtils.plot_tf` para plotar o gráfico da resposta a sinal degrau do modelo, bem como
+        Utiliza :meth:`PlotUtils.plot_tf` para plotar o gráfico da resposta a sinal degrau do :term:`Modelo`, bem como
         as retas de tempo de acomodaçao, sobressinal, e valor de regime e os dados
         discretos (:attr:`Model.source_data`) caso tenham sido informados.
 
         Parameters
         ----------
         plot_discrete_data : bool, optional
-            Plotar ou não os dados discretos juntamente ao modelo calculado.
+            Plotar ou não os dados discretos juntamente ao :term:`Modelo` calculado.
         settling_time_threshold : float, optional
             Percentual de desvio do valor de regime considerado do cálculo do tempo de acomodação.
         upscale_model : bool, optional
             Fazer ou não *upscale* dos outputs de model pelo valor do setpoint dos dados discretos.
-            Facilita comparação visual entre o modelo e os dados discretos.
+            Facilita comparação visual entre o :term:`Modelo` e os dados discretos.
         simulation_time : float, optional
             Unidade de tempo que a simulação deve durar. Calculado automaticamente se não for fornecido.
         """
@@ -209,10 +209,10 @@ class ModelView:
 
     def get_model_step_response_data(self, settling_time_threshold: float = 0.02) -> Dict[str, Any]:
         """
-        Retorna dados de resposta a sinal degrau do modelo.
+        Retorna dados de resposta a sinal degrau do :term:`Modelo`.
 
         Utiliza :func:`control.step_info`
-        para obtenção dos dados de resposta a sinal degrau do sistema no formato de dicionário (:class:`dict`).
+        para obtenção dos dados de resposta a sinal degrau do :term:`Sistema` no formato de dicionário (:class:`dict`).
 
         Parameters
         ----------
@@ -253,7 +253,7 @@ class ModelView:
               - Tempo do pico.
             * - SteadyStateValue
               - Valor de regime
-              - Valor de regime do sistema.
+              - Valor de regime do :term:`Sistema`.
 
         """
 
@@ -266,7 +266,7 @@ class ModelView:
 
     def print_model_step_response_data(self, settling_time_threshold: float = 0.02):
         """
-        *Pretty Print* dos dados de resposta a sinal de grau do sistema.
+        *Pretty Print* dos dados de resposta a sinal de grau do :term:`sistema`.
 
         Utiliza :meth:`PlotUtils.pprint_dict` para fazer o print dos dados.
 
@@ -280,7 +280,7 @@ class ModelView:
 
     def print_tf(self):
         """
-        Imprime a função de transferência na tela.
+        Imprime a :term:`Função de Transferência` na tela.
 
         Utiliza o método :meth:`PlotUtils.print_tf`
         Caso esteja em um ambiente `jupyter <https://jupyter.org/>`_, a função :func:`~IPython.display.display`
