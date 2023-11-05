@@ -107,6 +107,7 @@ html_theme = 'sphinx_rtd_theme'
 import inspect
 from os.path import relpath, dirname
 
+
 def linkcode_resolve(domain, info):
     """
     Determine the URL corresponding to Python object
@@ -175,4 +176,3 @@ numpydoc_show_class_members = False
 # Don't create a Sphinx TOC for the lists of class methods and attributes
 numpydoc_class_members_toctree = False
 # -- Options for LaTeX output ------------------------------------------------
-
