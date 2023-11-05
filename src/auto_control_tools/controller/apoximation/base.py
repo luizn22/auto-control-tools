@@ -17,7 +17,7 @@ class BaseControllerAproximation:
 
         Métodos de aproximação de controladores devem ser subclasses desta classe. Elas devem implementar o método
         :meth:`get_controller` para retornar um objeto da classe :class:`Controller` com os ganhos referentes de
-        controlador PID.
+        :term:`Controlador PID`.
 
         Subclasses podem sobreescrever o atributo :attr:`B_accepted_controllers`
         com os tipos de controlador suportados e utilizar o método
@@ -29,7 +29,7 @@ class BaseControllerAproximation:
     @abstractmethod
     def get_controller(cls, model: Model, controller_type: str) -> Controller:
         """
-        `Método abstrato <https://docs.python.org/3/library/abc.html#abc.abstractmethod>`_
+        Método abstrato :func:`abc.abstractmethod`
         para obtenção de um :class:`Controller`.
         """
         raise NotImplementedError('get_controller must be implemented in a subclass')

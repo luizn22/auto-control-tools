@@ -12,11 +12,12 @@ class Controller:
     """
     Classe base para controle PID.
 
-    Esta é uma classe representativa do modelo matemático de uma planta de sistemas de controle em malha fechada com
-    controlador PID (Proporcional-Itegrador-Derivativo). Esse tipo de controlador é muito difundido na indústria,
-    possuindo inúmeras aplicações.
+    Esta é uma classe representativa do :term:`Modelo` matemático de uma planta de sistemas de controle em
+    :term:`Malha Fechada` com :term:`Controlador PID` (Proporcional-Itegrador-Derivativo). Esse tipo de controlador é muito
+    difundido na indústria, possuindo inúmeras aplicações.
 
-    Para um processo :math:`P(s)` o fechamento de malha simples com controlador PID denota-se pelas seguintes equações:
+    Para um processo :math:`P(s)` o fechamento de malha simples com :term:`Controlador PID` denota-se pelas seguintes
+    equações:
 
     .. math::
 
@@ -29,10 +30,8 @@ class Controller:
 
     Essa classe se destina a armazenar os valores de ganhos de controlador, bem como realizar o fechamento da manha
     de controle utilizando os parâmetros PID (:paramref:`kp`, :paramref:`ki`, :paramref:`kd`) e o objeto de modelo
-    (:paramref:`model`). Para isso, atua encima do objeto de função de transferência da biblioteca de controle
-    :attr:`Model.tf` (`TransferFunction
-    <https://python-control.readthedocs.io/en/latest/generated/control.TransferFunction.html>`_) presente no
-    :attr:`Model` fornecido.
+    (:paramref:`model`). Para isso, atua encima do objeto de :term:`Função de Transferência` da biblioteca de controle
+    :attr:`Model.tf` (:class:`control.TransferFunction`) presente no :attr:`Model` fornecido.
 
 
     Além disso o atributo :attr:`view` possibilita a visualização de dados, estatísticas e gráficos referentes ao
@@ -56,7 +55,7 @@ class Controller:
     ----------
     model : Model
         Modelo matemático de uma planta a ser controlada. Utilizado por métodos de outras classes para obter informações
-        sobre o modelo.
+        sobre o :term:`Modelo`.
     ki : float, optional
         Valor referente ao ganho Integrador, :math:`K_i`, do controlador, utilizado no cálculo de :attr:`tf` e
         :attr:`tf_symbolic`.
@@ -66,16 +65,15 @@ class Controller:
     kd : float, optional
         Valor referente ao ganho Derivativo, :math:`K_d` do controlador, utilizado no cálculo de :attr:`tf` e
         :attr:`tf_symbolic`.
-    tf : `TransferFunction <https://python-control.readthedocs.io/en/latest/generated/control.TransferFunction.html>`_
-        Função de transferência que representa o processo da planta em malha fechada com controlador (`TransferFunction
-        <https://python-control.readthedocs.io/en/latest/generated/control.TransferFunction.html>`_).
+    tf : control.TransferFunction
+        :term:`Função de Transferência` que representa o processo da planta em :term:`Malha Fechada` com controlador (
+        :class:`control.TransferFunction`).
 
         Utilizada pelas classe de visualização de dados :class:`ControllerView`.
 
         Calculada a partir do fechamento da malha do controlador junto ao processo.
-    tf_symbolic : `Expr <https://docs.sympy.org/latest/modules/core.html#module-sympy.core.expr>`_
-        Guarda representação simbolica
-        (`Expr <https://docs.sympy.org/latest/modules/core.html#module-sympy.core.expr>`_) de :attr:`tf`.
+    tf_symbolic : ~sympy.core.expr.Expr
+        Guarda representação simbolica (:class:`~sympy.core.expr.Expr`) de :attr:`tf`.
 
         Atributos da class control.TransferFunction funcionam apenas com as listas dos coeficientes de s de seus
         numeradores e denominadores, expressões mais complexas, como exponenciais, não podem ser representadas de
@@ -181,19 +179,20 @@ class ControllerView:
                                             settling_time_threshold: float = 0.02,
                                             simulation_time: Union[float, None] = None):
         """
-        Apresenta gráfico de resposta degrau do modelo.
+        Apresenta gráfico de resposta degrau do :term:`Modelo`.
 
         Utiliza :meth:`PlotUtils.plot_tf` para plotar o gráfico da resposta a sinal degrau do controlador, bem como
-        as retas de tempo de acomodaçao, sobressinal, e valor de regime. Também faz o plot da função de transferencia
-        do modelo por padrão.
+        as retas de tempo de acomodaçao, sobressinal, e valor de regime. Também faz o plot da
+        :term:`Função de Transferência` do :term:`Modelo` por padrão.
 
         Parameters
         ----------
         plot_model : bool, optional
-            Plotar ou não a função de transferência do modelo juntamente a do controlador.
+            Plotar ou não a :term:`Função de Transferência` do :term:`Modelo` juntamente a do controlador.
         use_pade : bool, optional
-            Plotar ou não consideranto o atraso de tempo (são introduzidos muitos termos a função de transferência com
-            a aproximação de pade, isso pode causar problemas ao plotar os dados em alguns casos).
+            Plotar ou não consideranto o atraso de tempo (são introduzidos muitos termos a
+            :term:`Função de Transferência` com a aproximação de pade, isso pode causar problemas ao plotar os dados
+            em alguns casos).
         settling_time_threshold : float, optional
             Percentual de desvio do valor de regime considerado do cálculo do tempo de acomodação.
         simulation_time : float, optional
@@ -212,9 +211,8 @@ class ControllerView:
         """
         Retorna dados de resposta a sinal degrau do controlador.
 
-        Utiliza `control.step_info()
-        <https://python-control.readthedocs.io/en/latest/generated/control.step_info.html>`_
-        para obtenção dos dados de resposta a sinal degrau do sistema no formato de dicionário (:class:`dict`).
+        Utiliza :class:`control.step_info()` para obtenção dos dados de resposta a sinal degrau do :term:`Sistema`
+        no formato de dicionário (:class:`dict`).
 
         Parameters
         ----------
@@ -264,7 +262,7 @@ class ControllerView:
               - Tempo do pico.
             * - SteadyStateValue
               - Valor de regime
-              - Valor de regime do sistema.
+              - Valor de regime do :term:`Sistema`.
 
         """
         data = {
@@ -287,7 +285,7 @@ class ControllerView:
 
     def print_controller_step_response_data(self, settling_time_threshold: float = 0.02):
         """
-        *Pretty Print* dos dados de resposta a sinal de grau do sistema.
+        *Pretty Print* dos dados de resposta a sinal de grau do :term:`Sistema`.
 
         Utiliza :meth:`PlotUtils.pprint_dict` para fazer o print dos dados.
 
@@ -301,10 +299,10 @@ class ControllerView:
 
     def print_tf(self):
         """
-        Imprime a função de transferência na tela.
+        Imprime a :term:`Função de Transferência` na tela.
 
         Utiliza o método :meth:`PlotUtils.print_tf`
-        Caso esteja em um ambiente `jupyter <https://jupyter.org/>`_, a função display() é chamada para que a função
-        de transferência seja mostrada com formatação matemática.
+        Caso esteja em um ambiente `jupyter <https://jupyter.org/>`_, a função :func:`~IPython.display.display` é
+        chamada para que a :term:`Função de Transferência` seja mostrada com formatação matemática.
         """
         PlotUtils.print_tf(self.controller.tf_symbolic)

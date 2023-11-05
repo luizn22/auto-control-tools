@@ -10,6 +10,12 @@ Glossário
         circuitos elétricos, sistemas biológicos, entre outros. Este termo abrange uma variedade de entidades,
         desde processos industriais até sistemas biológicos e econômicos :cite:`CoelhoIdentificacao`.
 
+    Função de Transferência
+        A função de transferência de um :term:`Sistema` representado por uma equação diferencial linear invariante no
+        tempo é definida como a relação entre a transformada de Laplace da saída (função de resposta — response
+        function) e a transformada de Laplace da entrada (função de excitação — driving function), admitindo-se todas as
+        condições iniciais nulas :cite:`ogata2010engenharia`.
+
     Modelo
         Em controle de processos, um modelo refere-se a uma representação matemática abstrata de um :term:`Sistema`,
         capturando seus aspectos essenciais para análise, simulação e tomada de decisões. Geralmente, o modelo é
@@ -36,7 +42,7 @@ Glossário
     Sintonia
         No contexto de controle de sistemas, a sintonia refere-se ao processo de ajuste dos parâmetros de um
         controlador para otimizar o desempenho do :term:`Sistema`. Essa atividade é essencial para alcançar respostas
-        rápidas e estáveis, minimizando erros e garantindo uma operação eficiente em malha fechada.
+        rápidas e estáveis, minimizando erros e garantindo uma operação eficiente em :term:`Malha Fechada`.
         A sintonia pode ser realizada através de métodos experimentais, como testes de :term:`Malha Aberta`, ou por
         abordagens analíticas baseadas em modelos matemáticos. O objetivo é encontrar uma configuração ideal que
         maximize a eficácia do controlador em atender às demandas específicas do sistema, resultando em um comportamento

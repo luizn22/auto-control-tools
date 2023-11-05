@@ -40,20 +40,19 @@ class PlotUtils:
         Parameters
         ----------
         tf : Union[control.TransferFunction, Dict[str, control.TransferFunction]]
-            Função de transferência (`TransferFunction
-            <https://python-control.readthedocs.io/en/latest/generated/control.TransferFunction.html>`_)
+            :term:`Função de Transferência` (:class:`control.TransferFunction`)
             ou dicionário de funções de transferência a serem plotadas.
             As chaves do dicionário serão usadas como sufixo dos itens de legenda.
 
         discrete_data : pandas.Series, optional
-            Série temporal (`pandas.Series <https://pandas.pydata.org/docs/reference/api/pandas.Series.html>`_)
+            Série temporal (:class:`pandas.Series`)
             referente aos dados discretos de resposta a sinal degrau a serem sobrepostos ao gráfico.
 
         settling_time_threshold : float, optional
             Limiar de tempo de acomodação, por padrão 0.02 (2%).
 
         pade : control.TransferFunction, optional
-            Função de transferência de Pade para consideração do atraso na resposta ao sinal degrau.
+            :term:`Função de Transferência` de Pade para consideração do atraso na resposta ao sinal degrau.
 
         scale : Union[float, Dict[str, float]], optional
             Fator de escala para as funções de transferência, por padrão 1.
@@ -62,7 +61,7 @@ class PlotUtils:
             coincidir com alguma chave do dicionário.
 
         simulation_time : float, optional
-            Tempo de simulação, caso não seja informado, o tempo de acomodação da função de transferência será
+            Tempo de simulação, caso não seja informado, o tempo de acomodação da :term:`Função de Transferência` será
             usado como base, se não for possível calcular, será utilizado ``simulation_time = 100`` no lugar.
 
         qt_points : int, optional
@@ -146,26 +145,25 @@ class PlotUtils:
     ) -> Tuple[Dict[str, float], pd.Series]:
         """
         Calcula as informações e cria uma série temporal
-        (`pandas.Series <https://pandas.pydata.org/docs/reference/api/pandas.Series.html>`_)
-        referentes a resposta a sinal degrau da função de transferência.
+        (:class:`pandas.Series`)
+        referentes a resposta a sinal degrau da :term:`Função de Transferência`.
 
         Parameters
         ----------
         tf : control.TransferFunction
-            Função de transferência (`TransferFunction
-            <https://python-control.readthedocs.io/en/latest/generated/control.TransferFunction.html>`_).
+            :term:`Função de Transferência` (:class:`control.TransferFunction`).
 
         settling_time_threshold : float, optional
             Limiar de tempo de acomodação, por padrão 0.02 (2%).
 
         pade : control.TransferFunction, optional
-            Função de transferência de Pade para consideração do atraso na resposta ao sinal degrau.
+            :term:`Função de Transferência` de Pade para consideração do atraso na resposta ao sinal degrau.
 
         scale : float, optional
-            Fator de escala para a função de transferência, por padrão 1.
+            Fator de escala para a :term:`Função de Transferência`, por padrão 1.
 
         simulation_time : float, optional
-            Tempo de simulação, caso não seja informado, o tempo de acomodação da função de transferência será
+            Tempo de simulação, caso não seja informado, o tempo de acomodação da :term:`Função de Transferência` será
             usado como base, se não for possível calcular, será utilizado ``simulation_time = 100`` no lugar.
 
         qt_points : int, optional
@@ -174,7 +172,7 @@ class PlotUtils:
         Returns
         -------
         Tuple[Dict[str, float], pd.Series]
-            Informações sobre a função de transferência e dados temporais.
+            Informações sobre a :term:`Função de Transferência` e dados temporais.
         """
 
         # Setup tf
@@ -209,13 +207,12 @@ class PlotUtils:
             qt_points: int = 1000,
     ):
         """
-        Plota a resposta ao degrau de uma função de transferência.
+        Plota a resposta ao degrau de uma :term:`Função de Transferência`.
 
         Parameters
         ----------
         tf : control.TransferFunction
-            Função de transferência (`TransferFunction
-            <https://python-control.readthedocs.io/en/latest/generated/control.TransferFunction.html>`_).
+            :term:`Função de Transferência` (:class:`control.TransferFunction`).
 
         colors : List[Any]
             Lista de cores para o plot (cores utilizadas serão removidas da lista com o método :meth:`list.pop`).
@@ -227,13 +224,13 @@ class PlotUtils:
             Limiar de tempo de acomodação, por padrão 0.02 (2%).
 
         pade : control.TransferFunction, optional
-            Função de transferência de Pade para consideração do atraso na resposta ao sinal degrau.
+            :term:`Função de Transferência` de Pade para consideração do atraso na resposta ao sinal degrau.
 
         scale : float, optional
-            Fator de escala para a função de transferência, por padrão 1.
+            Fator de escala para a :term:`Função de Transferência`, por padrão 1.
 
         simulation_time : float, optional
-            Tempo de simulação, caso não seja informado, o tempo de acomodação da função de transferência será
+            Tempo de simulação, caso não seja informado, o tempo de acomodação da :term:`Função de Transferência` será
             usado como base, se não for possível calcular, será utilizado ``simulation_time = 100`` no lugar.
 
         qt_points : int, optional
@@ -287,18 +284,18 @@ class PlotUtils:
             qt_points: int = 1000,
     ) -> pd.Series:
         """
-        Gera a série temporal da resposta ao degrau de uma função de transferência.
+        Gera a série temporal da resposta ao degrau de uma :term:`Função de Transferência`.
 
         Parameters
         ----------
         tf : control.TransferFunction
-            Função de transferência.
+            :term:`Função de Transferência`.
 
         simulation_time : float
             Tempo de simulação.
 
         scale : float, optional
-            Fator de escala para a função de transferência, por padrão 1.
+            Fator de escala para a :term:`Função de Transferência`, por padrão 1.
 
         qt_points : int, optional
             Quantidade de pontos para a simulação, por padrão 1000.
@@ -331,7 +328,7 @@ class PlotUtils:
         Parameters
         ----------
         steady_state_value : float
-            Valor de regime de uma resposta de um sistema a sinal degrau.
+            Valor de regime de uma resposta de um :term:`Sistema` a sinal degrau.
 
         steady_state_color
             Cor para as linhas horizontais.
@@ -391,7 +388,7 @@ class PlotUtils:
         Gera uma lista de cores contrastantes.
 
         As cores geradas estão em um formato aceito como valor de cor pelas ferramentas de plot da bilblioteca
-        `matplotlib <https://matplotlib.org/>`_.
+        :mod:`matplotlib`.
 
         Parameters
         ----------
@@ -417,11 +414,11 @@ class PlotUtils:
     @classmethod
     def print_tf(cls, tf: Any):
         """
-        Imprime a função de transferência na tela.
+        Imprime a :term:`Função de Transferência` na tela.
 
         Caso esteja em um ambiente `jupyter <https://jupyter.org/>`_, a função
-        `display <https://ipython.readthedocs.io/en/stable/api/generated/IPython.display.html#IPython.display.display>`_
-        é chamada para que a função de transferência seja mostrada com formatação matemática.
+        :func:`~IPython.display.display`
+        é chamada para que a :term:`Função de Transferência` seja mostrada com formatação matemática.
         """
         if cls._jupyter_env:
             from IPython import display
@@ -435,8 +432,8 @@ class PlotUtils:
         Exibe um dicionário de forma formatada.
 
         Caso esteja em um ambiente `jupyter <https://jupyter.org/>`_, os dados do dicionario são transformados em um
-        `pandas.DataFrame <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_ e a função
-        `display <https://ipython.readthedocs.io/en/stable/api/generated/IPython.display.html#IPython.display.display>`_
+        :class:`pandas.DataFrame` e a função
+        :func:`~IPython.display.display`
         e utilizada para plota-lo de forma formatada.
 
         Parameters

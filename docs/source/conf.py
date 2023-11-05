@@ -19,26 +19,15 @@ version = '0.0.1'
 # -- General configuration
 
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.doctest',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
-    'sphinx.ext.coverage',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.ifconfig',
-    'sphinx.ext.viewcode',
-    'sphinx.ext.githubpages',
-
-    'sphinx.ext.duration',
-    'sphinx.ext.autosummary',
-
-    'sphinx.ext.napoleon',
-    'nbsphinx',
-    'numpydoc',
-    'sphinx.ext.linkcode',
-
-    'sphinx_paramlinks',
-    'sphinxcontrib.bibtex',
+    'sphinx.ext.autodoc',  # automatic documentation
+    'sphinx.ext.intersphinx',  # links between different lib documentations
+    'sphinx.ext.mathjax',  # support for latex math expressions rendered by javascript
+    'sphinx.ext.autosummary',  # automatic documentation
+    'sphinx.ext.napoleon',  # ease of docstring sintax
+    'numpydoc',  # ease of docstring sintax
+    'sphinx.ext.linkcode',  # link documentation to code repository
+    'sphinx_paramlinks',  # allow param link references
+    'sphinxcontrib.bibtex',  # support for bibtex
 ]
 
 autoclass_content = "class"
@@ -92,21 +81,21 @@ pygments_style = 'sphinx'
 # should be linked to in this documentation.
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3/', None),
+    'control': ('https://python-control.readthedocs.io/en/latest/', None),
     'sphinx': ('https://www.sphinx-doc.org/en/master/', None),
     'scipy': ('https://docs.scipy.org/doc/scipy/reference', None),
+    'sympy': ('https://docs.sympy.org/latest/', None),
     'numpy': ('https://numpy.org/doc/stable', None),
     'matplotlib': ('https://matplotlib.org/', None),
+    'Ipython': ('https://ipython.readthedocs.io/en/stable/', None),
+    'pandas': ('https://pandas.pydata.org/pandas-docs/stable/', None),
 }
 
 intersphinx_disabled_domains = ['std']
 
-
+# bibtex settings
 bibtex_bibfiles = ['bibliography.bib']
 bibtex_default_style = 'unsrt'
-
-# If this is True, todo and todolist produce output, else they produce nothing.
-# The default is False.
-todo_include_todos = True
 
 # -- Options for HTML output
 
@@ -117,6 +106,7 @@ html_theme = 'sphinx_rtd_theme'
 
 import inspect
 from os.path import relpath, dirname
+
 
 def linkcode_resolve(domain, info):
     """
@@ -158,7 +148,7 @@ def linkcode_resolve(domain, info):
 
     # Ignore re-exports as their source files are not within the numpy repo
     module = inspect.getmodule(obj)
-    if module is not None and not module.__name__.startswith("src"):
+    if module is not None and not module.__name__.startswith("auto_control_tools"):
         return None
 
     try:
@@ -186,24 +176,3 @@ numpydoc_show_class_members = False
 # Don't create a Sphinx TOC for the lists of class methods and attributes
 numpydoc_class_members_toctree = False
 # -- Options for LaTeX output ------------------------------------------------
-
-latex_elements = {
-    # The paper size ('letterpaper' or 'a4paper').
-    #
-    # 'papersize': 'letterpaper',
-
-    # The font size ('10pt', '11pt' or '12pt').
-    #
-    # 'pointsize': '10pt',
-
-    # Additional stuff for the LaTeX preamble.
-    #
-    # 'preamble': '',
-
-    # Latex figure (float) alignment
-    #
-    # 'figure_align': 'htbp',
-}
-
-# -- Options for EPUB output
-epub_show_urls = 'footnote'
