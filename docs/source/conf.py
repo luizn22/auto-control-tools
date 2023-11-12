@@ -1,4 +1,4 @@
-# Configuration file for the Sphinx documentation builder
+    # Configuration file for the Sphinx documentation builder
 
 import sys
 import os
@@ -28,6 +28,7 @@ extensions = [
     'sphinx.ext.linkcode',  # link documentation to code repository
     'sphinx_paramlinks',  # allow param link references
     'sphinxcontrib.bibtex',  # support for bibtex
+    "sphinx_rtd_dark_mode",  # add dark mode toggle
 ]
 
 autoclass_content = "class"
@@ -176,3 +177,7 @@ numpydoc_show_class_members = False
 # Don't create a Sphinx TOC for the lists of class methods and attributes
 numpydoc_class_members_toctree = False
 # -- Options for LaTeX output ------------------------------------------------
+
+
+# set default theme to light
+default_dark_mode = False
