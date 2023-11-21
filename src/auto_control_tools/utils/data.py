@@ -242,7 +242,7 @@ class DataUtils:
             pre_signal = 0
 
         df['input'] = df['input'] - pre_signal
-        return df, step_signal
+        return df, float(step_signal)
 
     @classmethod
     def offset_data_output(cls, df: pd.DataFrame) -> pd.DataFrame:
