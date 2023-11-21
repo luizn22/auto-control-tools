@@ -130,6 +130,7 @@ class CohenCoonControllerAproximation(FirstOrderTableControllerAproximation):
     .. image:: ../image_resources/cc_aprox_plot.png
     """
     _accepted_controllers = [P, PI, PID]
+    _accepts_null_theta = False
     _controller_table = {
         _PController.controller_type: _PController(),
         _PIController.controller_type: _PIController(),

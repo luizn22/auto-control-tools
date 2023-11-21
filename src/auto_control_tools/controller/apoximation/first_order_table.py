@@ -63,6 +63,7 @@ class FirstOrderTableControllerAproximation(BaseControllerAproximation):
 
     """
     _controller_table: Dict[str, FirstOrderTableControllerAproximationItem] = {}
+    _accepts_null_theta = True
 
     @classmethod
     def get_controller(
@@ -87,5 +88,8 @@ class FirstOrderTableControllerAproximation(BaseControllerAproximation):
         -------
         Controlador com os parâmetros encontrados
         """
+        if cls._accepts_null_theta is False and model.theta <= 0:
+            raise ValueError('This method does not work with theta <= 0!')
+
         cls._parse_controller_option(controller_type)
         return cls._controller_table[controller_type].get_controller(model)
