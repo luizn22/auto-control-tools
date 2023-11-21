@@ -143,10 +143,10 @@ class DataInputUtils:
         """
         fields = copy(cls.standard_fields)
 
-        if sample_time is not None:
+        if sample_time:
             fields.remove('time')
 
-        if step_signal is not None:
+        if step_signal:
             fields.remove('input')
 
         return fields
