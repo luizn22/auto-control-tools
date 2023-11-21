@@ -207,7 +207,8 @@ class ControllerView:
             simulation_time=self.controller.model.get_simulation_time() if simulation_time is None else simulation_time,
         )
 
-    def get_controller_step_response_data(self, settling_time_threshold: float = 0.02) -> Dict[str, Any]:
+    def get_controller_step_response_data(self, settling_time_threshold: float = 0.02,
+                                          simulation_time: Union[float, None] = None) -> Dict[str, Any]:
         """
         Retorna dados de resposta a sinal degrau do controlador.
 
@@ -218,6 +219,8 @@ class ControllerView:
         ----------
         settling_time_threshold : float, optional
             Percentual de desvio do valor de regime considerado do cálculo do tempo de acomodação.
+        simulation_time : float, optional
+            Unidade de tempo que a simulação deve durar. Calculado automaticamente se não for fornecido.
 
         Notes
         -----
@@ -277,13 +280,14 @@ class ControllerView:
 
         data.update(dict(control.step_info(
             tf,
-            T=self.controller.model.get_simulation_time(),
+            T=self.controller.model.get_simulation_time() if simulation_time is None else simulation_time,
             SettlingTimeThreshold=settling_time_threshold
         )))
 
         return data
 
-    def print_controller_step_response_data(self, settling_time_threshold: float = 0.02):
+    def print_controller_step_response_data(self, settling_time_threshold: float = 0.02,
+                                            simulation_time: Union[float, None] = None):
         """
         *Pretty Print* dos dados de resposta a sinal de grau do :term:`Sistema`.
 
@@ -293,9 +297,14 @@ class ControllerView:
         ----------
         settling_time_threshold : float, optional
             Percentual de desvio do valor de regime considerado do cálculo do tempo de acomodação.
+        simulation_time : float, optional
+            Unidade de tempo que a simulação deve durar. Calculado automaticamente se não for fornecido.
         """
 
-        PlotUtils.pprint_dict(self.get_controller_step_response_data())
+        PlotUtils.pprint_dict(self.get_controller_step_response_data(
+            settling_time_threshold=settling_time_threshold,
+            simulation_time=simulation_time,
+        ))
 
     def print_tf(self):
         """
