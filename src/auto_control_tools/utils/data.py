@@ -3,8 +3,6 @@ from typing import Tuple, Union
 import pandas as pd
 from scipy.signal import lfilter
 
-from .envoirment import is_jupyter_environment
-
 
 class DataUtils:
     """
