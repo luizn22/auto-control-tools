@@ -138,7 +138,7 @@ class DataUtils:
     @classmethod
     def setup_data_default(cls, df: pd.DataFrame, sample_time: Union[float, None] = None,
                            step_signal: Union[float, None] = None,
-                           use_lin_filter: bool = False, linfilter_sothness: int = 5
+                           use_lin_filter: bool = False, linfilter_smoothness: int = 5
                            ) -> Tuple[pd.Series, float]:
         """
         Prepara os dados para uso dos métodos de :term:`Identificação`.
@@ -161,7 +161,7 @@ class DataUtils:
             Em casos cujo sinal de saida é muito ruidoso, um filtro linear, para reduzir a oscilação dos dados é
             necessário para realizar a identificação. Se esse parâmetro for informado como verdadeiro, um filtro linear
             :meth:`DataUtils.linfilter` será aplicado sobre os dados.
-        linfilter_sothness : bool, optional
+        linfilter_smoothness : bool, optional
             Valor inteiro referente a intensidade do filtro linear. Valores maiores reduzem mais o ruído, contudo
             tornam os dados mais distantes da realidade.
 
@@ -190,7 +190,7 @@ class DataUtils:
         s = pd.Series(df['output'].values, index=df['time'])
 
         if use_lin_filter:
-            s = DataUtils.linfilter(s, linfilter_sothness)
+            s = DataUtils.linfilter(s, linfilter_smoothness)
 
         return s, step_signal
 
