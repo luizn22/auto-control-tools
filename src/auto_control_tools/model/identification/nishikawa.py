@@ -175,6 +175,10 @@ class NishikawaModelIdentification(BaseModelIdentification):
 
         A0 = vreg * idx_vreg - np.trapz(tf_data[:idx_vreg], tf_data[:idx_vreg].index)  # type: ignore
 
+        if A0 <= 0:
+            raise ValueError('Area calculation resulted negative! Verify input data, Nishikawa only works with A0 > 0.'
+                             'Raising linfilter_smoothness may help!')
+
         t0 = A0 / vreg
 
         A1 = np.trapz(tf_data.loc[tf_data.index <= t0], tf_data.loc[tf_data.index <= t0].index)
