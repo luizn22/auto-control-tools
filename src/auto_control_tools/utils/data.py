@@ -13,7 +13,6 @@ class DataUtils:
     Aqui são implementados diversos métodos para operação e extração de informações de
     :class:`pandas.Series` e :class:`pandas.DataFrame`.
     """
-    _jupyter_env = is_jupyter_environment()
 
     @staticmethod
     def linfilter(series: pd.Series, smothness: int) -> pd.Series:
