@@ -15,7 +15,7 @@ class DataUtils:
     """
 
     @staticmethod
-    def linfilter(series: pd.Series, smothness: int) -> pd.Series:
+    def linfilter(series: pd.Series, smoothness: int) -> pd.Series:
         """
         Aplica um filtro linear à série temporal de entrada para suavização.
 
@@ -24,7 +24,7 @@ class DataUtils:
         series : pandas.Series
             Dados da série temporal (:class:`pandas.Series`)
             de entrada a serem suavizados.
-        smothness : int
+        smoothness : int
             Número inteiro que representa o nível de suavização. Quanto maior o valor, mais suave será a curva
             resultante.
 
@@ -42,7 +42,7 @@ class DataUtils:
         >>> dados_suavizados = act.DataUtils.linfilter(serie_entrada, 3)
         """
         # the larger smothness is, the smoother curve will be
-        b = [1.0 / smothness] * smothness
+        b = [1.0 / smoothness] * smoothness
         a = 1
         return pd.Series(lfilter(b, a, series), name=series.name)
 
