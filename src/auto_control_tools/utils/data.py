@@ -71,7 +71,7 @@ class DataUtils:
         >>> tempo_acomodacao, valor_regime = act.DataUtils.get_vreg(dados_resposta_degrau, 0.02)
         """
         for idx, value in tf_data.iloc[::1].items():
-            local_s = tf_data[idx:]
+            local_s = tf_data.loc[tf_data.index >= idx]
             mean = local_s.mean()
 
             if all((local_s < (1 + settling_time_threshold) * mean) & (local_s > (1 - settling_time_threshold) * mean)):
