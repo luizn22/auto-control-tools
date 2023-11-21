@@ -19,7 +19,7 @@ class BaseControllerAproximation:
         :meth:`get_controller` para retornar um objeto da classe :class:`Controller` com os ganhos referentes de
         :term:`Controlador PID`.
 
-        Subclasses podem sobreescrever o atributo :attr:`B_accepted_controllers`
+        Subclasses podem sobreescrever o atributo :attr:`_accepted_controllers`
         com os tipos de controlador suportados e utilizar o método
         :meth:`_parse_controller_option` para verifica se um tipo de controlador é aceito.
     """
