@@ -89,6 +89,7 @@ class SmithModelIdentification(BaseModelIdentification):
 
     .. image:: ../image_resources/sm_ident_plot.png
     """
+
     @classmethod
     def get_model(
             cls,
@@ -146,15 +147,19 @@ class SmithModelIdentification(BaseModelIdentification):
         Objeto :class:`FirstOrderModel` referente ao modelo gerado pelo método.
         """
         df = DataInputUtils.get_model_data_default(path, sample_time, step_signal)
-        tf_data, step_signal = DataUtils.setup_data_default(df, sample_time, step_signal)
+        tf_data, step_signal = DataUtils.setup_data_default(
+            df, sample_time, step_signal,
+            use_lin_filter=use_lin_filter,
+            linfilter_smoothness=linfilter_smoothness
+        )
 
         idx_vreg, vreg = DataUtils.get_vreg(tf_data, settling_time_threshold=settling_time_threshold)
 
-        t1 = tf_data[tf_data == min(tf_data[tf_data >= vreg*0.283])].index[0]
-        t2 = tf_data[tf_data == min(tf_data[tf_data >= vreg*0.632])].index[0]
+        t1 = tf_data[tf_data == min(tf_data[tf_data >= vreg * 0.283])].index[0]
+        t2 = tf_data[tf_data == min(tf_data[tf_data >= vreg * 0.632])].index[0]
 
         K = vreg / step_signal
-        tau = 1.5*(t2 - t1)
+        tau = 1.5 * (t2 - t1)
         theta = t2 - tau
 
         if ignore_delay_threshold is not None and theta < ignore_delay_threshold:

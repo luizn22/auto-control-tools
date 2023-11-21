@@ -86,6 +86,7 @@ class ZieglerNicholsModelIdentification(BaseModelIdentification):
 
     .. image:: ../image_resources/zn_ident_plot.png
     """
+
     @classmethod
     def get_model(
             cls,
@@ -149,7 +150,11 @@ class ZieglerNicholsModelIdentification(BaseModelIdentification):
         Objeto :class:`FirstOrderModel` referente ao modelo gerado pelo método.
         """
         df = DataInputUtils.get_model_data_default(path, sample_time, step_signal)
-        tf_data, step_signal = DataUtils.setup_data_default(df, sample_time, step_signal)
+        tf_data, step_signal = DataUtils.setup_data_default(
+            df, sample_time, step_signal,
+            use_lin_filter=use_lin_filter,
+            linfilter_smoothness=linfilter_smoothness
+        )
 
         idx_vreg, vreg = DataUtils.get_vreg(tf_data, settling_time_threshold=settling_time_threshold)
         idx_tan, tan_point_value, tan = DataUtils.get_max_tan(tf_data)

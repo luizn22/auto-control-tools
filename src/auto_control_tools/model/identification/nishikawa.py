@@ -99,6 +99,7 @@ class NishikawaModelIdentification(BaseModelIdentification):
 
     .. image:: ../image_resources/ni_ident_plot.png
     """
+
     @classmethod
     def get_model(
             cls,
@@ -164,19 +165,23 @@ class NishikawaModelIdentification(BaseModelIdentification):
         Objeto :class:`FirstOrderModel` referente ao modelo gerado pelo método.
         """
         df = DataInputUtils.get_model_data_default(path, sample_time, step_signal)
-        tf_data, step_signal = DataUtils.setup_data_default(df, sample_time, step_signal)
+        tf_data, step_signal = DataUtils.setup_data_default(
+            df, sample_time, step_signal,
+            use_lin_filter=use_lin_filter,
+            linfilter_smoothness=linfilter_smoothness
+        )
 
         idx_vreg, vreg = DataUtils.get_vreg(tf_data, settling_time_threshold=settling_time_threshold)
 
-        A0 = vreg*idx_vreg - np.trapz(tf_data[:idx_vreg], tf_data[:idx_vreg].index)  # type: ignore
+        A0 = vreg * idx_vreg - np.trapz(tf_data[:idx_vreg], tf_data[:idx_vreg].index)  # type: ignore
 
-        t0 = A0/vreg
+        t0 = A0 / vreg
 
         A1 = np.trapz(tf_data.loc[tf_data.index <= t0], tf_data.loc[tf_data.index <= t0].index)
 
         K = vreg / step_signal
 
-        tau = A1/(0.368*vreg)
+        tau = A1 / (0.368 * vreg)
         theta = t0 - tau
 
         if ignore_delay_threshold is not None and theta < ignore_delay_threshold:

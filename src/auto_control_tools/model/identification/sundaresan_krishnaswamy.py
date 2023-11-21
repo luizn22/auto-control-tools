@@ -91,6 +91,7 @@ class SundaresanKrishnaswamyModelIdentification(BaseModelIdentification):
 
     .. image:: ../image_resources/sn_kr_ident_plot.png
     """
+
     @classmethod
     def get_model(
             cls,
@@ -148,15 +149,19 @@ class SundaresanKrishnaswamyModelIdentification(BaseModelIdentification):
         Objeto :class:`FirstOrderModel` referente ao modelo gerado pelo método.
         """
         df = DataInputUtils.get_model_data_default(path, sample_time, step_signal)
-        tf_data, step_signal = DataUtils.setup_data_default(df, sample_time, step_signal)
+        tf_data, step_signal = DataUtils.setup_data_default(
+            df, sample_time, step_signal,
+            use_lin_filter=use_lin_filter,
+            linfilter_smoothness=linfilter_smoothness
+        )
 
         idx_vreg, vreg = DataUtils.get_vreg(tf_data, settling_time_threshold=settling_time_threshold)
 
-        t1 = tf_data[tf_data == min(tf_data[tf_data >= vreg*0.353])].index[0]
-        t2 = tf_data[tf_data == min(tf_data[tf_data >= vreg*0.853])].index[0]
+        t1 = tf_data[tf_data == min(tf_data[tf_data >= vreg * 0.353])].index[0]
+        t2 = tf_data[tf_data == min(tf_data[tf_data >= vreg * 0.853])].index[0]
 
         K = vreg / step_signal
-        tau = 0.67*(t2 - t1)
+        tau = 0.67 * (t2 - t1)
         theta = 1.3 * t1 - 0.29 * t2
 
         if ignore_delay_threshold is not None and theta < ignore_delay_threshold:
