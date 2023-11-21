@@ -180,7 +180,10 @@ class DataUtils:
 
         if step_signal is None:  # in case step signal is not informed, get it and then remove column
             step_signal = max(df['input'])
-            df = cls.trunk_data_input(df)
+
+        df, step_signal = cls.offset_data_input(df, step_signal)
+
+        df = cls.trunk_data_input(df)
 
         df = cls.offset_data_output(df)
 
@@ -222,7 +225,24 @@ class DataUtils:
         """
         if 'input' not in df.columns:
             raise ValueError('input is not in df.columns')
-        return df.loc[df['input'] != 0][[col for col in df if col != 'input']]
+        df = df.loc[df['input'] > 0][[col for col in df if col != 'input']]
+        df['time'] = df['time'] - df['time'].iloc[0]
+        return df
+
+    @staticmethod
+    def offset_data_input(df: pd.DataFrame, step_signal: Union[float, None] = None) -> Tuple[pd.DataFrame, float]:
+        if 'input' not in df.columns:
+            raise ValueError('input is not in df.columns')
+
+        pre_signal = df['input'].drop_duplicates().sort_values(ascending=True)
+        if len(pre_signal) > 1:
+            pre_signal = pre_signal.iloc[-2]
+            step_signal = step_signal - pre_signal
+        else:
+            pre_signal = 0
+
+        df['input'] = df['input'] - pre_signal
+        return df, step_signal
 
     @classmethod
     def offset_data_output(cls, df: pd.DataFrame) -> pd.DataFrame:
