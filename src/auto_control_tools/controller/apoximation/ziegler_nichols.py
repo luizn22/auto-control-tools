@@ -20,10 +20,11 @@ class _PIController(FirstOrderTableControllerAproximationItem):
 
     @classmethod
     def get_controller(cls, model: FirstOrderModel) -> Controller:
+        kp = 0.9*(1/model.K)*(model.tau / model.theta)
         return Controller(
             model,
-            kp=0.9*(1/model.K)*(model.tau / model.theta),
-            ki=1/(model.theta / 0.3)
+            kp=kp,
+            ki=kp/(model.theta / 0.3)
         )
 
 
@@ -32,11 +33,12 @@ class _PIDController(FirstOrderTableControllerAproximationItem):
 
     @classmethod
     def get_controller(cls, model: FirstOrderModel) -> Controller:
+        kp = 1.2*(1/model.K)*(model.tau / model.theta)
         return Controller(
             model,
-            kp=1.2*(1/model.K)*(model.tau / model.theta),
-            ki=1/(2 * model.theta),
-            kd=1/(0.5 * model.theta)
+            kp=kp,
+            ki=kp/(2 * model.theta),
+            kd=kp*(0.5 * model.theta)
         )
 
 
