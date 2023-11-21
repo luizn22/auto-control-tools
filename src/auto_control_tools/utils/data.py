@@ -289,6 +289,28 @@ class DataUtils:
 
     @staticmethod
     def noise_check(s: pd.Series, window_size: int = 5, deviation_percentage_threshold: float = 30) -> bool:
+        """
+        Verifica se a série temporal s possui ruido.
+
+        Cria uma cópia suavizada da série e compara com a original para obter os ruídos locais, dividindo pelo
+        valor da série suavizada para obter o desvio proporcional.
+        Caso o desvio proporcional for maior que :paramref:`deviation_percentage_threshold` retorna verdadeiro.
+
+        Parameters
+        ----------
+        s : pd.Series
+            Série temporal a ser verificada.
+        window_size: int
+            Tamanho da janela de suavização. Padrão 5.
+        deviation_percentage_threshold: float
+            Desvio percentual de ruído aceito. Padrão (30%).
+
+        Returns
+        -------
+        bool
+            Se a série é ruidosa ou não
+
+        """
         smoothed_series = s.rolling(window=window_size).mean()
         noise = (s - smoothed_series).abs() / smoothed_series
 
