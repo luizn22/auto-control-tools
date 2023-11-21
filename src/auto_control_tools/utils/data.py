@@ -237,7 +237,7 @@ class DataUtils:
         return df
 
     @staticmethod
-    def offset_data_input(df: pd.DataFrame, step_signal: Union[float, None] = None) -> Tuple[pd.DataFrame, float]:
+    def offset_data_input(df: pd.DataFrame, step_signal: float) -> Tuple[pd.DataFrame, float]:
         if 'input' not in df.columns:
             raise ValueError('input is not in df.columns')
 
