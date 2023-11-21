@@ -1,3 +1,4 @@
+import warnings
 from typing import Tuple, Union
 
 import pandas as pd
@@ -192,6 +193,12 @@ class DataUtils:
         if use_lin_filter:
             s = DataUtils.linfilter(s, linfilter_smoothness)
 
+        noisy = cls.noise_check(s)
+
+        if noisy:
+            warnings.warn("Noisy data! This may cause problems. It might be a good idea to use the use_lin_filter "
+                          "option.")
+
         return s, step_signal
 
     @classmethod
@@ -279,3 +286,12 @@ class DataUtils:
         df['output'] = df['output'].apply(lambda x: x if x > 0 else 0)
         df['output'] = df['output'] - min(df['output'])
         return df
+
+    @staticmethod
+    def noise_check(s: pd.Series, window_size: int = 5, deviation_percentage_threshold: float = 30) -> bool:
+        smoothed_series = s.rolling(window=window_size).mean()
+        noise = (s - smoothed_series).abs() / smoothed_series
+
+        noisy = any(noise.iloc[len(noise)//2:] > (deviation_percentage_threshold / 100))
+
+        return noisy
