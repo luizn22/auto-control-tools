@@ -98,7 +98,9 @@ class SundaresanKrishnaswamyModelIdentification(BaseModelIdentification):
             sample_time: Union[None, float] = None,
             step_signal: Union[None, float] = None,
             ignore_delay_threshold: Union[None, float] = 0.5,
-            settling_time_threshold: float = 0.02
+            settling_time_threshold: float = 0.02,
+            use_lin_filter: bool = False,
+            linfilter_smoothness: int = 5
 
     ) -> FirstOrderModel:
         """
@@ -133,6 +135,13 @@ class SundaresanKrishnaswamyModelIdentification(BaseModelIdentification):
             Valor mínimo de theta para que ele não seja zerado.
         settling_time_threshold : float, optional
             Percentual de desvio do valor de regime considerado do cálculo do tempo de acomodação.
+        use_lin_filter : bool, optional
+            Em casos cujo sinal de saida é muito ruidoso, um filtro linear, para reduzir a oscilação dos dados é
+            necessário para realizar a identificação. Se esse parâmetro for informado como verdadeiro, um filtro linear
+            :meth:`DataUtils.linfilter` será aplicado sobre os dados.
+        linfilter_smoothness : bool, optional
+            Valor inteiro referente a intensidade do filtro linear. Valores maiores reduzem mais o ruído, contudo
+            tornam os dados mais distantes da realidade.
 
         Returns
         -------
