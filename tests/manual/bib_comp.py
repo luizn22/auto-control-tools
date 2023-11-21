@@ -10,10 +10,10 @@ controller = act.ZieglerNicholsControllerAproximation.get_controller(model, act.
 
 controller.view.print_tf()
 controller.view.print_controller_step_response_data()
-controller.view.plot_controller_step_response_graph()
+controller.view.plot_controller_step_response_graph(plot_model=False)
 
 controller = act.CohenCoonControllerAproximation.get_controller(model, act.PID)
 
 controller.view.print_tf()
 controller.view.print_controller_step_response_data()
-controller.view.plot_controller_step_response_graph()
+controller.view.plot_controller_step_response_graph(plot_model=False)
