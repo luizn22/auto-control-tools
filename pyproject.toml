@@ -1,22 +1,48 @@
 [build-system]
-requires = [
-    "setuptools>=42",
-    "wheel"
-]
+requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = 'auto_control_tools'
-dynamic = ["version", "dependencies", "description"]
+name = "auto-control-tools"  # nome do pacote distribuído (com hífen)
+version = "0.0.1"
+description = "Control tools for automatic identification and PID controller approximation"
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [{ name = "Luiz Fernando Niquelatte", email = "luiz.n22@aluno.ifsc.edu.br" }]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
 
+# Deixe as dependências base virem do requirements.txt (dinâmico)
+dependencies = []
+
+[project.optional-dependencies]
+testing = [
+  "pytest>=6.0",
+  "pytest-cov>=2.0",
+  "mypy>=0.910",
+  "flake8>=3.9",
+  "tox>=3.24"
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+# encontra os pacotes dentro de src/
+packages = { find = { where = ["src"] } }
+
+# mapeia o nome importável (underscore) ao diretório em src/
+[tool.setuptools.package-data]
+auto_control_tools = ["py.typed"]
+
+# carrega install_requires do arquivo
 [tool.setuptools.dynamic]
-dependencies = {file = ["requirements.txt"]}
+dependencies = { file = ["requirements.txt"] }
 
 [tool.pytest.ini_options]
 addopts = "--cov=auto_control_tools"
-testpaths = [
-    "tests",
-]
 
 [tool.mypy]
 mypy_path = "src"
@@ -31,3 +57,6 @@ warn_return_any = true
 warn_unreachable = true
 warn_unused_configs = true
 no_implicit_reexport = true
+
+[tool.flake8]
+max-line-length = 160
