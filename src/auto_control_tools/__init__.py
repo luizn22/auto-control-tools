@@ -1,3 +1,1 @@
-from .model import *  # noqa
-from .controller import *  # noqa
-from .utils import *  # noqa
+__version__ = "0.2.0"  # bump semântico
