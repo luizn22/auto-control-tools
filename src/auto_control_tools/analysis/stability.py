@@ -7,6 +7,7 @@ Uso básico
 >>> from auto_control_tools.analysis.stability import RouthHurwitz, routh_hurwitz
 >>> rh = RouthHurwitz([1, 2, 3, 4])  # s^3 + 2 s^2 + 3 s + 4
 >>> result = rh.compute()
+>>> print(result)  # Exibe tabela completa e análise
 >>> result.is_stable
 True
 >>> result.rhp_poles
@@ -73,23 +74,106 @@ class RouthResult:
         df.index.name = "Linha"
         return df
 
-    def to_latex(self, floatfmt: str = ".6g") -> str:
-        """Gera uma string LaTeX (tabular) da tabela de Routh.
+    def to_string_table(self, floatfmt: str = ".4f", col_width: int = 10) -> str:
+        """Gera uma representação em string formatada da tabela de Routh.
+        
         Parâmetros
         ----------
         floatfmt : str
             Formato numérico aplicado a cada elemento.
+        col_width : int
+            Largura de cada coluna em caracteres.
+        
+        Retorna
+        -------
+        str
+            Tabela formatada como string.
         """
-        # Construção manual para não depender de pandas
-        header_cols = max(len(r) for r in self.table)
-        col_spec = "|" + "c|" * header_cols
-        lines = ["\begin{tabular}{" + col_spec + "}", "\hline"]
-        for row in self.table:
+        lines = []
+        header_cols = max(len(r) for r in self.table) if self.table else 0
+        
+        # Cabeçalho com colunas numeradas
+        header = "Linha  |"
+        for i in range(header_cols):
+            header += f" Col {i+1}".ljust(col_width) + "|"
+        lines.append(header)
+        lines.append("-" * len(header))
+        
+        # Linhas da tabela
+        for label, row in zip(self.row_labels, self.table):
+            line = f"{label:<6} |"
             padded = row + [0.0] * (header_cols - len(row))
-            line = " & ".join(format(x, floatfmt) for x in padded)
-            lines.append(line + " \ \hline")
-        lines.append("\end{tabular}")
-        return "".join(lines)
+            for val in padded:
+                formatted_val = format(val, floatfmt)
+                line += f" {formatted_val:<{col_width-1}}|"
+            lines.append(line)
+        
+        return "\n".join(lines)
+    
+    def display(self, floatfmt: str = ".4f", col_width: int = 10) -> str:
+        """Retorna uma representação completa dos resultados incluindo tabela e análise.
+        
+        Parâmetros
+        ----------
+        floatfmt : str
+            Formato numérico aplicado a cada elemento.
+        col_width : int
+            Largura de cada coluna em caracteres.
+            
+        Retorna
+        -------
+        str
+            Resultado completo formatado.
+        """
+        lines = []
+        lines.append("=" * 60)
+        lines.append("ANÁLISE DE ESTABILIDADE - CRITÉRIO DE ROUTH-HURWITZ")
+        lines.append("=" * 60)
+        lines.append(f"\nPolinômio de ordem {self.order}:")
+        
+        # Monta string do polinômio
+        poly_str = []
+        for i, coef in enumerate(self.coefficients):
+            power = self.order - i
+            if abs(coef) < 1e-10:
+                continue
+            if power == 0:
+                poly_str.append(f"{coef:+g}")
+            elif power == 1:
+                poly_str.append(f"{coef:+g}s")
+            else:
+                poly_str.append(f"{coef:+g}s^{power}")
+        lines.append("  " + " ".join(poly_str).lstrip('+'))
+        
+        lines.append(f"\nTabela de Routh:")
+        lines.append(self.to_string_table(floatfmt, col_width))
+        
+        lines.append(f"\nPrimeira coluna: {[format(x, floatfmt) for x in self.first_column]}")
+        lines.append(f"\nNúmero de mudanças de sinal: {self.rhp_poles}")
+        lines.append(f"Polos no semiplano direito: {self.rhp_poles}")
+        
+        lines.append("\n" + "=" * 60)
+        if self.is_stable:
+            lines.append("RESULTADO: Sistema ESTÁVEL ✓")
+        else:
+            lines.append(f"RESULTADO: Sistema INSTÁVEL ✗ ({self.rhp_poles} polos instáveis)")
+        lines.append("=" * 60)
+        
+        if self.notes:
+            lines.append("\nObservações:")
+            for note in self.notes:
+                lines.append(f"  • {note}")
+        
+        return "\n".join(lines)
+    
+    def __str__(self) -> str:
+        """Representação em string do resultado."""
+        return self.display()
+    
+    def __repr__(self) -> str:
+        """Representação para debugging."""
+        return (f"RouthResult(order={self.order}, is_stable={self.is_stable}, "
+                f"rhp_poles={self.rhp_poles})")
 
 
 class RouthHurwitz:
@@ -290,7 +374,9 @@ def routh_hurwitz(coeffs: Sequence[Number], **kwargs) -> RouthResult:
     """Wrapper funcional: calcula Routh–Hurwitz e retorna `RouthResult`.
     Exemplos
     --------
-    >>> routh_hurwitz([1, 2, 3, 4]).is_stable
+    >>> result = routh_hurwitz([1, 2, 3, 4])
+    >>> print(result)  # Mostra tabela completa e análise
+    >>> result.is_stable
     True
     """
     return RouthHurwitz(coeffs, **kwargs).compute()
@@ -298,23 +384,27 @@ def routh_hurwitz(coeffs: Sequence[Number], **kwargs) -> RouthResult:
 
 # ------------------------- Execução direta (debug) ------------------------- #
 if __name__ == "__main__":
-    # Exemplos rápidos de verificação manual ("testes" smoke)
+    print("\n" + "="*70)
+    print("TESTES DO CRITÉRIO DE ROUTH-HURWITZ")
+    print("="*70)
+    
+    # Exemplos de verificação
     examples = {
-        "estavel: s^3 + 2s^2 + 3s + 4": [1, 2, 3, 4],     # estável
-        "instavel: s^2 - 2s + 2": [1, -2, 2],              # 2 polos em RHP
-        "marginal (linha nula): s^4 + 2s^2 + 1": [1, 0, 2, 0, 1],  # auxiliar/derivada
-        "pivo zero: s^3 + 2s": [1, 0, 2, 0],               # força epsilon no pivô
-        "estavel: s^2 + 2s + 2": [1, 2, 2],                # estável (−1 ± j)
+        "Estável: s^3 + 2s^2 + 3s + 4": [1, 2, 3, 4],
+        "Instável: s^2 - 2s + 2": [1, -2, 2],
+        "Marginal (linha nula): s^4 + 2s^2 + 1": [1, 0, 2, 0, 1],
+        "Pivô zero: s^3 + 2s": [1, 0, 2, 0],
+        "Estável: s^2 + 2s + 2": [1, 2, 2],
     }
-    for name, coeffs in examples.items():
+    
+    for i, (name, coeffs) in enumerate(examples.items(), 1):
+        print(f"\n{'='*70}")
+        print(f"EXEMPLO {i}: {name}")
+        print('='*70)
+        
         rh = RouthHurwitz(coeffs)
-        res = rh.compute()
-        print("Caso:", name)
-        print("  Ordem:", res.order)
-        print("  Primeira coluna:", [f"{x:.6g}" for x in res.first_column])
-        print("  Polos em RHP:", res.rhp_poles, "| Estável:", res.is_stable)
-        if res.notes:
-            print("  Notas:", *res.notes, sep="- ")
-        # Exibe tabela crua
-        for lbl, row in zip(res.row_labels, res.table):
-            print(" ", lbl, ":", [f"{x:.6g}" for x in row])
+        result = rh.compute()
+        
+        # Exibe resultado completo com tabela
+        print(result)
+        print()
