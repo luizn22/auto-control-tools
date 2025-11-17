@@ -16,5 +16,6 @@ Documentação
     about
     introduction
     auto_control_tools
+    analise
     references
     dev
